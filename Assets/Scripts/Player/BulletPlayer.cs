@@ -9,10 +9,12 @@ public class BulletPlayer : Projectile
         if (other.CompareTag("Enemy"))
         {
             Enemy enemy = other.GetComponent<Enemy>();
+            
             if (enemy != null)
             {
                 enemy.TakeDamage(1);
             }
+
             Destroy(gameObject);
         }
         else

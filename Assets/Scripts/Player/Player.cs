@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : Character
 {
@@ -8,6 +9,10 @@ public class Player : Character
     [SerializeField] private Vector2 _rotationPoint = Vector2.zero;
     [SerializeField] private float _openingFactor = 1f;
     [SerializeField] private float _initialSpeed = 5f;
+
+    [Header("Controls")]
+    [SerializeField] private PlayerInput _playerInput;
+    private bool _isShootingPressed;
 
     private float _currentSpeed;
     private int _rotationDirection = 1;
@@ -25,6 +30,7 @@ public class Player : Character
 
     void FixedUpdate()
     {
+        CheckChangeDirection();
         RotatePlayer();
     }
 
@@ -38,6 +44,18 @@ public class Player : Character
         float y = _rotationPoint.y + Mathf.Sin(_angleRadians) * _radiusInitial;
 
         transform.position = new Vector2(x, y);
+    }
+
+    private void CheckChangeDirection()
+    {
+        bool isCurrentShootingPressed = _playerInput.actions["Shoot"].ReadValue<float>() > 0;
+
+        if (isCurrentShootingPressed && !_isShootingPressed)
+        {
+            ChangeOrientation();
+        }
+
+        _isShootingPressed = isCurrentShootingPressed;
     }
 
     public void ChangeOrientation()

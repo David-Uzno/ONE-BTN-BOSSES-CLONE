@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bullet: {fileID: 9019059391284965346, guid: 6bf31f62546a11642b0fdefb8749be6e, type: 3}
   _shootingPosition: {fileID: 296972246}
-  _shotCooldown: 0.25
+  _shotCooldown: 1
 --- !u!1 &314396678
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,8 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bullet: {fileID: 5809045304181728483, guid: 4226a01bb9355714b9dfadba6556cf05, type: 3}
   _shootingPosition: {fileID: 314396679}
-  _shotCooldown: 0.25
-  _playerInput: {fileID: 910324385}
+  _shotCooldown: 0.1
 --- !u!1 &323399451
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,7 +723,7 @@ Transform:
   m_GameObject: {fileID: 910324384}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalPosition: {x: 0, y: -4.5, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -747,6 +746,7 @@ MonoBehaviour:
   _rotationPoint: {x: 0, y: 0}
   _openingFactor: 1
   _initialSpeed: 5
+  _playerInput: {fileID: 910324385}
 --- !u!61 &910324391
 BoxCollider2D:
   m_ObjectHideFlags: 0
