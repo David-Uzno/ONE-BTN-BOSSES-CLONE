@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    [Header("Status")]
     [SerializeField] private int _health = 100;
 
     public void TakeDamage(int damage)
