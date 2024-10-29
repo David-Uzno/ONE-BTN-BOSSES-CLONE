@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : Character
+public class Player : MonoBehaviour
 {
     [Header ("Rotation")]
     [SerializeField] private Vector2 _rotationPoint = Vector2.zero;

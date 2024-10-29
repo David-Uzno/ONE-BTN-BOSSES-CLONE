@@ -8,12 +8,12 @@ public class BulletEnemy : Projectile
     {
         if (other.CompareTag("Player"))
         {
-            Player player = other.GetComponent<Player>();
+            /*Player player = other.GetComponent<Player>();
 
             if (player != null)
             {
                 player.TakeDamage(1);
-            }
+            }*/
             
             Destroy(gameObject);
         }
