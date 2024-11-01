@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 public class Player : Character
 {
     [Header ("Rotation")]
+    [SerializeField] private float _initialSpeed = 5f;
     [SerializeField] private Vector2 _rotationPoint = Vector2.zero;
     [SerializeField] private float _openingFactor = 1f;
-    [SerializeField] private float _initialSpeed = 5f;
 
     [Header("Controls")]
     [SerializeField] private PlayerInput _playerInput;
@@ -44,6 +44,11 @@ public class Player : Character
         float y = _rotationPoint.y + Mathf.Sin(_angleRadians) * _radiusInitial;
 
         transform.position = new Vector2(x, y);
+
+        // Cálculo del ángulo de rotación para el personaje
+        Vector2 directionToCenter = (_rotationPoint - (Vector2)transform.position).normalized;
+        float rotationAngle = Mathf.Atan2(directionToCenter.y, directionToCenter.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, rotationAngle - 90f);
     }
 
     private void CheckChangeDirection()

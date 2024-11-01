@@ -513,7 +513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bullet: {fileID: 5809045304181728483, guid: 4226a01bb9355714b9dfadba6556cf05, type: 3}
   _shootingPosition: {fileID: 314396679}
-  _shotCooldown: 0.1
+  _shotCooldown: 0.25
 --- !u!1 &323399451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,13 +1132,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842568659}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1399648739}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &842568661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1312,10 +1312,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb309811b4e4944cb71077705868805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  _health: 3
   _rotationPoint: {x: 0, y: 0}
   _openingFactor: 1
-  _initialSpeed: 5
+  _initialSpeed: 2.25
   _playerInput: {fileID: 910324385}
 --- !u!58 &910324391
 CircleCollider2D:
