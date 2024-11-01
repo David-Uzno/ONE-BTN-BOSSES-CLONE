@@ -5,10 +5,11 @@ using UnityEngine;
 public abstract class Projectile : MonoBehaviour
 {
     [SerializeField] protected float _speed;
+    [SerializeField ]private Vector2 _direction;
 
     private void Update()
     {
-        transform.Translate(Vector2.up * _speed * Time.deltaTime);
+        transform.Translate(_direction * _speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
