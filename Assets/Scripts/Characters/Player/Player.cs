@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,15 +11,17 @@ public class Player : Character
     [SerializeField] private Vector2 _rotationPoint = Vector2.zero;
     [SerializeField] private float _openingFactor = 1f;
 
-    [Header("Controls")]
-    [SerializeField] private PlayerInput _playerInput;
-    private bool _isShootingPressed;
-
     private float _currentSpeed;
     private int _rotationDirection = 1;
     private float _angleRadians;
     private float _radiusInitial;
 
+    [Header("Controls")]
+    [SerializeField] private PlayerInput _playerInput;
+    private bool _isShootingPressed;
+
+    public event Action<int> OnLifeLost;
+    
     void Start()
     {
         _currentSpeed = _initialSpeed;
@@ -32,6 +35,19 @@ public class Player : Character
     {
         CheckChangeDirection();
         RotatePlayer();
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+
+        if (_health > 0)
+        {
+            if (OnLifeLost != null) 
+            {
+                OnLifeLost.Invoke(_health);
+            }
+        }
     }
 
     private void RotatePlayer()
