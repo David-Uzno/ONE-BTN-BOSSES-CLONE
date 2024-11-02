@@ -5,17 +5,38 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Player")]
-    [SerializeField] private Player _player;
+    [Header("Player Status")]
+    [SerializeField] private GameObject _playerReference;
+    [SerializeField] private int _initialHealth = 3;
+    private int _health;
 
     [Header("Lives UI")]
     [SerializeField] private List<Image> _lifeImages;
 
+    [Header("Results UI")]
+    [SerializeField] private GameObject _winner;
+    [SerializeField] private GameObject _gameOver;
+
+
     void Start()
     {
-        if (_player != null)
+        _health = _initialHealth;
+
+        if (_playerReference != null)
         {
-            _player.OnLifeLost += UpdateLivesUI;
+            UpdateLivesUI(_health);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _health -= damage;
+        
+        UpdateLivesUI(_health);
+
+        if (_health <= 0)
+        {
+            GameOver();
         }
     }
 
@@ -27,11 +48,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void Winner()
     {
-        if (_player != null)
-        {
-            _player.OnLifeLost -= UpdateLivesUI;
-        }
+        _winner.SetActive(true);
+    }
+
+    private void GameOver()
+    {
+        Time.timeScale = 0f;
+        Destroy(_playerReference);
+
+        _gameOver.SetActive(true);
     }
 }

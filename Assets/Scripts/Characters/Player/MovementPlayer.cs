@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : Character
+public class MovementPlayer : Character
 {
     [Header ("Rotation")]
     [SerializeField] private float _initialSpeed = 5f;
@@ -19,8 +19,6 @@ public class Player : Character
     [Header("Controls")]
     [SerializeField] private PlayerInput _playerInput;
     private bool _isShootingPressed;
-
-    public event Action<int> OnLifeLost;
     
     void Start()
     {
@@ -35,19 +33,6 @@ public class Player : Character
     {
         CheckChangeDirection();
         RotatePlayer();
-    }
-
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
-
-        if (_health > 0)
-        {
-            if (OnLifeLost != null) 
-            {
-                OnLifeLost.Invoke(_health);
-            }
-        }
     }
 
     private void RotatePlayer()
