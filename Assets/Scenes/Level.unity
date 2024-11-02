@@ -317,14 +317,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0496291a91f848946aee014e21d5908f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerReference: {fileID: 910324384}
-  _initialHealth: 3
+  playerReference: {fileID: 910324384}
+  initialHealth: 3
   _lifeImages:
   - {fileID: 1541075899}
   - {fileID: 1250310091}
   - {fileID: 1707088549}
-  _winner: {fileID: 1700248721}
-  _gameOver: {fileID: 281286586}
+  winnerUI: {fileID: 1700248721}
+  gameOverUI: {fileID: 281286586}
 --- !u!1 &112359226
 GameObject:
   m_ObjectHideFlags: 0
@@ -2447,7 +2447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9447bc875c61667429fa1fc9e706a316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  _health: 10
 --- !u!1 &1495692645
 GameObject:
   m_ObjectHideFlags: 0
