@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     [Header("Lives UI")]
     [SerializeField] private List<Image> _lifeImages;
 
-<<<<<<< HEAD
     [Header("UI de Resultados")]
     [SerializeField] private GameObject winnerUI;
     [SerializeField] private GameObject gameOverUI;
@@ -30,26 +29,6 @@ public class GameManager : MonoBehaviour
         SubscribeToEnemyEvents();
     }
 
-=======
-    [Header("UI Results")]
-    [SerializeField] private GameObject winnerUI;
-    [SerializeField] private GameObject gameOverUI;
-    #endregion
-
-    #region Initialization
-
-    private void Awake()
-    {
-        Time.timeScale = 1f;
-    }
-
-    private void Start()
-    {
-        InitializeHealth();
-        SubscribeToEnemyEvents();
-    }
-
->>>>>>> 5c129b5f2678945f2dff1801293226bfd4a3339e
     private void InitializeHealth()
     {
         health = initialHealth;
@@ -116,7 +95,6 @@ public class GameManager : MonoBehaviour
     #region EndGame
     private void Winner()
     {
-<<<<<<< HEAD
         // Llama a GameOver() en Timer para mostrar el tiempo final y mensaje de récord
         if (timer != null)
         {
@@ -124,8 +102,6 @@ public class GameManager : MonoBehaviour
         }
 
         // Pausar el tiempo y activar la UI de victoria
-=======
->>>>>>> 5c129b5f2678945f2dff1801293226bfd4a3339e
         Time.timeScale = 0f;
         winnerUI.SetActive(true);
     }
