@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [Header("UI de Resultados")]
     [SerializeField] private GameObject winnerUI;
     [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private Timer timer;
     #endregion
 
     #region Initialization
@@ -94,6 +95,13 @@ public class GameManager : MonoBehaviour
     #region EndGame
     private void Winner()
     {
+        // Llama a GameOver() en Timer para mostrar el tiempo final y mensaje de récord
+        if (timer != null)
+        {
+            timer.GameOver();
+        }
+
+        // Pausar el tiempo y activar la UI de victoria
         Time.timeScale = 0f;
         winnerUI.SetActive(true);
     }
