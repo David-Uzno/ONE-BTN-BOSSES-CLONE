@@ -5,17 +5,34 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Player")]
-    [SerializeField] private Player _player;
+    [Header("Status Player")]
+    [SerializeField] private MovementPlayer _player;
+    [SerializeField] private int _initialHealth = 3;
+    private int _health;
 
     [Header("Lives UI")]
     [SerializeField] private List<Image> _lifeImages;
 
+
     void Start()
     {
+        _health = _initialHealth;
+
         if (_player != null)
         {
-            _player.OnLifeLost += UpdateLivesUI;
+            UpdateLivesUI(_health);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _health -= damage;
+        
+        UpdateLivesUI(_health);
+
+        if (_health <= 0)
+        {
+            Destroy(_player.gameObject);
         }
     }
 
@@ -24,14 +41,6 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < _lifeImages.Count; i++)
         {
             _lifeImages[i].enabled = i < currentHealth;
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (_player != null)
-        {
-            _player.OnLifeLost -= UpdateLivesUI;
         }
     }
 }
