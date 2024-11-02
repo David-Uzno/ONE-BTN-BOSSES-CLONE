@@ -20,6 +20,12 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Initialization
+
+    private void Awake()
+    {
+        Time.timeScale = 1f;
+    }
+
     private void Start()
     {
         InitializeHealth();
