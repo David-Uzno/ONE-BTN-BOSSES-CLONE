@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    #region Varialbes
+    #region Variables
     [Header("Player Status")]
     [SerializeField] private GameObject playerReference;
     [SerializeField] private int initialHealth = 3;
@@ -23,6 +23,11 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Initialization
+    private void Awake()
+    {
+        Time.timeScale = 1f;
+    }
+
     private void Start()
     {
         InitializeHealth();
@@ -95,13 +100,11 @@ public class GameManager : MonoBehaviour
     #region EndGame
     private void Winner()
     {
-        // Llama a GameOver() en Timer para mostrar el tiempo final y mensaje de récord
         if (timer != null)
         {
             timer.GameOver();
         }
 
-        // Pausar el tiempo y activar la UI de victoria
         Time.timeScale = 0f;
         winnerUI.SetActive(true);
     }

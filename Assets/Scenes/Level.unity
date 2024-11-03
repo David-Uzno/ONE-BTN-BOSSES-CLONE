@@ -325,6 +325,7 @@ MonoBehaviour:
   - {fileID: 1707088549}
   winnerUI: {fileID: 1700248721}
   gameOverUI: {fileID: 281286586}
+  timer: {fileID: 0}
 --- !u!1 &112359226
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,6 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d770c455cf1dfc641a8273c46c91da34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: {fileID: 0}
 --- !u!1 &314396678
 GameObject:
   m_ObjectHideFlags: 0
@@ -2976,6 +2978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d770c455cf1dfc641a8273c46c91da34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: {fileID: 0}
 --- !u!1 &1707088547
 GameObject:
   m_ObjectHideFlags: 0
@@ -3743,6 +3746,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 731219739}
+  finalTimeText: {fileID: 0}
+  highScoreMessage: {fileID: 0}
 --- !u!1 &2123900180
 GameObject:
   m_ObjectHideFlags: 0
