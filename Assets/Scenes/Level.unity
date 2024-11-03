@@ -323,9 +323,9 @@ MonoBehaviour:
   - {fileID: 1541075899}
   - {fileID: 1250310091}
   - {fileID: 1707088549}
-  winnerUI: {fileID: 1700248721}
-  gameOverUI: {fileID: 281286586}
-  timer: {fileID: 1980635837}
+  _winnerUI: {fileID: 1700248721}
+  _gameOverUI: {fileID: 281286586}
+  _timer: {fileID: 1980635837}
 --- !u!1 &127449669
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +401,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 127449669}
   m_CullTransparentMesh: 1
+--- !u!1 &247701677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 247701679}
+  - component: {fileID: 247701678}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &247701678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247701677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1532682c47cef8b4da1a710b01a7ca65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timer: {fileID: 731219739}
+  _saveFilePath: 
+--- !u!4 &247701679
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247701677}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &281286586
 GameObject:
   m_ObjectHideFlags: 0
@@ -3271,9 +3317,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82807d501169894bbebd265c69fff79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeText: {fileID: 731219739}
-  finalTimeText: {fileID: 1215439611}
-  highScoreMessage: {fileID: 564191880}
+  _timeText: {fileID: 731219739}
+  _finalTimeText: {fileID: 1215439611}
+  _highScoreMessage: {fileID: 564191880}
+  _finalTimeTextTemplate: 'Tiempo Total: '
+  _newRecordMessage: "\xA1Nuevo R\xE9cord!"
+  _currentLevel: 0
 --- !u!1 &2063450292
 GameObject:
   m_ObjectHideFlags: 0
@@ -5487,5 +5536,6 @@ SceneRoots:
   - {fileID: 1399648739}
   - {fileID: 1714827125}
   - {fileID: 92255775}
+  - {fileID: 247701679}
   - {fileID: 641765797}
   - {fileID: 5745367}

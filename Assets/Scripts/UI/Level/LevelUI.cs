@@ -6,16 +6,14 @@ using UnityEngine.SceneManagement;
 public class LevelUI : MonoBehaviour
 {
     [SerializeField] Timer timer; 
-
     
     public void OnVictory()
     {
         if (timer != null)
         {
-            timer.GameOver();  
+            timer.StopGameTimer();  
         }
     }
-
 
     public void Reset()
     {

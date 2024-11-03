@@ -5,52 +5,129 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI timeText;         
-    [SerializeField] TextMeshProUGUI finalTimeText;     
-    [SerializeField] TextMeshProUGUI highScoreMessage;  
+    #region Variables
+    [Header("UI Elements")]
+    [SerializeField] private TextMeshProUGUI _timeText;         
+    [SerializeField] private TextMeshProUGUI _finalTimeText;     
+    [SerializeField] private TextMeshProUGUI _highScoreMessage;  
 
-    float elapsedTime;
-    bool isGameOver = false;
-    float bestTime;
+    [Header("Messages")]
+    [SerializeField] private string _finalTimeTextTemplate = "Tiempo Total: ";
+    [SerializeField] private string _newRecordMessage = "Â¡Nuevo RÃ©cord!";
 
-    void Start()
+    [Header("Level Settings")]
+    private ushort _elapsedTime;
+    private ushort _bestTime;
+    private float _timeAccumulator;
+
+    private bool _isGameOver = false;    
+
+    [Header("References")]
+    private SaveManager _saveManager;
+    private GameManager _gameManager;
+    #endregion
+
+    #region Unity Methods
+    private void Awake()
     {
-        bestTime = PlayerPrefs.GetFloat("BestTime", float.MaxValue);
-    }
-
-    void Update()
-    {
-        if (!isGameOver)
+        _gameManager = FindObjectOfType<GameManager>();
+        _saveManager = FindObjectOfType<SaveManager>();
+        
+        if (_timeText == null)
         {
-            elapsedTime += Time.deltaTime;
-            int minutes = Mathf.FloorToInt(elapsedTime / 60);
-            int seconds = Mathf.FloorToInt(elapsedTime % 60);
-            timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            Debug.LogError("_timeText no estÃ¡ asignado en el Inspector.");
         }
     }
 
-    public void GameOver()
+    private void Start()
     {
-        isGameOver = true;
+        LoadBestTime();
+    }
 
-        finalTimeText.text = "Tiempo total: " + FormatTime(elapsedTime);
-
-        if (elapsedTime < bestTime)
+    private void Update()
+    {
+        if (!_isGameOver)
         {
-            bestTime = elapsedTime;
-            PlayerPrefs.SetFloat("BestTime", bestTime);
-            highScoreMessage.text = "¡Nuevo récord!";
+            AccumulateTime();
+            UpdateTimeUI();
+        }
+    }
+    #endregion
+
+    #region Time Management
+    private void AccumulateTime()
+    {
+        _timeAccumulator += Time.deltaTime;
+
+        if (_timeAccumulator >= 1f)
+        {
+            _elapsedTime += 1;
+            _timeAccumulator -= 1f;
+        }
+    }
+
+    private void UpdateTimeUI()
+    {
+        ushort minutes = (ushort)(_elapsedTime / 60);
+        ushort seconds = (ushort)(_elapsedTime % 60);
+
+        _timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void StopGameTimer()
+    {
+        _isGameOver = true;
+
+        _finalTimeText.text = _finalTimeTextTemplate + FormatTime(_elapsedTime);
+
+        if (_elapsedTime < _bestTime)
+        {
+            _bestTime = _elapsedTime;
+            _saveManager.SavePoint(_bestTime, _gameManager._currentLevel);
+            _highScoreMessage.text = _newRecordMessage;
         }
         else
         {
-            highScoreMessage.text = "No superaste el récord.";
+            _highScoreMessage.text = "";
         }
     }
 
-    string FormatTime(float time)
+    string FormatTime(ushort time)
     {
-        int minutes = Mathf.FloorToInt(time / 60);
-        int seconds = Mathf.FloorToInt(time % 60);
+        ushort minutes = (ushort)(time / 60);
+        ushort seconds = (ushort)(time % 60);
+        
         return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+    #endregion
+
+    #region Data Handling
+    private void LoadBestTime()
+    {
+        if (_saveManager != null)
+        {
+            if (_gameManager._currentLevel < 0)
+            {
+                Debug.LogError("El nivel actual no puede ser negativo.");
+                _bestTime = ushort.MaxValue;
+                return;
+            }
+
+            var data = _saveManager.LoadData();
+            if (data._pointsPerLevel.Count > _gameManager._currentLevel)
+            {
+                _bestTime = data._pointsPerLevel[_gameManager._currentLevel];
+            }
+            else
+            {
+                _bestTime = ushort.MaxValue;
+            }
+        }
+        else
+        {
+            Debug.LogError("SaveManager no encontrado en la escena.");
+            _bestTime = ushort.MaxValue;
+        }
+    }
+    #endregion
 }

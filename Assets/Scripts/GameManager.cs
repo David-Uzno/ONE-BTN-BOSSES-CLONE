@@ -8,6 +8,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     #region Variables
+    [Header("Level Status")]
+    public byte _currentLevel;
+
     [Header("Player Status")]
     [SerializeField] private GameObject playerReference;
     [SerializeField] private int initialHealth = 3;
@@ -16,10 +19,10 @@ public class GameManager : MonoBehaviour
     [Header("Lives UI")]
     [SerializeField] private List<Image> _lifeImages;
 
-    [Header("UI de Resultados")]
-    [SerializeField] private GameObject winnerUI;
-    [SerializeField] private GameObject gameOverUI;
-    [SerializeField] private Timer timer;
+    [Header("Results UI")]
+    [SerializeField] private GameObject _winnerUI;
+    [SerializeField] private GameObject _gameOverUI;
+    [SerializeField] private Timer _timer;
     #endregion
 
     #region Initialization
@@ -100,13 +103,13 @@ public class GameManager : MonoBehaviour
     #region EndGame
     private void Winner()
     {
-        if (timer != null)
+        if (_timer != null)
         {
-            timer.GameOver();
+            _timer.StopGameTimer();
         }
 
         Time.timeScale = 0f;
-        winnerUI.SetActive(true);
+        _winnerUI.SetActive(true);
     }
 
     private void GameOver()
@@ -114,7 +117,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         Destroy(playerReference.gameObject);
 
-        gameOverUI.SetActive(true);
+        _gameOverUI.SetActive(true);
     }
     #endregion
 }
