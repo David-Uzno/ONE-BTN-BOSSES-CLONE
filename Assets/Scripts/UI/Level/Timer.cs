@@ -5,9 +5,9 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI timeText;          // Muestra el tiempo en pantalla durante el juego
-    [SerializeField] TextMeshProUGUI finalTimeText;     // Muestra el tiempo final al ganar
-    [SerializeField] TextMeshProUGUI highScoreMessage;  // Muestra el mensaje de récord
+    [SerializeField] TextMeshProUGUI timeText;         
+    [SerializeField] TextMeshProUGUI finalTimeText;     
+    [SerializeField] TextMeshProUGUI highScoreMessage;  
 
     float elapsedTime;
     bool isGameOver = false;
@@ -15,7 +15,6 @@ public class Timer : MonoBehaviour
 
     void Start()
     {
-        // Recupera el mejor tiempo guardado o establece uno muy alto si no existe
         bestTime = PlayerPrefs.GetFloat("BestTime", float.MaxValue);
     }
 
@@ -34,10 +33,8 @@ public class Timer : MonoBehaviour
     {
         isGameOver = true;
 
-        // Muestra el tiempo total que tardó el jugador
         finalTimeText.text = "Tiempo total: " + FormatTime(elapsedTime);
 
-        // Verifica si el tiempo actual es un nuevo récord
         if (elapsedTime < bestTime)
         {
             bestTime = elapsedTime;

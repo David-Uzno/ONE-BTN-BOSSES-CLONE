@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class LevelUI : MonoBehaviour
 {
-    [SerializeField] Timer timer; // Referencia al Timer para llamar a GameOver()
+    [SerializeField] Timer timer; 
 
-    // Llama este método al ganar
+    
     public void OnVictory()
     {
         if (timer != null)
         {
-            timer.GameOver();  // Llama a GameOver para mostrar el tiempo y el récord
+            timer.GameOver();  
         }
     }
 
