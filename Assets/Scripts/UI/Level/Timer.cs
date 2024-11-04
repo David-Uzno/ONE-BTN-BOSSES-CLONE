@@ -7,18 +7,15 @@ public class Timer : MonoBehaviour
 {
     #region Variables
     [Header("UI Elements")]
-    [SerializeField] private TextMeshProUGUI _timeText;         
-    [SerializeField] private TextMeshProUGUI _finalTimeText;     
-    [SerializeField] private TextMeshProUGUI _highScoreMessage;  
+    [SerializeField] private TextMeshProUGUI _currentTimeText;         
+    [SerializeField] private TextMeshProUGUI _finalTimeDisplayText;
 
     [Header("Messages")]
-    [SerializeField] private string _finalTimeTextTemplate = "Tiempo Total: ";
-    [SerializeField] private string _newRecordMessage = "¡Nuevo Récord!";
+    [SerializeField] private GameObject _recordMessage;
 
     [Header("Level Settings")]
-    private ushort _elapsedTime;
-    private ushort _bestTime;
-    private float _timeAccumulator;
+    private float _elapsedTime;
+    private float _bestTime;
 
     private bool _isGameOver = false;    
 
@@ -32,11 +29,6 @@ public class Timer : MonoBehaviour
     {
         _gameManager = FindObjectOfType<GameManager>();
         _saveManager = FindObjectOfType<SaveManager>();
-        
-        if (_timeText == null)
-        {
-            Debug.LogError("_timeText no está asignado en el Inspector.");
-        }
     }
 
     private void Start()
@@ -57,47 +49,57 @@ public class Timer : MonoBehaviour
     #region Time Management
     private void AccumulateTime()
     {
-        _timeAccumulator += Time.deltaTime;
-
-        if (_timeAccumulator >= 1f)
-        {
-            _elapsedTime += 1;
-            _timeAccumulator -= 1f;
-        }
+        _elapsedTime += Time.deltaTime;
     }
 
     private void UpdateTimeUI()
     {
-        ushort minutes = (ushort)(_elapsedTime / 60);
-        ushort seconds = (ushort)(_elapsedTime % 60);
+        int minutes = Mathf.FloorToInt(_elapsedTime / 60);
+        int seconds = Mathf.FloorToInt(_elapsedTime % 60);
+        int milliseconds = Mathf.FloorToInt((_elapsedTime - Mathf.Floor(_elapsedTime)) * 1000);
 
-        _timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        _currentTimeText.text = string.Format("{0}:{1:00}:{2:000}", minutes, seconds, milliseconds);
     }
 
     public void StopGameTimer()
     {
         _isGameOver = true;
 
-        _finalTimeText.text = _finalTimeTextTemplate + FormatTime(_elapsedTime);
+        if (_finalTimeDisplayText != null)
+        {
+            _finalTimeDisplayText.text = FormatTime(_elapsedTime);
+        }
+        else
+        {
+            Debug.LogError("_finalTimeDisplayText no está asignado.");
+        }
 
         if (_elapsedTime < _bestTime)
         {
             _bestTime = _elapsedTime;
-            _saveManager.SavePoint(_bestTime, _gameManager._currentLevel);
-            _highScoreMessage.text = _newRecordMessage;
-        }
-        else
-        {
-            _highScoreMessage.text = "";
+            if (_saveManager != null && _gameManager != null)
+            {
+                _saveManager.SavePoint(_bestTime, _gameManager._currentLevel);
+            }
+            else
+            {
+                Debug.LogError("_saveManager o _gameManager no está asignado.");
+            }
+
+            if (_recordMessage != null)
+            {
+                _recordMessage.SetActive(true);
+            }
         }
     }
 
-    string FormatTime(ushort time)
+    string FormatTime(float time)
     {
-        ushort minutes = (ushort)(time / 60);
-        ushort seconds = (ushort)(time % 60);
+        int minutes = Mathf.FloorToInt(time / 60);
+        int seconds = Mathf.FloorToInt(time % 60);
+        int milliseconds = Mathf.FloorToInt((time - Mathf.Floor(time)) * 1000);
         
-        return string.Format("{0:00}:{1:00}", minutes, seconds);
+        return string.Format("{0}:{1:00}:{2:000}", minutes, seconds, milliseconds);
     }
     #endregion
 
@@ -109,7 +111,7 @@ public class Timer : MonoBehaviour
             if (_gameManager._currentLevel < 0)
             {
                 Debug.LogError("El nivel actual no puede ser negativo.");
-                _bestTime = ushort.MaxValue;
+                _bestTime = float.MaxValue;
                 return;
             }
 
@@ -120,13 +122,13 @@ public class Timer : MonoBehaviour
             }
             else
             {
-                _bestTime = ushort.MaxValue;
+                _bestTime = float.MaxValue;
             }
         }
         else
         {
             Debug.LogError("SaveManager no encontrado en la escena.");
-            _bestTime = ushort.MaxValue;
+            _bestTime = float.MaxValue;
         }
     }
     #endregion

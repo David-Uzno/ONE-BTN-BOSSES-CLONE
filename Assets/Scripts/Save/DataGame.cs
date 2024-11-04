@@ -6,5 +6,5 @@ using UnityEngine;
 [Serializable]
 public class DataGame
 {
-    public List<ushort> _pointsPerLevel = new List<ushort>();
+    public List<float> _pointsPerLevel = new List<float>();
 }

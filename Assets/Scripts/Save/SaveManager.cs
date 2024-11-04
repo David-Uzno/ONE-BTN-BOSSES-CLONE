@@ -33,7 +33,7 @@ public class SaveManager : MonoBehaviour
         return _gameData;
     }
 
-    public void SavePoint(ushort bestTime, ushort level)
+    public void SavePoint(float bestTime, ushort level)
     {
         if (_gameData == null)
         {
@@ -48,7 +48,7 @@ public class SaveManager : MonoBehaviour
         {
             while (_gameData._pointsPerLevel.Count < level)
             {
-                _gameData._pointsPerLevel.Add(ushort.MaxValue);
+                _gameData._pointsPerLevel.Add(float.MaxValue);
             }
             _gameData._pointsPerLevel.Add(bestTime);
         }
