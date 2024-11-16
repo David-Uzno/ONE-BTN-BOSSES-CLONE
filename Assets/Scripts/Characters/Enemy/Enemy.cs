@@ -10,7 +10,7 @@ public class Enemy : Character
     protected override void Die()
     {
         base.Die();
-        
+
         if (OnEnemyDeath != null)
         {
             OnEnemyDeath(this);
