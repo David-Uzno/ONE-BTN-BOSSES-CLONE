@@ -201,6 +201,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!1 &92255773
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,13 +356,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184667436}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1399648739}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &184667438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,7 +378,10 @@ MonoBehaviour:
   _bullet: {fileID: 4903479857577099635, guid: b651dcd1905079047adc2af9cda119b2, type: 3}
   _shootingPosition: {fileID: 184667437}
   _shotCooldown: 10
-  _spawnRadius: 1.5
+  _spawnPositions:
+  - {x: 2.8, y: 0, z: 0}
+  - {x: -2.8, y: 0, z: 0}
+  _spawnDelay: 1
 --- !u!1 &247701677
 GameObject:
   m_ObjectHideFlags: 0

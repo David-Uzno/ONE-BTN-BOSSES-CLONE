@@ -5,20 +5,25 @@ using UnityEngine;
 public class BossShooter : Shooter
 {
     [Header("Boss Attack Settings")]
-    [SerializeField] private float _spawnRadius = 1.5f;
+    [SerializeField] private Vector3[] _spawnPositions; 
+    [SerializeField] private float _spawnDelay = 1f;    
 
     protected override void Fire()
     {
-        if (CanShoot())
+        if (CanShoot() && _spawnPositions.Length > 0)
         {
-            // Genera una posición aleatoria cercana al jefe
-            Vector3 spawnPosition = transform.position + (Vector3)Random.insideUnitCircle * _spawnRadius;
-
-            // Instancia el proyectil en la posición calculada
-            Instantiate(_bullet, spawnPosition, transform.rotation);
-
+            StartCoroutine(SpawnWithDelay());
             _shotTime = Time.time + _shotCooldown;
         }
+    }
+
+    private IEnumerator SpawnWithDelay()
+    {
+        yield return new WaitForSeconds(_spawnDelay);
+
+        Vector3 spawnPosition = _spawnPositions[Random.Range(0, _spawnPositions.Length)];
+
+        Instantiate(_bullet, spawnPosition, transform.rotation);
     }
 }
 

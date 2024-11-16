@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LinearProyectile : MonoBehaviour
-
+public class LinearProyectile : Projectile
 {
-    private float _speed;
-    private Vector3 _direction;
-
-    public void Initialize(float speed, Vector3 direction)
+    private void Start()
     {
-        _speed = speed;
-        _direction = direction.normalized;
+        _speed = 0;
     }
 
-    private void Update()
+    protected override void HandleCollision(Collider2D other)
     {
-        transform.position += _direction * _speed * Time.deltaTime;
+        if (other.CompareTag("Player"))
+        {
+           
+            Destroy(other.gameObject);
+          
+        }
     }
 }
+
