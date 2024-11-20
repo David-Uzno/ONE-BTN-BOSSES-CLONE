@@ -11,7 +11,7 @@ public class RotationController : MonoBehaviour
 
     private float _angleRadians;
     private float _radiusInitial;
-    private float _currentSpeed;
+    public float _currentSpeed;
 
     public int _rotationDirection = 1;
 
