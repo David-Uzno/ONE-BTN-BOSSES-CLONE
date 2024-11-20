@@ -212,6 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 92255775}
   - component: {fileID: 92255776}
+  - component: {fileID: 92255777}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -256,6 +257,21 @@ MonoBehaviour:
   _winnerUI: {fileID: 3146200991700997291}
   _gameOverUI: {fileID: 1560667573235342029}
   _timer: {fileID: 1980635837}
+--- !u!114 &92255777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92255773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f118295138aa51244869599c5c9df9a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _initialSpeed: 2.5
+  _rotationPoint: {x: 0, y: 0}
+  _openingFactor: 7.5
 --- !u!1 &127449669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1250,11 +1266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb309811b4e4944cb71077705868805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 3
-  _initialSpeed: 2.25
-  _rotationPoint: {x: 0, y: 0}
-  _openingFactor: 1
+  _health: 1000
   _playerInput: {fileID: 910324385}
+  _movementController: {fileID: 92255777}
 --- !u!58 &910324391
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1262,7 +1276,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910324384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1671,7 +1685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9447bc875c61667429fa1fc9e706a316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 10
+  _health: 100
+  _playerInput: {fileID: 910324385}
 --- !u!1 &1541075897
 GameObject:
   m_ObjectHideFlags: 0
@@ -17484,7 +17499,7 @@ SceneRoots:
   - {fileID: 910324389}
   - {fileID: 1399648739}
   - {fileID: 1714827125}
+  - {fileID: 641765797}
   - {fileID: 92255775}
   - {fileID: 247701679}
-  - {fileID: 641765797}
   - {fileID: 5745367}
