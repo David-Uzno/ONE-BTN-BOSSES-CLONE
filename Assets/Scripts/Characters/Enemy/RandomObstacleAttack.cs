@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstaculoAleatorioAttack : MonoBehaviour
+public class RandomObstacleAttack : MonoBehaviour
 {
     [Header("Attack Settings")]
-    [SerializeField] private GameObject _obstaclePrefab; // Prefab del obstáculo
-    [SerializeField] private float _activationDelay = 3f; // Tiempo inicial antes del primer obstáculo
-    [SerializeField] private float _intervalBetweenAttacks = 5f; // Intervalo entre cada ataque
-    [SerializeField] private bool _autoStart = true; // Inicia automáticamente el ataque al comienzo
+    [SerializeField] private GameObject _obstaclePrefab;
+    [SerializeField] private float _activationDelay = 3f;
+    [SerializeField] private float _intervalBetweenAttacks = 5f;
+    [SerializeField] private bool _autoStart = true;
 
     private Camera _mainCamera;
 
     private void Start()
     {
-        // Obtén la referencia a la cámara principal
         _mainCamera = Camera.main;
 
         if (_autoStart)
