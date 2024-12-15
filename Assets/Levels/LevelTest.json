@@ -1,0 +1,52 @@
+{
+  "Moves": [
+    {
+      "Type": "TutorialMove",
+      "Tick": 4.0
+    },
+    {
+      "Type": "BossInitializer",
+      "EnemyScale": 1.0,
+      "TimeToScale": 0.5,
+      "Tick": 4.5
+    },
+    {
+      "Type": "TutorialDodge",
+      "Moves": [
+        {
+          "Type": "Triangle",
+          "Count": 1,
+          "StartAngle": 0.0,
+          "Cw": false,
+          "ShouldDelay": true,
+          "Tick": 1.5
+        },
+        {
+          "Type": "Triangle",
+          "Count": 1,
+          "StartAngle": 120.0,
+          "Cw": false,
+          "ShouldDelay": true,
+          "Tick": 3.5
+        },
+        {
+          "Type": "Triangle",
+          "Count": 1,
+          "StartAngle": 240.0,
+          "Cw": false,
+          "ShouldDelay": true,
+          "Tick": 5.5
+        }
+      ],
+      "Tick": 8
+    },
+    {
+      "Type": "Triangle",
+      "Count": 1,
+      "StartAngle": 0.0,
+      "Cw": false,
+      "ShouldDelay": true,
+      "Tick": 10.5
+    }
+  ]
+}
