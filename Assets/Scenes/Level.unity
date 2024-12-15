@@ -365,7 +365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &184667437
 Transform:
   m_ObjectHideFlags: 0
@@ -416,7 +416,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &206476206
 Transform:
   m_ObjectHideFlags: 0
@@ -1072,7 +1072,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 842568660}
-  - component: {fileID: 842568662}
   m_Layer: 0
   m_Name: Fire Point
   m_TagString: Untagged
@@ -1095,21 +1094,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1399648739}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &842568662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 842568659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27a5227b0a379d04185a7a8928be15b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bullet: {fileID: 9019059391284965346, guid: 6bf31f62546a11642b0fdefb8749be6e, type: 3}
-  _shootingPosition: {fileID: 842568660}
-  _shotCooldown: 1
 --- !u!1 &910324384
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,11 +1303,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5db2d3e08b76ac843adb4960bf1c9472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 10
+  _health: 100
   _playerInput: {fileID: 910324385}
   _movementController: {fileID: 92255777}
   _collider: {fileID: 910324391}
   _dashCounter: 100
+  _increasedSpeed: 2
+  _counterDelay: 0.025
 --- !u!1 &1155298683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,8 +1691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9447bc875c61667429fa1fc9e706a316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
-  _playerInput: {fileID: 910324385}
+  _health: 1000
 --- !u!1 &1541075897
 GameObject:
   m_ObjectHideFlags: 0
@@ -2324,7 +2309,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1957742464
 Transform:
   m_ObjectHideFlags: 0

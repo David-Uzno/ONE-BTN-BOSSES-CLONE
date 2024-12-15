@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : Character
 {
+    [Header("Controls")]
+    public PlayerInput _playerInput;
+
     [Header("Dependencies")]
     [SerializeField] protected RotationController _movementController;
 
