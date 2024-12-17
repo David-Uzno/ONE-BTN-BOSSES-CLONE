@@ -54342,7 +54342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c97daa5f364a334cafc57c7f87d5b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isInteractable: 1
+  _isInteractable: 0
+  _alphaInactiveOpacity: 0.5
   buttonIndex: 0
 --- !u!4 &7801405902140891240
 Transform:
@@ -60959,6 +60960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 1
+  _alphaInactiveOpacity: 0.5
   buttonIndex: 0
 --- !u!1 &8643700262237796888
 GameObject:
