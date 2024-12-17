@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Video;
 using TMPro;
-using Unity.VisualScripting;
 
 public class SelectMovement : MonoBehaviour
 {
+    [SerializeField] private GameObject _powerUpsUI;
     [SerializeField] private List<GameObject> _movements;
 
     [Header("Titles")]
@@ -35,6 +34,16 @@ public class SelectMovement : MonoBehaviour
         {
             _movements[_currentIndex].SetActive(true);
         }
+    }
+
+    public void Back()
+    {
+        _powerUpsUI.SetActive(false);
+    }
+
+    public void Play()
+    {
+        _powerUpsUI.SetActive(true);
     }
 
     public void OnPreviousMovement()

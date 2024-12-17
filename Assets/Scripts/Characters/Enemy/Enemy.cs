@@ -5,15 +5,37 @@ using UnityEngine;
 public class Enemy : Character
 {
     public delegate void EnemyDeathEventHandler(Enemy enemy);
-    public event EnemyDeathEventHandler OnEnemyDeath;
+    public static event EnemyDeathEventHandler OnAnyEnemyDeath;
+
+    public static int TotalEnemiesAlive = 0;
+
+    private void Awake()
+    {
+        TotalEnemiesAlive++;
+    }
 
     protected override void Die()
     {
         base.Die();
 
-        if (OnEnemyDeath != null)
+        TotalEnemiesAlive--;
+
+        if (OnAnyEnemyDeath != null)
         {
-            OnEnemyDeath(this);
+            OnAnyEnemyDeath.Invoke(this);
+        }
+
+        if (TotalEnemiesAlive <= 0)
+        {
+            GameManager.Instance.HandleLevelWin();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (TotalEnemiesAlive > 0)
+        {
+            TotalEnemiesAlive--;
         }
     }
 }

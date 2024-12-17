@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RotationController : MonoBehaviour
 {
-    [Header("Rotation Settings")]
     [SerializeField] private float _initialSpeed = 2.5f;
     [SerializeField] private Vector2 _rotationPoint = Vector2.zero;
     [SerializeField] private float _openingFactor = 10f;

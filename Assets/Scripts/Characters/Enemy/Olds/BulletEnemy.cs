@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class BulletEnemy : Projectile
 {
-    private GameManager _gameManager;
+    private HealthManager _healthManager;
 
     private void Awake()
     {
-        _gameManager = FindObjectOfType<GameManager>();
+        _healthManager = FindObjectOfType<HealthManager>();
     }
     
     protected override void HandleCollision(Collider2D other)
     {
-        if (other.CompareTag("Player") && _gameManager != null)
+        if (other.CompareTag("Player") && _healthManager != null)
         {
-            _gameManager.TakeDamage(1);
+            _healthManager.TakeDamage(1);
             Destroy(gameObject);
         }
         else
