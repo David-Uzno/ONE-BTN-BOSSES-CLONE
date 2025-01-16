@@ -10,13 +10,9 @@ public class LevelLoader : MonoBehaviour
     {
         public string Type;
         public float Tick;
-        public List<Move> Moves;
-
-        [Header("Boss")]
         public float EnemyScale;
         public float TimeToScale;
-
-        [Header("Triangle")]
+        public List<Move> Moves;   // Subacciones
         public int Count;
         public float StartAngle;
         public bool Cw;
@@ -31,9 +27,15 @@ public class LevelLoader : MonoBehaviour
 
     public Level CurrentLevel;
 
-    public void LoadLevel(string filePath)
+    public void LoadLevel(TextAsset jsonFile)
     {
-        string json = File.ReadAllText(filePath);
-        CurrentLevel = JsonUtility.FromJson<Level>(json);
+        if (jsonFile != null)
+        {
+            CurrentLevel = JsonUtility.FromJson<Level>(jsonFile.text);
+        }
+        else
+        {
+            Debug.LogError("TextAsset no asignado.");
+        }
     }
 }

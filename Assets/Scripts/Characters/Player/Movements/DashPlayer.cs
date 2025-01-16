@@ -10,7 +10,6 @@ public class DashPlayer : PlayerMovement
     [SerializeField] private Collider2D _collider;
     [SerializeField] private byte _counter = 100;
     
-
     [Header("Dash Settings")]
     [SerializeField] private float _increasedSpeed = 2.0f;
     [SerializeField] private float _counterDelay = 0.025f;
@@ -21,7 +20,7 @@ public class DashPlayer : PlayerMovement
 
     void Start()
     {
-        _initialSpeed = _movementController._currentSpeed;
+        _initialSpeed = _movementController._initialSpeed;
     }
 
     protected override void Movement()

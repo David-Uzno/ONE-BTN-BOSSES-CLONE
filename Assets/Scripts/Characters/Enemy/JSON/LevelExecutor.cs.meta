@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1cbc1236185f4394490638d4cd389a02
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - LevelLoader: {instanceID: 0}
+  - LevelJson: {instanceID: 0}
+  - TrianglePrefab: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

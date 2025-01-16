@@ -1477,11 +1477,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1237059092}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c795bab6c89de1d468bf2f392c55a6ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cbc1236185f4394490638d4cd389a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFilePath: Assets/Levels/LevelTest.json
-  LevelLoader: {fileID: 1237059095}
+  _levelLoader: {fileID: 1237059095}
+  _levelJson: {fileID: 4900000, guid: 98346083c65b10441adec2a3d7162ed4, type: 3}
+  _trianglePrefab: {fileID: 1722080280111837541, guid: 8bbb503610b0f1345ab5fbe4d4d5428a, type: 3}
 --- !u!114 &1237059095
 MonoBehaviour:
   m_ObjectHideFlags: 0
