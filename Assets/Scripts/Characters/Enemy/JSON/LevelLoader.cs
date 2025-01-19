@@ -12,7 +12,7 @@ public class LevelLoader : MonoBehaviour
         public float Tick;
         public float EnemyScale;
         public float TimeToScale;
-        public List<Move> Moves;   // Subacciones
+        public List<Move> Moves;    // Sub-acciones
         public int Count;
         public float StartAngle;
         public bool Cw;

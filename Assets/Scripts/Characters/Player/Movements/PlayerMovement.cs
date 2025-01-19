@@ -16,7 +16,7 @@ public class PlayerMovement : Character
     protected virtual void FixedUpdate()
     {
         CheckShootingInput();
-        _movementController.UpdateMovement(Time.fixedDeltaTime, transform);
+        _movementController.UpdateMovement();
     }
 
     protected void CheckShootingInput()

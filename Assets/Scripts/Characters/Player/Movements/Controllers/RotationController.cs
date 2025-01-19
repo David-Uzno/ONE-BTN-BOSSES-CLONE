@@ -4,61 +4,45 @@ using UnityEngine;
 
 public class RotationController : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] public float _initialSpeed = 2.5f;
-    [SerializeField] private Vector2 _rotationPoint = Vector2.zero;
-    [SerializeField] private float _openingFactor = 10f;
+    [SerializeField] private float _openingFactor = 7.5f;
 
+    [Header("Rotation")]
+    [SerializeField] private Vector2 _rotationPoint = Vector2.zero;
+    public sbyte _rotationDirection = 1;
+
+    [Header("Internal Calculations")]
+    public float _currentSpeed;
     private float _angleRadians;
     private float _radiusInitial;
-    public float _currentSpeed;
-
-    public int _rotationDirection = 1;
-
+    
     private void Start()
     {
         // Calcular el radio inicial
-        if (_rotationPoint == Vector2.zero)
-        {
-            float distance = Vector2.Distance(transform.position, Vector2.zero);
-
-            if (distance > 0f)
-            {
-                _radiusInitial = distance * _openingFactor;
-            }
-            else
-            {
-                _radiusInitial = _openingFactor;
-            }
-        }
-        else
-        {
-            _radiusInitial = Vector2.Distance(transform.position, _rotationPoint) * _openingFactor;
-        }
+        float distance = Vector2.Distance(transform.position, _rotationPoint);
+        _radiusInitial = Mathf.Max(distance, 1f) * _openingFactor;
 
         // Calcular el ángulo inicial
         _angleRadians = Mathf.Atan2(transform.position.y - _rotationPoint.y, transform.position.x - _rotationPoint.x);
 
         // Ajustar la posición inicial
-        float x = _rotationPoint.x + Mathf.Cos(_angleRadians) * _radiusInitial;
-        float y = _rotationPoint.y + Mathf.Sin(_angleRadians) * _radiusInitial;
-        transform.position = new Vector2(x, y);
+        transform.position = _rotationPoint + new Vector2(Mathf.Cos(_angleRadians), Mathf.Sin(_angleRadians)) * _radiusInitial;
 
         _currentSpeed = _initialSpeed;
     }
 
-    public void UpdateMovement(float deltaTime, Transform playerTransform)
+    public void UpdateMovement()
     {
         // Incrementar ángulo
-        _angleRadians += _currentSpeed * _rotationDirection * deltaTime;
+        _angleRadians += _currentSpeed * _rotationDirection * Time.fixedDeltaTime;
 
         // Calcular nueva posición
-        float x = _rotationPoint.x + Mathf.Cos(_angleRadians) * _radiusInitial;
-        float y = _rotationPoint.y + Mathf.Sin(_angleRadians) * _radiusInitial;
-        playerTransform.position = new Vector2(x, y);
+        transform.position = _rotationPoint + new Vector2(Mathf.Cos(_angleRadians), Mathf.Sin(_angleRadians)) * _radiusInitial;
 
         // Calcular rotación
-        Vector2 directionToCenter = (_rotationPoint - (Vector2)playerTransform.position).normalized;
+        Vector2 directionToCenter = (_rotationPoint - (Vector2)transform.position).normalized;
         float rotationAngle = Mathf.Atan2(directionToCenter.y, directionToCenter.x) * Mathf.Rad2Deg;
-        playerTransform.rotation = Quaternion.Euler(0, 0, rotationAngle - 90f);
+        transform.rotation = Quaternion.Euler(0, 0, rotationAngle - 90f);
     }
 }

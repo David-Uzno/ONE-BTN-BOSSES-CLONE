@@ -1232,7 +1232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 100
   _playerInput: {fileID: 910324385}
-  _movementController: {fileID: 0}
+  _movementController: {fileID: 910324393}
 --- !u!58 &910324391
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1300,10 +1300,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialSpeed: 2.5
-  _rotationPoint: {x: 0, y: 0}
   _openingFactor: 7.5
-  _currentSpeed: 0
+  _rotationPoint: {x: 0, y: 0}
   _rotationDirection: 1
+  _currentSpeed: 0
 --- !u!1 &1155298683
 GameObject:
   m_ObjectHideFlags: 0
