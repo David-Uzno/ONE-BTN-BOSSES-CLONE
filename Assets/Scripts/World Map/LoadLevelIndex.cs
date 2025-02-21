@@ -4,14 +4,25 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 
-public class Overworld : MonoBehaviour
+public class LoadLevelIndex : MonoBehaviour
 {
+    public static LoadLevelIndex Instance {get; private set;}
+
     [Header("Levels")]
     [SerializeField] private List<SceneAsset> _availableLevels;
-    [SerializeField] private int _currentLevelIndex;
+    public ushort _currentLevelIndex;
 
-/*  [Header("Button Management")]
-    [SerializeField] private List<ButtonLevel> _buttons;*/
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void PlayLevel()
     {

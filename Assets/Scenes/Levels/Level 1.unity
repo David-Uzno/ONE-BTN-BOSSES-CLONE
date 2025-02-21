@@ -1084,6 +1084,7 @@ GameObject:
   - component: {fileID: 910324386}
   - component: {fileID: 910324385}
   - component: {fileID: 910324393}
+  - component: {fileID: 910324394}
   - component: {fileID: 910324390}
   - component: {fileID: 910324392}
   m_Layer: 0
@@ -1275,7 +1276,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910324384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5db2d3e08b76ac843adb4960bf1c9472, type: 3}
   m_Name: 
@@ -1304,6 +1305,21 @@ MonoBehaviour:
   _rotationPoint: {x: 0, y: 0}
   _rotationDirection: 1
   _currentSpeed: 0
+--- !u!114 &910324394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910324384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583d0e1ff8f96694e804c81bd28b3fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerMovementScripts:
+  - {fileID: 910324390}
+  - {fileID: 910324392}
 --- !u!1 &1155298683
 GameObject:
   m_ObjectHideFlags: 0

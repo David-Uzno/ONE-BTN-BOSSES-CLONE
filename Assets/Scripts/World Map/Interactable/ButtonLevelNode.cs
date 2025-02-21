@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonLevel : MonoBehaviour
+public class ButtonLevelNode : MonoBehaviour
 {
-    [Header("Interactable Settings")]
+    [Header("Interactable")]
     [SerializeField] private bool _isInteractable = true;
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private float _alphaInactiveOpacity = 0.5f;
 
-    [Header("Button Information")]
-    public int buttonIndex;
+    [Header("Information")]
+    [SerializeField] private ushort _buttonIndex;
     
     private void Start()
     {
@@ -23,6 +23,7 @@ public class ButtonLevel : MonoBehaviour
         if (_isInteractable)
         {
             PlayerOverworld.Instance.GetPlayerGameObject().transform.position = this.transform.position;
+            LoadLevelIndex.Instance._currentLevelIndex = _buttonIndex;
         }
     }
 

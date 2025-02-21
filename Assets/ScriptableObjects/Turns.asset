@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 691951582bf94bf409714dc6236344b1, type: 3}
+  m_Name: Turns
+  m_EditorClassIdentifier: 
+  Title: '>TURNS'
+  Description: Keep flying in the same direction to ACCELERATE. Press SPACE to TURN,
+    changing your direction. When you TURN and your SPEED will be reduced. Balance
+    when you TURN to maintain a high speed!
+  VideoClip: {fileID: 32900000, guid: 16df3d1bce7bb5a4d86df0c40666951f, type: 3}
+  ScriptReference: {fileID: 11500000, guid: 8fb309811b4e4944cb71077705868805, type: 3}
+  MovementPrefab: {fileID: 3946776350683909951, guid: 663ae1d5cc533a849a633a775f597787, type: 3}

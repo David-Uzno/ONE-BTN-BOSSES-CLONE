@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 691951582bf94bf409714dc6236344b1, type: 3}
+  m_Name: Dash
+  m_EditorClassIdentifier: 
+  Title: '>DASH'
+  Description: 'Your ship always travels in a counter-clockwise direction. When you
+    HOLD SPACE you will be in DASH, ignoring all enemy attacks and traveling at an
+    increased speed. But beware, DASH drains your ENERGY and if you deplete it your
+    DASH will end. When not in DASH your ENERGY will regenerate. '
+  VideoClip: {fileID: 32900000, guid: 7ff0a40fd0b591b4eba78bb04cd58d54, type: 3}
+  ScriptReference: {fileID: 11500000, guid: 5db2d3e08b76ac843adb4960bf1c9472, type: 3}
+  MovementPrefab: {fileID: 8421919844343690454, guid: a2570c5ad6cbfd248872ffe355e5db5f, type: 3}
