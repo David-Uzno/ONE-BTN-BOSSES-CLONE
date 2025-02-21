@@ -54,7 +54,7 @@ public class SelectMovement : MonoBehaviour
 
     private void ActivateMovement(int index)
     {
-        if (!gameObject.activeInHierarchy) return;
+        if (this == null || !gameObject.activeInHierarchy) return;
 
         if (_currentActiveMovement != null)
         {

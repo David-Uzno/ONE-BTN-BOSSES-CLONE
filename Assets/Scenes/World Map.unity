@@ -58606,9 +58606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e6b492de11f5be48a66cb3e02b40c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _availableLevels:
-  - {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
-  - {fileID: 102900000, guid: 82e8828520c11c544ad19c6f6d65e835, type: 3}
+  _availableLevels: []
   _currentLevelIndex: 0
 --- !u!95 &9018308647248861436
 Animator:

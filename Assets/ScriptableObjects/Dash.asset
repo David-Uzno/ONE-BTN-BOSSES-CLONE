@@ -18,5 +18,5 @@ MonoBehaviour:
     increased speed. But beware, DASH drains your ENERGY and if you deplete it your
     DASH will end. When not in DASH your ENERGY will regenerate. '
   VideoClip: {fileID: 32900000, guid: 7ff0a40fd0b591b4eba78bb04cd58d54, type: 3}
-  ScriptReference: {fileID: 11500000, guid: 5db2d3e08b76ac843adb4960bf1c9472, type: 3}
+  ScriptReferenceName: DashPlayer
   MovementPrefab: {fileID: 3946776350683909951, guid: 663ae1d5cc533a849a633a775f597787, type: 3}

@@ -1,7 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -14,6 +13,7 @@ public class MovementData : ScriptableObject
     public VideoClip VideoClip;
 
     [Header("Dependencies")]
-    public MonoScript ScriptReference;
+    public string ScriptReferenceName;
+    private Type ScriptReference => Type.GetType(ScriptReferenceName);
     public GameObject MovementPrefab;
 }
