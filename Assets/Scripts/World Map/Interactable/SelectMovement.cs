@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using TMPro;
-using Unity.VisualScripting;
 
 public class SelectMovement : MonoBehaviour
 {
@@ -24,13 +24,17 @@ public class SelectMovement : MonoBehaviour
     public static int SelectedIndex {get; private set;} = 0;
 
     [Header("Dependencies")]
+    [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private TransitionMaganer _transitionManager;
     private GameObject _powerUpsUI;
 #endregion
 
 #region Movements
-    void Start()
+    private void Start()
     {
+        _playerInput.actions["Left"].performed += OnPreviousMovementPerformed;
+        _playerInput.actions["Right"].performed += OnNextMovementPerformed;
+
         _powerUpsUI = this.gameObject;
 
         if (_movementsData.Count > 0)
@@ -39,8 +43,19 @@ public class SelectMovement : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        if (_playerInput != null)
+        {
+            _playerInput.actions["Left"].performed -= OnPreviousMovementPerformed;
+            _playerInput.actions["Right"].performed -= OnNextMovementPerformed;
+        }
+    }
+
     private void ActivateMovement(int index)
     {
+        if (!gameObject.activeInHierarchy) return;
+
         if (_currentActiveMovement != null)
         {
             Destroy(_currentActiveMovement);
@@ -53,6 +68,7 @@ public class SelectMovement : MonoBehaviour
         if (movement.MovementPrefab != null)
         {
             _currentActiveMovement = Instantiate(movement.MovementPrefab, transform);
+            _currentActiveMovement.transform.SetSiblingIndex(1);
         }
 
         UpdateInformation(movement);
@@ -89,16 +105,30 @@ public class SelectMovement : MonoBehaviour
 
     public void OnPreviousMovement()
     {
-        if (_movementsData.Count == 0) return;
-
-        ActivateMovement((_currentIndex - 1 + _movementsData.Count) % _movementsData.Count);
+        HandleMovementChange(-1);
     }
 
     public void OnNextMovement()
     {
+        HandleMovementChange(1);
+    }
+
+    private void OnPreviousMovementPerformed(InputAction.CallbackContext context)
+    {
+        HandleMovementChange(-1);
+    }
+
+    private void OnNextMovementPerformed(InputAction.CallbackContext context)
+    {
+        HandleMovementChange(1);
+    }
+
+    private void HandleMovementChange(int direction)
+    {
         if (_movementsData.Count == 0) return;
 
-        ActivateMovement((_currentIndex + 1) % _movementsData.Count);
+        int newIndex = (_currentIndex + direction + _movementsData.Count) % _movementsData.Count;
+        ActivateMovement(newIndex);
     }
 #endregion
 }

@@ -67,8 +67,6 @@ public class PlayerOverworld : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1 + LoadLevelIndex.Instance._currentLevelIndex);
         }
-
-        
     }
 
     private void OnCancelPerformed(InputAction.CallbackContext context)

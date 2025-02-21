@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 8978612307097530880}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1491903210
@@ -324,7 +324,7 @@ CanvasGroup:
   m_GameObject: {fileID: 7548640987755346364}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
+  m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!222 &62104973526130374
@@ -408,7 +408,7 @@ CanvasGroup:
   m_GameObject: {fileID: 8863770699232830233}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
+  m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!222 &209987517722206123
@@ -1085,7 +1085,7 @@ CanvasGroup:
   m_GameObject: {fileID: 4304058381399350023}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
+  m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &1608741355421083540
@@ -1297,7 +1297,7 @@ CanvasGroup:
   m_GameObject: {fileID: 7592564231278185845}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
+  m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!222 &1907192629256088040
@@ -1675,7 +1675,7 @@ CanvasGroup:
   m_GameObject: {fileID: 4483925708166398868}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
+  m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!114 &2911874002790311960
@@ -2374,7 +2374,7 @@ CanvasGroup:
   m_GameObject: {fileID: 6010940972446767961}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
+  m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!224 &4891071541659986571
@@ -2413,10 +2413,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 2
+    m_Mode: 4
     m_WrapAround: 1
     m_SelectOnUp: {fileID: 7519453815763091443}
-    m_SelectOnDown: {fileID: 3497034409391205199}
+    m_SelectOnDown: {fileID: 7519453815763091443}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -2772,7 +2772,7 @@ CanvasGroup:
   m_GameObject: {fileID: 3546653498483991391}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
+  m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!222 &5279677171440702189
@@ -3714,7 +3714,7 @@ CanvasGroup:
   m_GameObject: {fileID: 5122845647772323413}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
+  m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!225 &7172448952337084031
@@ -3864,9 +3864,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 2
+    m_Mode: 4
     m_WrapAround: 1
-    m_SelectOnUp: {fileID: 5322523542718239492}
+    m_SelectOnUp: {fileID: 4909029526010219927}
     m_SelectOnDown: {fileID: 4909029526010219927}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}

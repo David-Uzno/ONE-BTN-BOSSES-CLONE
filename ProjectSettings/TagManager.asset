@@ -5,6 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - LevelNode
+  - Background/HealthRegen
+  - LevelCluster
+  - Background/HealthRegenDash
+  - Backgrounds
+  - Overworld
+  - Background/Immunity
+  - Background/EnemyHP
+  - Ace
+  - Background/Attack
+  - Background/Teleport
+  - UI/MainMenu
   layers:
   - Default
   - TransparentFX
