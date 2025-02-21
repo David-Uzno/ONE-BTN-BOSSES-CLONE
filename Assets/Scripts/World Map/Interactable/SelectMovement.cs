@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using TMPro;
+using Unity.VisualScripting;
 
 public class SelectMovement : MonoBehaviour
 {
@@ -21,11 +22,17 @@ public class SelectMovement : MonoBehaviour
     private GameObject _currentActiveMovement;
     public static UnityEvent<int> OnMovementSelected = new UnityEvent<int>();
     public static int SelectedIndex {get; private set;} = 0;
+
+    [Header("Dependencies")]
+    [SerializeField] private TransitionMaganer _transitionManager;
+    private GameObject _powerUpsUI;
 #endregion
 
 #region Movements
     void Start()
     {
+        _powerUpsUI = this.gameObject;
+
         if (_movementsData.Count > 0)
         {
             ActivateMovement(0);
@@ -69,7 +76,10 @@ public class SelectMovement : MonoBehaviour
 #region Buttons
     public void Back()
     {
-        gameObject.SetActive(false);
+        _powerUpsUI.SetActive(false);
+        _transitionManager.RevertTransition();
+
+        PlayerOverworld.Instance.IsActionPressed = false;
     }
 
     public void Play()

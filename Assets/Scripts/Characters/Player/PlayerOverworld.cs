@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerOverworld : MonoBehaviour 
 {
     public static PlayerOverworld Instance { get; private set; }
 
-    [Header("Dependencies")]
+    [HideInInspector] public bool IsActionPressed = false;
+
+    [Header("Player Dependencies")]
     [SerializeField] private GameObject _playerGameObject;
     [SerializeField] private PlayerInput _playerInput;
+
+    [Header("UI & Transition")]
     [SerializeField] private GameObject _powerUpsUI;
     [SerializeField] private TransitionMaganer _transitionManager;
 
@@ -49,16 +54,29 @@ public class PlayerOverworld : MonoBehaviour
 
     private void OnActionPerfomed(InputAction.CallbackContext context)
     {
-        _transitionManager.SaveCameraPosition();
+        if (IsActionPressed == false)
+        {
+            _transitionManager.SaveCameraPosition();
         
-        _powerUpsUI.SetActive(true);
-        _transitionManager.StartTransition();
+            _powerUpsUI.SetActive(true);
+            _transitionManager.StartTransition();
+
+            IsActionPressed = true;
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1 + LoadLevelIndex.Instance._currentLevelIndex);
+        }
+
+        
     }
 
     private void OnCancelPerformed(InputAction.CallbackContext context)
     {
         _powerUpsUI.SetActive(false);
         _transitionManager.RevertTransition();
+
+        IsActionPressed = false;
     }
 
     public GameObject GetPlayerGameObject()

@@ -1317,7 +1317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583d0e1ff8f96694e804c81bd28b3fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMovementScripts:
+  _movementScripts:
   - {fileID: 910324390}
   - {fileID: 910324392}
 --- !u!1 &1155298683

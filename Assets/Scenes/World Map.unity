@@ -656,6 +656,8 @@ MonoBehaviour:
   _titleTextUI: {fileID: 4204917267151718295}
   _descriptionTextUI: {fileID: 8819635682463084030}
   _videoPlayer: {fileID: 1166802660317387744}
+  _powerUpsUI: {fileID: 544882522}
+  _transitionManager: {fileID: 1245473156}
 --- !u!1 &586946725
 GameObject:
   m_ObjectHideFlags: 0
@@ -47897,6 +47899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d5ae7038a009348a7e4989422fb512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActionPressed: 0
   _playerGameObject: {fileID: 105234637935604081}
   _playerInput: {fileID: 7496219748883958953}
   _powerUpsUI: {fileID: 544882522}

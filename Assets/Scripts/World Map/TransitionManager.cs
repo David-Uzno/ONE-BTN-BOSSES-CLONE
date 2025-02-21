@@ -30,14 +30,12 @@ public class TransitionMaganer : MonoBehaviour
 
     public void StartTransition()
     {
-        Vector3 targetPosition = _originalCameraPosition - new Vector3(_moveLeftAmount, 0, 0);
-        StartCoroutine(SmoothTransition(_pixelPerfectCamera.assetsPPU, _pixelPerfectCamera.assetsPPU * _zoomScale, _transitionDuration, targetPosition));
+        StartCoroutine(SmoothTransition(_pixelPerfectCamera.assetsPPU, _pixelPerfectCamera.assetsPPU * _zoomScale, _transitionDuration, _originalCameraPosition - new Vector3(_moveLeftAmount, 0, 0)));
     }
 
-    public void RevertTransition()
+    public void RevertTransition() 
     {
-        Vector3 revertTargetPosition = _originalCameraPosition + new Vector3(_moveLeftAmount, 0, 0);
-        StartCoroutine(SmoothTransition(_pixelPerfectCamera.assetsPPU, _originalAssetsPPU, _transitionDuration, revertTargetPosition));
+        StartCoroutine(SmoothTransition(_pixelPerfectCamera.assetsPPU, _originalAssetsPPU, _transitionDuration, _originalCameraPosition));
     }
 
     private IEnumerator SmoothTransition(float start, float end, float duration, Vector3 targetCameraPosition)

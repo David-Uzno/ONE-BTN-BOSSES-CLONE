@@ -35,9 +35,9 @@
             "actions": [
                 {
                     "name": "Accept",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "83324f93-7ecb-4946-ab41-77f9bbec8968",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
