@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class DashPlayer : PlayerMovement
@@ -6,6 +7,7 @@ public class DashPlayer : PlayerMovement
     [Header("Dash")]
     [SerializeField] private Collider2D _collider;
     [SerializeField] private byte _counter = 100;
+    [SerializeField] private TextMeshProUGUI _counterText;
     
     [Header("Dash Settings")]
     [SerializeField] private float _increasedSpeed = 2.0f;
@@ -47,6 +49,10 @@ public class DashPlayer : PlayerMovement
         while (_counter > 0)
         {
             _counter--;
+            if (_counterText != null)
+            {
+                _counterText.text = _counter.ToString();
+            }
 
             if (_counter == 0)
             {
@@ -79,6 +85,10 @@ public class DashPlayer : PlayerMovement
         while (_counter < 100)
         {
             _counter++;
+            if (_counterText != null)
+            {
+                _counterText.text = _counter.ToString();
+            }
             yield return new WaitForSeconds(_counterDelay);
         }
         _increaseDashCoroutine = null;
