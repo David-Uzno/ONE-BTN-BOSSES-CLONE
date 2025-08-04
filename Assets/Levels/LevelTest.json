@@ -2,13 +2,13 @@
   "Moves": [
     {
       "Type": "TutorialMove",
-      "Tick": 4.0
+      "Tick": 2.0
     },
     {
       "Type": "BossInitializer",
       "EnemyScale": 1.0,
       "TimeToScale": 0.5,
-      "Tick": 4.5
+      "Tick": 2.25
     },
     {
       "Type": "TutorialDodge",
@@ -19,7 +19,7 @@
           "StartAngle": 0.0,
           "Cw": false,
           "ShouldDelay": true,
-          "Tick": 1.5
+          "Tick": 0.75
         },
         {
           "Type": "Triangle",
@@ -27,7 +27,7 @@
           "StartAngle": 120.0,
           "Cw": false,
           "ShouldDelay": true,
-          "Tick": 3.5
+          "Tick": 1.75
         },
         {
           "Type": "Triangle",
@@ -35,10 +35,10 @@
           "StartAngle": 240.0,
           "Cw": false,
           "ShouldDelay": true,
-          "Tick": 5.5
+          "Tick": 2.75
         }
       ],
-      "Tick": 8
+      "Tick": 4
     },
     {
       "Type": "Triangle",
@@ -46,7 +46,7 @@
       "StartAngle": 0.0,
       "Cw": false,
       "ShouldDelay": true,
-      "Tick": 10.5
+      "Tick": 5.25
     }
   ]
 }

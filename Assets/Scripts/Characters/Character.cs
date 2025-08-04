@@ -1,11 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
     [Header("Status")]
-    public int _health = 10;
+    [SerializeField] private int _health = 10;
+
+    public void SetHealth(int health)
+    {
+        _health = health;
+    }
 
     public virtual void TakeDamage(int damage)
     {
@@ -19,6 +22,6 @@ public class Character : MonoBehaviour
 
     protected virtual void Die()
     {
-        Destroy(gameObject); 
+        Destroy(gameObject);
     }
 }

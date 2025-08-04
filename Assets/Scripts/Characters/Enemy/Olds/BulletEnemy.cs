@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletEnemy : Projectile
@@ -8,7 +6,7 @@ public class BulletEnemy : Projectile
 
     private void Awake()
     {
-        _healthManager = FindObjectOfType<HealthManager>();
+        _healthManager = Object.FindFirstObjectByType<HealthManager>();
     }
     
     protected override void HandleCollision(Collider2D other)

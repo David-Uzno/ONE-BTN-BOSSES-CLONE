@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelExecutor : MonoBehaviour
@@ -33,7 +31,19 @@ public class LevelExecutor : MonoBehaviour
         foreach (var move in level.Moves)
         {
             yield return new WaitForSeconds(move.Tick);
-            ExecuteMove(move);
+
+            if (move.Moves != null && move.Moves.Count > 0)
+            {
+                foreach (var subMove in move.Moves)
+                {
+                    yield return new WaitForSeconds(subMove.Tick);
+                    ExecuteMove(subMove);
+                }
+            }
+            else
+            {
+                ExecuteMove(move);
+            }
         }
     }
 

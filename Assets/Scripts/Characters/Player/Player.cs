@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerScriptAssigner : MonoBehaviour
+public class Player : Character
 {
+    [Header("Movements")]
     [SerializeField] private MonoBehaviour[] _movementScripts;
 
     private void OnEnable()

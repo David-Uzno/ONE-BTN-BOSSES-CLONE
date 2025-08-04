@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -27,8 +25,8 @@ public class Timer : MonoBehaviour
     #region Unity Methods
     private void Awake()
     {
-        _gameManager = FindObjectOfType<GameManager>();
-        _saveManager = FindObjectOfType<SaveManager>();
+        _gameManager = GameManager.Instance;
+        _saveManager = Object.FindFirstObjectByType<SaveManager>();
     }
 
     private void Start()

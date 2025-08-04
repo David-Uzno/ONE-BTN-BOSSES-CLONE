@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,6 +6,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Level Status")]
     public byte _currentLevel;
+    public float _radius = 7.5f;
 
     [Header("Results UI")]
     [SerializeField] private GameObject _winnerUI;
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _timer = FindObjectOfType<Timer>();
+        _timer = Object.FindFirstObjectByType<Timer>();
 
         Enemy.OnAnyEnemyDeath += HandleEnemyDeath;
     }

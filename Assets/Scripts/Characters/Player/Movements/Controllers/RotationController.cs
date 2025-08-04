@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RotationController : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] public float _initialSpeed = 2.5f;
-    [SerializeField] private float _openingFactor = 7.5f;
 
     [Header("Rotation")]
     [SerializeField] private Vector2 _rotationPoint = Vector2.zero;
@@ -15,19 +12,18 @@ public class RotationController : MonoBehaviour
     [Header("Internal Calculations")]
     public float _currentSpeed;
     private float _angleRadians;
-    private float _radiusInitial;
-    
+    private CircularPath _circularPath;
+
     private void Start()
     {
-        // Calcular el radio inicial
-        float distance = Vector2.Distance(transform.position, _rotationPoint);
-        _radiusInitial = Mathf.Max(distance, 1f) * _openingFactor;
+        // Inicializar CircularPath con el radio fijo
+        _circularPath = new CircularPath(_rotationPoint);
 
         // Calcular el ángulo inicial
-        _angleRadians = Mathf.Atan2(transform.position.y - _rotationPoint.y, transform.position.x - _rotationPoint.x);
+        _angleRadians = _circularPath.GetAngle(transform.position);
 
         // Ajustar la posición inicial
-        transform.position = _rotationPoint + new Vector2(Mathf.Cos(_angleRadians), Mathf.Sin(_angleRadians)) * _radiusInitial;
+        transform.position = _circularPath.GetPosition(_angleRadians);
 
         _currentSpeed = _initialSpeed;
     }
@@ -38,7 +34,7 @@ public class RotationController : MonoBehaviour
         _angleRadians += _currentSpeed * _rotationDirection * Time.fixedDeltaTime;
 
         // Calcular nueva posición
-        transform.position = _rotationPoint + new Vector2(Mathf.Cos(_angleRadians), Mathf.Sin(_angleRadians)) * _radiusInitial;
+        transform.position = _circularPath.GetPosition(_angleRadians);
 
         // Calcular rotación
         Vector2 directionToCenter = (_rotationPoint - (Vector2)transform.position).normalized;
