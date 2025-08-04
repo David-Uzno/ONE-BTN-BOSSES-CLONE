@@ -2,7 +2,7 @@ fileFormatVersion: 2
 guid: 5a09ad93eea02d94d87008e03592e04b
 VideoClipImporter:
   externalObjects: {}
-  serializedVersion: 2
+  serializedVersion: 3
   frameRange: 0
   startFrame: 0
   endFrame: 158
