@@ -31,17 +31,17 @@ public class GameManager : MonoBehaviour
     {
         _timer = Object.FindFirstObjectByType<Timer>();
 
-        Enemy.OnAnyEnemyDeath += HandleEnemyDeath;
+        EnemyCharacter.OnAnyEnemyDeath += HandleEnemyDeath;
     }
 
     private void OnDestroy()
     {
-        Enemy.OnAnyEnemyDeath -= HandleEnemyDeath;
+        EnemyCharacter.OnAnyEnemyDeath -= HandleEnemyDeath;
     }
 
-    private void HandleEnemyDeath(Enemy enemy)
+    private void HandleEnemyDeath(EnemyCharacter enemy)
     {
-        if (Enemy.TotalEnemiesAlive <= 0)
+        if (EnemyCharacter.TotalEnemiesAlive <= 0)
         {
             HandleLevelWin();
         }

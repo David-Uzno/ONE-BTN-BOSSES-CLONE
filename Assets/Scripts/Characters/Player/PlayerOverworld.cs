@@ -6,15 +6,16 @@ public class PlayerOverworld : MonoBehaviour
 {
     public static PlayerOverworld Instance { get; private set; }
 
-    [HideInInspector] public bool IsActionPressed = false;
-
     [Header("Player Dependencies")]
     [SerializeField] private GameObject _playerGameObject;
     [SerializeField] private PlayerInput _playerInput;
 
     [Header("UI & Transition")]
     [SerializeField] private GameObject _powerUpsUI;
+    [SerializeField] private SelectMovement _selectCharacter;
     [SerializeField] private TransitionMaganer _transitionManager;
+
+    [HideInInspector] public bool IsActionPressed = false;
 
     private void Awake()
     {
@@ -36,18 +37,42 @@ public class PlayerOverworld : MonoBehaviour
                 Debug.LogError("PlayerOverworld GameObject no encontrado.");
             }
         }
+
+        if (_selectCharacter == null)
+        {
+            _selectCharacter = Object.FindFirstObjectByType<SelectMovement>();
+            if (_selectCharacter == null)
+            {
+                Debug.LogError("SelectCharacter no encontrado en la escena.");
+            }
+        }
+
+        if (_transitionManager == null)
+        {
+            _transitionManager = Object.FindFirstObjectByType<TransitionMaganer>();
+            if (_transitionManager == null)
+            {
+                Debug.LogError("TransitionMaganer no encontrado en la escena.");
+            }
+        }
     }
 
     private void Start()
     {
         _playerInput.actions["Accept"].performed += OnActionPerfomed;
         _playerInput.actions["Cancel"].performed += OnCancelPerformed;
+
+        _playerInput.actions["Left"].performed -= OnLeftPerformed;
+        _playerInput.actions["Right"].performed -= OnRightPerformed;
     }
 
     private void OnDestroy()
     {
         _playerInput.actions["Accept"].performed -= OnActionPerfomed;
         _playerInput.actions["Cancel"].performed -= OnCancelPerformed;
+
+        _playerInput.actions["Left"].performed -= OnLeftPerformed;
+        _playerInput.actions["Right"].performed -= OnRightPerformed;
     }
 
     private void OnActionPerfomed(InputAction.CallbackContext context)
@@ -60,6 +85,9 @@ public class PlayerOverworld : MonoBehaviour
             _transitionManager.StartTransition();
 
             IsActionPressed = true;
+
+            _playerInput.actions["Left"].performed += OnLeftPerformed;
+            _playerInput.actions["Right"].performed += OnRightPerformed;
         }
         else
         {
@@ -73,6 +101,48 @@ public class PlayerOverworld : MonoBehaviour
         _transitionManager.RevertTransition();
 
         IsActionPressed = false;
+
+        // Desactivar eventos de movimiento
+        _playerInput.actions["Left"].performed -= OnLeftPerformed;
+        _playerInput.actions["Right"].performed -= OnRightPerformed;
+    }
+
+    private void OnLeftPerformed(InputAction.CallbackContext context)
+    {
+        if (IsActionPressed)
+        {
+            if (_selectCharacter != null)
+            {
+                _selectCharacter.NextCharacter();
+            }
+            else
+            {
+                Debug.LogError("_selectCharacter es null. No se puede ejecutar OnLeftPerformed.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("OnActionPerformed no ha sido activado. No se puede ejecutar OnLeftPerformed.");
+        }
+    }
+
+    private void OnRightPerformed(InputAction.CallbackContext context)
+    {
+        if (IsActionPressed)
+        {
+            if (_selectCharacter != null)
+            {
+                _selectCharacter.PreviousCharacter();
+            }
+            else
+            {
+                Debug.LogError("_selectCharacter es null. No se puede ejecutar OnRightPerformed.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("OnActionPerformed no ha sido activado. No se puede ejecutar OnRightPerformed.");
+        }
     }
 
     public GameObject GetPlayerGameObject()

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Enemy : Character
+public class EnemyCharacter : Character
 {
-    public delegate void EnemyDeathEventHandler(Enemy enemy);
+    public delegate void EnemyDeathEventHandler(EnemyCharacter enemy);
     public static event EnemyDeathEventHandler OnAnyEnemyDeath;
 
     public static int TotalEnemiesAlive = 0;

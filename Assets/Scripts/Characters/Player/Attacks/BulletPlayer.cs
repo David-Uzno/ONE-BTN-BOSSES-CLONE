@@ -6,7 +6,7 @@ public class BulletPlayer : Projectile
     {
         if (other.CompareTag("Enemy"))
         {
-            Enemy enemy = other.GetComponent<Enemy>();
+            EnemyCharacter enemy = other.GetComponent<EnemyCharacter>();
             
             if (enemy != null)
             {
