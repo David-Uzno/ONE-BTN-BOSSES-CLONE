@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 #region Simple Attacks
@@ -10,21 +9,44 @@ public class TutorialMoveAction : IMoveAction
     }
 }
 
-public class SquareAction : IMoveAction
+public abstract class BaseAction : IMoveAction
 {
-    private GameObject _squarePrefab;
-    private Transform _spawnParent;
-    private GameObject _lastSquareInstance;
+    protected GameObject _prefab;
+    protected Transform _spawnParent;
+    protected GameObject _lastInstance;
 
-    public SquareAction(GameObject prefab, Transform parent = null)
+    public BaseAction(GameObject prefab, Transform parent = null)
     {
-        _squarePrefab = prefab;
+        _prefab = prefab;
         _spawnParent = parent;
     }
 
-    public void Execute(LevelLoader.Move move)
+    public abstract void Execute(LevelLoader.Move move);
+
+    protected void HandleLastInstance()
     {
-        if (_squarePrefab == null)
+        if (_lastInstance != null)
+        {
+            Object.Destroy(_lastInstance);
+        }
+    }
+
+    protected void ConfigureInstance(GameObject instance)
+    {
+        if (instance == null)
+        {
+            Debug.LogError("El objeto instanciado es nulo.");
+        }
+    }
+}
+
+public class SquareAction : BaseAction
+{
+    public SquareAction(GameObject prefab, Transform parent = null) : base(prefab, parent) { }
+
+    public override void Execute(LevelLoader.Move move)
+    {
+        if (_prefab == null)
         {
             Debug.LogError("El Prefab del Cuadrado no está asignado.");
             return;
@@ -43,50 +65,26 @@ public class SquareAction : IMoveAction
             float angleRadians = Mathf.Deg2Rad * (startAngle + i * 360.0f / move.Count);
             Vector2 position = circularPath.GetPosition(angleRadians);
 
-            HandleLastSquareInstance();
-            _lastSquareInstance = Object.Instantiate(_squarePrefab, position, Quaternion.Euler(0, 0, startAngle), _spawnParent);
-            ConfigureSquare(_lastSquareInstance);
-
-            //Debug.Log($"Cuadrado {i + 1} instanciado en posición {position} con rotación {startAngle}");
-        }
-    }
-
-    private void HandleLastSquareInstance()
-    {
-        if (_lastSquareInstance != null)
-        {
-            Object.Destroy(_lastSquareInstance);
-        }
-    }
-
-    private void ConfigureSquare(GameObject square)
-    {
-        if (square == null)
-        {
-            Debug.LogError("El objeto cuadrado es nulo.");
+            HandleLastInstance();
+            _lastInstance = Object.Instantiate(_prefab, position, Quaternion.Euler(0, 0, startAngle), _spawnParent);
+            ConfigureInstance(_lastInstance);
         }
     }
 }
 
-public class TriangleAction : IMoveAction
+public class TriangleAction : BaseAction
 {
-    private GameObject _trianglePrefab;
-    private GameObject _lastTriangleInstance;
+    public TriangleAction(GameObject prefab, Transform parent = null) : base(prefab, parent) { }
 
-    public TriangleAction(GameObject prefab)
+    public override void Execute(LevelLoader.Move move)
     {
-        _trianglePrefab = prefab;
-    }
-
-    public void Execute(LevelLoader.Move move)
-    {
-        if (_trianglePrefab == null)
+        if (_prefab == null)
         {
             Debug.LogError("El Prefab del Triangulo no está asignado.");
             return;
         }
 
-        HandleLastTriangleInstances();
+        HandleLastInstance();
 
         CircularPath circularPath = new CircularPath(Vector2.zero);
         float startAngle = 0.0f;
@@ -99,25 +97,13 @@ public class TriangleAction : IMoveAction
         {
             float angle = startAngle + i * (360.0f / move.Count);
             float angleRadians = Mathf.Deg2Rad * angle;
-            
+
             Vector2 position = circularPath.GetPosition(angleRadians);
-            
+
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
-            GameObject newTriangleInstance = Object.Instantiate(_trianglePrefab, position, rotation);
-
-            if (newTriangleInstance.transform.childCount == 0)
-            {
-                Debug.LogWarning("El prefab del Triangulo no tiene un hijo. Se usará el padre directamente.");
-            }
-        }
-    }
-
-    private void HandleLastTriangleInstances()
-    {
-        if (_lastTriangleInstance != null)
-        {
-            Object.Destroy(_lastTriangleInstance);
+            GameObject newInstance = Object.Instantiate(_prefab, position, rotation, _spawnParent);
+            ConfigureInstance(newInstance);
         }
     }
 }
