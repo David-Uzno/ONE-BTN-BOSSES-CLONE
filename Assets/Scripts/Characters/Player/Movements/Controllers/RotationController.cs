@@ -12,7 +12,8 @@ public class RotationController : MonoBehaviour
     [Header("Internal Calculations")]
     public float _currentSpeed;
     private float _angleRadians;
-    private CircularPath _circularPath = new CircularPath(Vector2.zero);
+    private CircularPath _circularPath;
+    private bool _isInitialized = false;
 
     private void Start()
     {
@@ -26,13 +27,15 @@ public class RotationController : MonoBehaviour
         transform.position = _circularPath.GetPosition(_angleRadians);
 
         _currentSpeed = _initialSpeed;
+
+        _isInitialized = true;
     }
 
     public void UpdateMovement()
     {
-        if (_circularPath == null)
+        if (!_isInitialized)
         {
-            Debug.LogError("_circularPath no está inicializado.");
+            Debug.LogWarning("RotationController no está inicializado.");
             return;
         }
 
