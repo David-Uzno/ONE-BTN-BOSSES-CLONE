@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ObstacleInteraction
 {
-    private readonly HealthManager _healthManager;
+    private HealthManager _healthManager;
 
     public ObstacleInteraction(HealthManager healthManager)
     {

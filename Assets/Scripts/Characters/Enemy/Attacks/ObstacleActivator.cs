@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class ObstacleActivator
 {
-    private readonly SpriteRenderer _spriteRenderer;
-    private readonly PolygonCollider2D _polygonCollider;
+    private SpriteRenderer _spriteRenderer;
+    private PolygonCollider2D _polygonCollider;
 
     public ObstacleActivator(SpriteRenderer spriteRenderer, PolygonCollider2D polygonCollider)
     {
