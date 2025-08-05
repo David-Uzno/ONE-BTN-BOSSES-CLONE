@@ -15,6 +15,7 @@ public class TransitionMaganer : MonoBehaviour
 
     private Vector3 _originalCameraPosition;
     private int _originalAssetsPPU;
+    private bool _isReverting;
 
     private void Start()
     {
@@ -39,11 +40,12 @@ public class TransitionMaganer : MonoBehaviour
 
     public void RevertTransition() 
     {
-        if (this == null)
+        if (this == null || _isReverting)
         {
             return;
         }
 
+        _isReverting = true;
         StartCoroutine(SmoothTransition(_pixelPerfectCamera.assetsPPU, _originalAssetsPPU, _transitionDuration, _originalCameraPosition));
     }
 
@@ -63,5 +65,7 @@ public class TransitionMaganer : MonoBehaviour
 
         _pixelPerfectCamera.assetsPPU = (int)end;
         _cameraTransform.position = endPosition;
+
+        _isReverting = false;
     }
 }
