@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
@@ -77,7 +77,7 @@ public class Timer : MonoBehaviour
             _bestTime = _elapsedTime;
             if (_saveManager != null && _gameManager != null)
             {
-                _saveManager.SavePoint(_bestTime, _gameManager._currentLevel);
+                _saveManager.SaveScore(_bestTime, _gameManager._currentLevel);
             }
             else
             {

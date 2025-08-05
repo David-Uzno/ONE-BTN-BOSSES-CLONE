@@ -1,6 +1,9 @@
+using Firebase;
+using Firebase.Database;
+using Firebase.Extensions;
 using System.IO;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
@@ -10,8 +13,9 @@ public class SaveManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timer;
 
     [Header("Game Data")]
-    private string _saveFilePath;
+    [SerializeField] private string _saveFilePath;
     private DataGame _gameData;
+    private DatabaseReference _databaseReference;
 
     private void Awake()
     {
@@ -24,12 +28,29 @@ public class SaveManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        _saveFilePath = Application.dataPath + "/save.json";
+        FirebaseInitializer();
+        _saveFilePath = Application.dataPath + "/save.json";       
+    }
+
+    private void FirebaseInitializer()
+    {
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.Result == DependencyStatus.Available)
+            {
+                _databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+                Debug.Log("Firebase está inicializado correctamente.");
+            }
+            else
+            {
+                Debug.LogError($"No se pudo inicializar Firebase: {task.Result}");
+            }
+        });
     }
 
     public DataGame LoadData()
     {
-        if(File.Exists(_saveFilePath))
+        if (File.Exists(_saveFilePath))
         {
             string content = File.ReadAllText(_saveFilePath);
             _gameData = JsonUtility.FromJson<DataGame>(content);
@@ -42,7 +63,7 @@ public class SaveManager : MonoBehaviour
         return _gameData;
     }
 
-    public void SavePoint(float bestTime, ushort level)
+    public void SaveScore(float bestTime, ushort level)
     {
         if (_gameData == null)
         {
@@ -65,6 +86,30 @@ public class SaveManager : MonoBehaviour
         string JSON = JsonUtility.ToJson(_gameData);
         File.WriteAllText(_saveFilePath, JSON);
 
-        Debug.Log($"Archivo guardado en la ruta: {_saveFilePath}");
+        SaveScoreToFirebase(bestTime, "userId_placeholder");
+
+        Debug.Log($"Archivo guardado en la ruta: {_saveFilePath}");      
+    }
+
+    public void SaveScoreToFirebase(float score, string userId)
+    {
+        if (_databaseReference == null)
+        {
+            Debug.LogError("Firebase no está inicializado. Intentando inicializar...");
+            FirebaseInitializer();
+            return;
+        }
+
+        _databaseReference.Child("scores").Child(userId).SetValueAsync(score).ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                Debug.Log("Score guardado exitosamente en Firebase.");
+            }
+            else
+            {
+                Debug.LogError("Error al guardar el score en Firebase: " + task.Exception);
+            }
+        });
     }
 }

@@ -46,6 +46,7 @@ public class WinOverlay : MonoBehaviour
 
     public void Reset()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
