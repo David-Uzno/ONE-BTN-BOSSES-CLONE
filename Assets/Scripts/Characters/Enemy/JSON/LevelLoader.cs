@@ -12,9 +12,21 @@ public class LevelLoader : MonoBehaviour
         public float TimeToScale;
         public List<Move> Moves;    // Sub-acciones
         public int Count;
-        public float StartAngle;
+        public RandomRange StartAngle;
         public bool Cw;
         public bool ShouldDelay;
+    }
+
+    [System.Serializable]
+    public class RandomRange
+    {
+        public float Min;
+        public float Max;
+
+        public float GetRandomValue()
+        {
+            return Random.Range(Min, Max);
+        }
     }
 
     [System.Serializable]

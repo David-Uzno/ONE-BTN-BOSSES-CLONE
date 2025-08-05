@@ -41,14 +41,20 @@ public class TriangleAction : IMoveAction
 
         for (int i = 0; i < move.Count; i++)
         {
-            float angleRadians = Mathf.Deg2Rad * (move.StartAngle + i * 360.0f / move.Count);
+            float startAngle = 0.0f;
+            if (move.StartAngle != null)
+            {
+                startAngle = move.StartAngle.GetRandomValue();
+            }
+
+            float angleRadians = Mathf.Deg2Rad * (startAngle + i * 360.0f / move.Count);
             Vector2 position = circularPath.GetPosition(angleRadians);
 
             HandleLastTriangleInstance();
-            _lastTriangleInstance = Object.Instantiate(_trianglePrefab, position, Quaternion.Euler(0, 0, move.StartAngle), _spawnParent);
+            _lastTriangleInstance = Object.Instantiate(_trianglePrefab, position, Quaternion.Euler(0, 0, startAngle), _spawnParent);
             ConfigureTriangle(_lastTriangleInstance);
 
-            Debug.Log($"Triángulo {i + 1} instanciado en posición {position} con rotación {move.StartAngle}");
+            Debug.Log($"Triángulo {i + 1} instanciado en posición {position} con rotación {startAngle}");
         }
     }
 

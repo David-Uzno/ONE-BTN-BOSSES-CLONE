@@ -16,7 +16,10 @@
         {
           "Type": "Triangle",
           "Count": 1,
-          "StartAngle": 0.0,
+          "StartAngle": {
+            "Min": 0.0,
+            "Max": 360.0
+          },
           "Cw": false,
           "ShouldDelay": true,
           "Tick": 0.75
@@ -24,7 +27,10 @@
         {
           "Type": "Triangle",
           "Count": 1,
-          "StartAngle": 120.0,
+          "StartAngle": {
+            "Min": 0.0,
+            "Max": 360.0
+          },
           "Cw": false,
           "ShouldDelay": true,
           "Tick": 1.75
@@ -32,7 +38,10 @@
         {
           "Type": "Triangle",
           "Count": 1,
-          "StartAngle": 240.0,
+          "StartAngle": {
+            "Min": 0.0,
+            "Max": 360.0
+          },
           "Cw": false,
           "ShouldDelay": true,
           "Tick": 2.75
@@ -43,7 +52,10 @@
     {
       "Type": "Triangle",
       "Count": 1,
-      "StartAngle": 0.0,
+      "StartAngle": {
+        "Min": 0.0,
+        "Max": 360.0
+      },
       "Cw": false,
       "ShouldDelay": true,
       "Tick": 5.25
