@@ -352,7 +352,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timer: {fileID: 731219739}
-  _saveFilePath: 
 --- !u!4 &247701679
 Transform:
   m_ObjectHideFlags: 0
@@ -1264,7 +1263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89e15ba4147c2a84687ed427769e16f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialHealth: 3
+  _health: 3
   _lifeImages:
   - {fileID: 1541075899}
   - {fileID: 1250310091}

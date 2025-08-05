@@ -4,15 +4,26 @@ using TMPro;
 
 public class SaveManager : MonoBehaviour
 {
+    public static SaveManager Instance;
+
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI _timer;
 
     [Header("Game Data")]
-    [SerializeField] private string _saveFilePath;
+    private string _saveFilePath;
     private DataGame _gameData;
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
         _saveFilePath = Application.dataPath + "/save.json";
     }
 

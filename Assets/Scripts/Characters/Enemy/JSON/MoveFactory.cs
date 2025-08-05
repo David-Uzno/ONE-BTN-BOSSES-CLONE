@@ -21,7 +21,6 @@ public static class MoveFactory
     public static void SetMovement()
     {
         actions["TutorialMove"] = new TutorialMoveAction();
-        actions["BossInitializer"] = new BossInitializerAction();
         actions["TutorialDodge"] = new TutorialDodgeAction();
     }
 

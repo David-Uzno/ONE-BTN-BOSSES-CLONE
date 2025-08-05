@@ -9,14 +9,6 @@ public class TutorialMoveAction : IMoveAction
     }
 }
 
-public class BossInitializerAction : IMoveAction
-{
-    public void Execute(LevelLoader.Move move)
-    {
-        Debug.Log($"Inicializando Boss con escala {move.EnemyScale} en {move.TimeToScale} segundos");
-    }
-}
-
 public class SquareAction : IMoveAction
 {
     private GameObject _squarePrefab;

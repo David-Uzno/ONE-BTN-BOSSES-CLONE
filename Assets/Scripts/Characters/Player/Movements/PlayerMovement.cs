@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : Character
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Controls")]
     public PlayerInput _playerInput;

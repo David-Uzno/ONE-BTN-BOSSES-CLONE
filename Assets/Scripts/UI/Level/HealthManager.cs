@@ -2,20 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthManager : MonoBehaviour
+public class HealthManager : MonoBehaviour, IDamageable
 {
     [Header("Player Status")]
-    [SerializeField] private int _initialHealth = 3;
-    private int _health;
+    [SerializeField] private int _health = 3;
 
     [Header("Lives UI")]
     [SerializeField] private List<Image> _lifeImages;
-
-    public void InitializeHealth()
-    {
-        _health = _initialHealth;
-        UpdateLivesUI(_health);
-    }
 
     public void TakeDamage(int damage)
     {

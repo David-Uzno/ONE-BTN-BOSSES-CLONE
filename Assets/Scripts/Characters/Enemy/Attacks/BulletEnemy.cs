@@ -8,7 +8,7 @@ public class BulletEnemy : Projectile
 
     private Vector2 _movementDirection;
     private CircularPath _circularPath;
-    
+    private HealthManager _healthManager;
 
     public void SetDirection(Vector2 direction)
     {
@@ -41,9 +41,9 @@ public class BulletEnemy : Projectile
 
     protected override void HandleCollision(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && _healthManager != null)
         {
-            Debug.Log("Colisión Contra el Jugador");
+            _healthManager.TakeDamage(1);
         }
     }
 }

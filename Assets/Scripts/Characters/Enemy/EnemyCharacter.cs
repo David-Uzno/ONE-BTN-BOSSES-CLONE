@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public class EnemyCharacter : Character
+public class EnemyCharacter : MonoBehaviour, IDamageable
 {
+    [Header("Status")]
+    [SerializeField] private int _health = 10;
+
     public delegate void EnemyDeathEventHandler(EnemyCharacter enemy);
     public static event EnemyDeathEventHandler OnAnyEnemyDeath;
 
@@ -12,9 +15,19 @@ public class EnemyCharacter : Character
         TotalEnemiesAlive++;
     }
 
-    protected override void Die()
+    public void TakeDamage(int damage)
     {
-        base.Die();
+        _health -= damage;
+
+        if (_health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
 
         TotalEnemiesAlive--;
 
