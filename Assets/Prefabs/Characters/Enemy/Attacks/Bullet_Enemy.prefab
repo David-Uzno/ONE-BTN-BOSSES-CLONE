@@ -167,4 +167,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 4
   _direction: {x: 0, y: 0}
-  _speedIncreaseFactor: 3.5
+  _speedIncreaseFactor: 3.25

@@ -5,6 +5,7 @@ public class Obstacle : MonoBehaviour
 {
     [SerializeField] private float _initialAlpha = 0.5f;
     [SerializeField] private float _activationDelay = 1f;
+    [SerializeField] private float _disableDelay = 3f;
 
     private SpriteRenderer _spriteRenderer;
     private PolygonCollider2D _polygonCollider;
@@ -12,24 +13,37 @@ public class Obstacle : MonoBehaviour
 
     private void Awake()
     {
+        InitializeComponents();
+        SetInitialAlpha();
+        DisableCollider();
+
+        StartCoroutine(ActivateTriangle());
+        Invoke("DisableGameObject", _disableDelay);
+    }
+
+    private void InitializeComponents()
+    {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _polygonCollider = GetComponent<PolygonCollider2D>();
-
         _healthManager = Object.FindFirstObjectByType<HealthManager>();
+    }
 
+    private void SetInitialAlpha()
+    {
         if (_spriteRenderer != null)
         {
             var color = _spriteRenderer.color;
             color.a = _initialAlpha;
             _spriteRenderer.color = color;
         }
+    }
 
+    private void DisableCollider()
+    {
         if (_polygonCollider != null)
         {
             _polygonCollider.enabled = false;
         }
-
-        StartCoroutine(ActivateTriangle());
     }
 
     private IEnumerator ActivateTriangle()
@@ -47,6 +61,11 @@ public class Obstacle : MonoBehaviour
         {
             _polygonCollider.enabled = true;
         }
+    }
+
+    private void DisableGameObject()
+    {
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
