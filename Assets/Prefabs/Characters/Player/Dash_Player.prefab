@@ -488,7 +488,8 @@ MonoBehaviour:
   _collider: {fileID: 5765290096288743961}
   _counter: 100
   _counterText: {fileID: 2696249429551533776}
-  _increasedSpeed: 2
+  _counterIncreasedSpeed: 2
+  _counterDecreaseSpeed: 3
   _counterDelay: 0.025
 --- !u!1 &9215526895159659765
 GameObject:

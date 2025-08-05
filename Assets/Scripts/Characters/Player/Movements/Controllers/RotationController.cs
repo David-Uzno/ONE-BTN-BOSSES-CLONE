@@ -12,7 +12,7 @@ public class RotationController : MonoBehaviour
     [Header("Internal Calculations")]
     public float _currentSpeed;
     private float _angleRadians;
-    private CircularPath _circularPath;
+    private CircularPath _circularPath = new CircularPath(Vector2.zero);
 
     private void Start()
     {
@@ -30,6 +30,12 @@ public class RotationController : MonoBehaviour
 
     public void UpdateMovement()
     {
+        if (_circularPath == null)
+        {
+            Debug.LogError("_circularPath no está inicializado.");
+            return;
+        }
+
         // Incrementar ángulo
         _angleRadians += _currentSpeed * _rotationDirection * Time.fixedDeltaTime;
 
