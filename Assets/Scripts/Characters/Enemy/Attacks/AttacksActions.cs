@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 #region Simple Attacks
@@ -67,11 +68,57 @@ public class SquareAction : IMoveAction
     }
 }
 
-public class Triangle : IMoveAction
+public class TriangleAction : IMoveAction
 {
+    private GameObject _trianglePrefab;
+    private GameObject _lastTriangleInstance;
+
+    public TriangleAction(GameObject prefab)
+    {
+        _trianglePrefab = prefab;
+    }
+
     public void Execute(LevelLoader.Move move)
     {
+        if (_trianglePrefab == null)
+        {
+            Debug.LogError("El Prefab del Triangulo no está asignado.");
+            return;
+        }
 
+        HandleLastTriangleInstances();
+
+        CircularPath circularPath = new CircularPath(Vector2.zero);
+        float startAngle = 0.0f;
+        if (move.StartAngle != null)
+        {
+            startAngle = move.StartAngle.GetRandomValue();
+        }
+
+        for (int i = 0; i < move.Count; i++)
+        {
+            float angle = startAngle + i * (360.0f / move.Count);
+            float angleRadians = Mathf.Deg2Rad * angle;
+            
+            Vector2 position = circularPath.GetPosition(angleRadians);
+            
+            Quaternion rotation = Quaternion.Euler(0, 0, angle);
+
+            GameObject newTriangleInstance = Object.Instantiate(_trianglePrefab, position, rotation);
+
+            if (newTriangleInstance.transform.childCount == 0)
+            {
+                Debug.LogWarning("El prefab del Triangulo no tiene un hijo. Se usará el padre directamente.");
+            }
+        }
+    }
+
+    private void HandleLastTriangleInstances()
+    {
+        if (_lastTriangleInstance != null)
+        {
+            Object.Destroy(_lastTriangleInstance);
+        }
     }
 }
 

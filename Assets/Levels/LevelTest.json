@@ -19,7 +19,7 @@
           "Tick": 0.75
         },
         {
-          "Type": "Square",
+          "Type": "Triangle",
           "Count": 1,
           "StartAngle": {
             "Min": 0.0,
@@ -28,6 +28,28 @@
           "Cw": false,
           "ShouldDelay": true,
           "Tick": 1.75
+        },
+        {
+          "Type": "Square",
+          "Count": 1,
+          "StartAngle": {
+            "Min": 0.0,
+            "Max": 360.0
+          },
+          "Cw": false,
+          "ShouldDelay": true,
+          "Tick": 2.75
+        },
+        {
+          "Type": "Square",
+          "Count": 1,
+          "StartAngle": {
+            "Min": 0.0,
+            "Max": 360.0
+          },
+          "Cw": false,
+          "ShouldDelay": true,
+          "Tick": 2.75
         },
         {
           "Type": "Square",

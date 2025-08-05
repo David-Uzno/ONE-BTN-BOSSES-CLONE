@@ -227,8 +227,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 247701679}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &92255776
@@ -365,7 +364,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 92255775}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &323399451
 GameObject:
@@ -1120,7 +1119,7 @@ MonoBehaviour:
   _levelLoader: {fileID: 1237059095}
   _levelJson: {fileID: 4900000, guid: 98346083c65b10441adec2a3d7162ed4, type: 3}
   _squarePrefab: {fileID: 4606860640228417726, guid: 9c4bcd636cac26d4ea00bbfcb6f19d1b, type: 3}
-  _trianglePrefab: {fileID: 1722080280111837541, guid: 8bbb503610b0f1345ab5fbe4d4d5428a, type: 3}
+  _trianglePrefab: {fileID: 7956121692010200868, guid: 035825a2ce56e4f41afa461394082265, type: 3}
   _projectile: {fileID: 9095242110189830134, guid: 6bf31f62546a11642b0fdefb8749be6e, type: 3}
 --- !u!114 &1237059095
 MonoBehaviour:
@@ -17545,5 +17544,6 @@ SceneRoots:
   - {fileID: 1714827125}
   - {fileID: 641765797}
   - {fileID: 92255775}
+  - {fileID: 247701679}
   - {fileID: 1431061965}
   - {fileID: 5745367}

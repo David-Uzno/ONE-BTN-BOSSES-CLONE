@@ -14,7 +14,8 @@ public class LevelExecutor : MonoBehaviour
     private void Start()
     {
         MoveFactory.SetMovement();
-        MoveFactory.SetTriangle(_squarePrefab);
+        MoveFactory.SetSquare(_squarePrefab);
+        MoveFactory.SetTriangle(_trianglePrefab);
         MoveFactory.SetStraightProjectile(_projectile);
 
         _levelLoader.LoadLevel(_levelJson);
