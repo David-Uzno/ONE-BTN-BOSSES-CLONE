@@ -22,7 +22,7 @@ public class ButtonLevelNode : MonoBehaviour
     {
         if (_isInteractable)
         {
-            PlayerOverworld.Instance.GetPlayerGameObject().transform.position = this.transform.position;
+            OverworldUI.Instance.GetPlayerGameObject().transform.position = this.transform.position;
             LoadLevelIndex.Instance._currentLevelIndex = _buttonIndex;
         }
     }

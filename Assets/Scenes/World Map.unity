@@ -654,7 +654,7 @@ MonoBehaviour:
   _titleTextUI: {fileID: 4204917267151718295}
   _descriptionTextUI: {fileID: 8819635682463084030}
   _videoPlayer: {fileID: 1166802660317387744}
-  _playerInput: {fileID: 7496219748883958953}
+  _playerInput: {fileID: 0}
   _transitionManager: {fileID: 1245473156}
 --- !u!1 &586946725
 GameObject:
@@ -1949,8 +1949,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SelectMovement, Assembly-CSharp
-        m_MethodName: Play
+        m_TargetAssemblyTypeName: OverworldUI, Assembly-CSharp
+        m_MethodName: ActivatePowerUpsUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2647,9 +2647,8 @@ GameObject:
   - component: {fileID: 7229119359623525807}
   - component: {fileID: 7296356957597961101}
   - component: {fileID: 358261283317251948}
-  - component: {fileID: 7496219748883958951}
-  - component: {fileID: 7496219748883958953}
   - component: {fileID: 7496219748883958952}
+  - component: {fileID: 7496219748883958953}
   m_Layer: 0
   m_Name: PlayerOverworld
   m_TagString: Player
@@ -11220,8 +11219,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SelectMovement, Assembly-CSharp
-        m_MethodName: Back
+        m_TargetAssemblyTypeName: OverworldUI, Assembly-CSharp
+        m_MethodName: DeactivatePowerUpsUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18559,14 +18558,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &2836664018261716882
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3935668273932256292}
-  m_Enabled: 1
 --- !u!1 &2837064004554491035
 GameObject:
   m_ObjectHideFlags: 0
@@ -25869,7 +25860,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7628091814102422535}
   - component: {fileID: 8461348766327110597}
-  - component: {fileID: 2836664018261716882}
   - component: {fileID: 9179385666273557292}
   m_Layer: 0
   m_Name: Main Camera
@@ -49233,61 +49223,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -48}
   m_SizeDelta: {x: 2, y: 16}
   m_Pivot: {x: 0, y: 1}
---- !u!58 &7496219748883958951
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 105234637935604081}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.8
 --- !u!114 &7496219748883958952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 105234637935604081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8d5ae7038a009348a7e4989422fb512, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsActionPressed: 0
-  _playerGameObject: {fileID: 105234637935604081}
-  _playerInput: {fileID: 7496219748883958953}
-  _powerUpsUI: {fileID: 544882522}
-  _selectCharacter: {fileID: 544882525}
-  _transitionManager: {fileID: 1245473156}
---- !u!114 &7496219748883958953
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49317,6 +49253,24 @@ MonoBehaviour:
   m_DefaultActionMap: Overworld
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7496219748883958953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105234637935604081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d5ae7038a009348a7e4989422fb512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _powerUpsUI: {fileID: 544882522}
+  _selectCharacter: {fileID: 544882525}
+  _transitionManager: {fileID: 1245473156}
+  _playerGameObject: {fileID: 105234637935604081}
+  _playerInput: {fileID: 7496219748883958952}
+  IsActionPressed: 0
 --- !u!4 &7499610490302037078
 Transform:
   m_ObjectHideFlags: 0

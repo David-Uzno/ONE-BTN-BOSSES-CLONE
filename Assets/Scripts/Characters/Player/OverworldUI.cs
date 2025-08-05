@@ -2,21 +2,24 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class PlayerOverworld : MonoBehaviour 
+public class OverworldUI : MonoBehaviour
 {
-    public static PlayerOverworld Instance { get; private set; }
-
-    [Header("Player Dependencies")]
-    [SerializeField] private GameObject _playerGameObject;
-    [SerializeField] private PlayerInput _playerInput;
+    #region Variables
+    public static OverworldUI Instance { get; private set; }
 
     [Header("UI & Transition")]
     [SerializeField] private GameObject _powerUpsUI;
     [SerializeField] private SelectMovement _selectCharacter;
     [SerializeField] private TransitionMaganer _transitionManager;
 
-    [HideInInspector] public bool IsActionPressed = false;
+    [Header("Player Dependencies")]
+    [SerializeField] private GameObject _playerGameObject;
+    [SerializeField] private PlayerInput _playerInput;
 
+    [HideInInspector] public bool IsActionPressed = false;
+    #endregion
+
+    #region Unity Methods
     private void Awake()
     {
         if (Instance == null)
@@ -74,13 +77,15 @@ public class PlayerOverworld : MonoBehaviour
         _playerInput.actions["Left"].performed -= OnLeftPerformed;
         _playerInput.actions["Right"].performed -= OnRightPerformed;
     }
+    #endregion
 
+    #region Input Handlers
     private void OnActionPerfomed(InputAction.CallbackContext context)
     {
         if (IsActionPressed == false)
         {
             _transitionManager.SaveCameraPosition();
-        
+
             _powerUpsUI.SetActive(true);
             _transitionManager.StartTransition();
 
@@ -97,14 +102,18 @@ public class PlayerOverworld : MonoBehaviour
 
     private void OnCancelPerformed(InputAction.CallbackContext context)
     {
-        _powerUpsUI.SetActive(false);
+        DeactivatePowerUpsUI();
+
+        _playerInput.actions["Left"].performed -= OnLeftPerformed;
+        _playerInput.actions["Right"].performed -= OnRightPerformed;
+    }
+
+    private void DeactivatePowerUpsUI()
+    {
+                _powerUpsUI.SetActive(false);
         _transitionManager.RevertTransition();
 
         IsActionPressed = false;
-
-        // Desactivar eventos de movimiento
-        _playerInput.actions["Left"].performed -= OnLeftPerformed;
-        _playerInput.actions["Right"].performed -= OnRightPerformed;
     }
 
     private void OnLeftPerformed(InputAction.CallbackContext context)
@@ -144,9 +153,12 @@ public class PlayerOverworld : MonoBehaviour
             Debug.LogWarning("OnActionPerformed no ha sido activado. No se puede ejecutar OnRightPerformed.");
         }
     }
+    #endregion
 
+    #region Public Methods
     public GameObject GetPlayerGameObject()
     {
         return _playerGameObject;
     }
+    #endregion
 }

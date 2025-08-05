@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 
@@ -30,11 +29,21 @@ public class TransitionMaganer : MonoBehaviour
 
     public void StartTransition()
     {
+        if (this == null)
+        {
+            return;
+        }
+
         StartCoroutine(SmoothTransition(_pixelPerfectCamera.assetsPPU, _pixelPerfectCamera.assetsPPU * _zoomScale, _transitionDuration, _originalCameraPosition - new Vector3(_moveLeftAmount, 0, 0)));
     }
 
     public void RevertTransition() 
     {
+        if (this == null)
+        {
+            return;
+        }
+
         StartCoroutine(SmoothTransition(_pixelPerfectCamera.assetsPPU, _originalAssetsPPU, _transitionDuration, _originalCameraPosition));
     }
 
