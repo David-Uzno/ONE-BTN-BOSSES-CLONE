@@ -82,6 +82,11 @@ public class OverworldUI : MonoBehaviour
     #region Input Handlers
     private void OnActionPerfomed(InputAction.CallbackContext context)
     {
+        ActivatePowerUpsUI();
+    }
+
+    public void ActivatePowerUpsUI()
+    {
         if (IsActionPressed == false)
         {
             _transitionManager.SaveCameraPosition();
@@ -110,7 +115,7 @@ public class OverworldUI : MonoBehaviour
 
     private void DeactivatePowerUpsUI()
     {
-                _powerUpsUI.SetActive(false);
+        _powerUpsUI.SetActive(false);
         _transitionManager.RevertTransition();
 
         IsActionPressed = false;
