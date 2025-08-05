@@ -3,40 +3,51 @@ using System.Collections.Generic;
 
 public class BulletPool : MonoBehaviour
 {
+    [Header("Bullet Pool Settings")]
     [SerializeField] private GameObject _bulletPrefab;
-    [SerializeField] private int _poolSize = 10;
+    [SerializeField] private int _initialPoolSize = 10;
 
-    private Queue<GameObject> _pool = new Queue<GameObject>();
+    private Queue<GameObject> _bulletPool = new Queue<GameObject>();
 
     private void Awake()
     {
-        for (int i = 0; i < _poolSize; i++)
+        InitializePool();
+    }
+
+    private void InitializePool()
+    {
+        for (int i = 0; i < _initialPoolSize; i++)
         {
-            GameObject bullet = Instantiate(_bulletPrefab);
+            GameObject bullet = CreateNewBullet();
             bullet.SetActive(false);
-            _pool.Enqueue(bullet);
+            _bulletPool.Enqueue(bullet);
         }
     }
 
     public GameObject GetBullet()
     {
-        if (_pool.Count > 0)
+        if (_bulletPool.Count > 0)
         {
-            GameObject bullet = _pool.Dequeue();
+            GameObject bullet = _bulletPool.Dequeue();
             bullet.SetActive(true);
             return bullet;
         }
         else
         {
-            GameObject bullet = Instantiate(_bulletPrefab);
-            bullet.SetActive(true);
-            return bullet;
+            return CreateNewBullet();
         }
     }
 
     public void ReturnBullet(GameObject bullet)
     {
         bullet.SetActive(false);
-        _pool.Enqueue(bullet);
+        _bulletPool.Enqueue(bullet);
+    }
+
+    private GameObject CreateNewBullet()
+    {
+        GameObject bullet = Instantiate(_bulletPrefab);
+        bullet.SetActive(false);
+        return bullet;
     }
 }

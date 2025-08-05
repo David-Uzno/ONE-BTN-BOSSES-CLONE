@@ -145,8 +145,8 @@ public class StraightProjectile : IMoveAction
             if (bullet != null)
             {
                 Vector2 direction = new Vector2(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
-                bullet.SetDirection(direction);
-                bullet.SetCircularPath(circularPath);
+                bullet.SetMovementDirection(direction);
+                bullet.AssignCircularPath(circularPath);
             }
 
             //Debug.Log($"Proyectil {i + 1} instanciado en posición {startPosition} con ángulo {angle}");

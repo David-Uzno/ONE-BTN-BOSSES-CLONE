@@ -32,6 +32,31 @@ public class OverworldUI : MonoBehaviour
             return;
         }
 
+        InitializePlayerGameObject();
+        InitializeSelectCharacter();
+        InitializeTransitionManager();
+    }
+
+    private void Start()
+    {
+        _playerInput.actions["Accept"].performed += OnActionPerformed;
+        _playerInput.actions["Cancel"].performed += OnCancelPerformed;
+
+        _playerInput.actions["Left"].performed -= OnLeftPerformed;
+        _playerInput.actions["Right"].performed -= OnRightPerformed;
+    }
+
+    private void OnDestroy()
+    {
+        _playerInput.actions["Accept"].performed -= OnActionPerformed;
+        _playerInput.actions["Cancel"].performed -= OnCancelPerformed;
+
+        _playerInput.actions["Left"].performed -= OnLeftPerformed;
+        _playerInput.actions["Right"].performed -= OnRightPerformed;
+    }
+
+    private void InitializePlayerGameObject()
+    {
         if (_playerGameObject == null)
         {
             _playerGameObject = GameObject.Find("PlayerOverworld");
@@ -40,7 +65,10 @@ public class OverworldUI : MonoBehaviour
                 Debug.LogError("PlayerOverworld GameObject no encontrado.");
             }
         }
+    }
 
+    private void InitializeSelectCharacter()
+    {
         if (_selectCharacter == null)
         {
             _selectCharacter = Object.FindFirstObjectByType<SelectMovement>();
@@ -49,7 +77,10 @@ public class OverworldUI : MonoBehaviour
                 Debug.LogError("SelectCharacter no encontrado en la escena.");
             }
         }
+    }
 
+    private void InitializeTransitionManager()
+    {
         if (_transitionManager == null)
         {
             _transitionManager = Object.FindFirstObjectByType<TransitionMaganer>();
@@ -59,35 +90,17 @@ public class OverworldUI : MonoBehaviour
             }
         }
     }
-
-    private void Start()
-    {
-        _playerInput.actions["Accept"].performed += OnActionPerfomed;
-        _playerInput.actions["Cancel"].performed += OnCancelPerformed;
-
-        _playerInput.actions["Left"].performed -= OnLeftPerformed;
-        _playerInput.actions["Right"].performed -= OnRightPerformed;
-    }
-
-    private void OnDestroy()
-    {
-        _playerInput.actions["Accept"].performed -= OnActionPerfomed;
-        _playerInput.actions["Cancel"].performed -= OnCancelPerformed;
-
-        _playerInput.actions["Left"].performed -= OnLeftPerformed;
-        _playerInput.actions["Right"].performed -= OnRightPerformed;
-    }
     #endregion
 
     #region Input Handlers
-    private void OnActionPerfomed(InputAction.CallbackContext context)
+    private void OnActionPerformed(InputAction.CallbackContext context)
     {
         ActivatePowerUpsUI();
     }
 
     public void ActivatePowerUpsUI()
     {
-        if (IsActionPressed == false)
+        if (!IsActionPressed)
         {
             _transitionManager.SaveCameraPosition();
 
@@ -101,7 +114,7 @@ public class OverworldUI : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1 + LoadLevelIndex.Instance._currentLevelIndex);
+            LoadNextScene();
         }
     }
 
@@ -113,7 +126,7 @@ public class OverworldUI : MonoBehaviour
         _playerInput.actions["Right"].performed -= OnRightPerformed;
     }
 
-    private void DeactivatePowerUpsUI()
+    public void DeactivatePowerUpsUI()
     {
         _powerUpsUI.SetActive(false);
         _transitionManager.RevertTransition();
@@ -157,6 +170,11 @@ public class OverworldUI : MonoBehaviour
         {
             Debug.LogWarning("OnActionPerformed no ha sido activado. No se puede ejecutar OnRightPerformed.");
         }
+    }
+
+    private void LoadNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1 + LoadLevelIndex.Instance._currentLevelIndex);
     }
     #endregion
 

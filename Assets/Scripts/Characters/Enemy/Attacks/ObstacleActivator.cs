@@ -12,35 +12,34 @@ public class ObstacleActivator
         _polygonCollider = polygonCollider;
     }
 
-    public IEnumerator Activate(float activationDelay)
+    public IEnumerator ActivateObstacleWithDelay(float activationDelay)
     {
         yield return new WaitForSeconds(activationDelay);
+        SetSpriteAlpha(1f);
+        EnableCollider(true);
+    }
 
+    public void InitializeObstacle(float initialAlpha)
+    {
+        SetSpriteAlpha(initialAlpha);
+        EnableCollider(false);
+    }
+
+    private void SetSpriteAlpha(float alpha)
+    {
         if (_spriteRenderer != null)
         {
             var color = _spriteRenderer.color;
-            color.a = 1f;
+            color.a = alpha;
             _spriteRenderer.color = color;
-        }
-
-        if (_polygonCollider != null)
-        {
-            _polygonCollider.enabled = true;
         }
     }
 
-    public void Initialize(float initialAlpha)
+    private void EnableCollider(bool isEnabled)
     {
-        if (_spriteRenderer != null)
-        {
-            var color = _spriteRenderer.color;
-            color.a = initialAlpha;
-            _spriteRenderer.color = color;
-        }
-
         if (_polygonCollider != null)
         {
-            _polygonCollider.enabled = false;
+            _polygonCollider.enabled = isEnabled;
         }
     }
 }

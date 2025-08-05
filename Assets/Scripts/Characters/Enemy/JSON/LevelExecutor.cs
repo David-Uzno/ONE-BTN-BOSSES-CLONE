@@ -1,24 +1,34 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelExecutor : MonoBehaviour
 {
     [SerializeField] private LevelLoader _levelLoader;
-    [SerializeField] private TextAsset _levelJson;
+    [SerializeField] private TextAsset _levelJSON;
 
-    [Header("Attacks")]
+    [Header("Attack Prefabs")]
     [SerializeField] private GameObject _squarePrefab;
     [SerializeField] private GameObject _trianglePrefab;
-    [SerializeField] private GameObject _projectile;
+    [SerializeField] private GameObject _projectilePrefab;
 
     private void Start()
+    {
+        InitializeMoveFactory();
+        LoadAndExecuteLevel();
+    }
+
+    private void InitializeMoveFactory()
     {
         MoveFactory.SetMovement();
         MoveFactory.SetSquare(_squarePrefab);
         MoveFactory.SetTriangle(_trianglePrefab);
-        MoveFactory.SetStraightProjectile(_projectile);
+        MoveFactory.SetStraightProjectile(_projectilePrefab);
+    }
 
-        _levelLoader.LoadLevel(_levelJson);
+    private void LoadAndExecuteLevel()
+    {
+        _levelLoader.LoadLevel(_levelJSON);
 
         if (_levelLoader.CurrentLevel != null)
         {
@@ -30,24 +40,33 @@ public class LevelExecutor : MonoBehaviour
         }
     }
 
-    IEnumerator ExecuteLevel(LevelLoader.Level level)
+    private IEnumerator ExecuteLevel(LevelLoader.Level level)
     {
         foreach (var move in level.Moves)
         {
             yield return new WaitForSeconds(move.Tick);
+            ExecuteMoveOrSubMoves(move);
+        }
+    }
 
-            if (move.Moves != null && move.Moves.Count > 0)
-            {
-                foreach (var subMove in move.Moves)
-                {
-                    yield return new WaitForSeconds(subMove.Tick);
-                    ExecuteMove(subMove);
-                }
-            }
-            else
-            {
-                ExecuteMove(move);
-            }
+    private void ExecuteMoveOrSubMoves(LevelLoader.Move move)
+    {
+        if (move.Moves != null && move.Moves.Count > 0)
+        {
+            StartCoroutine(ExecuteSubMoves(move.Moves));
+        }
+        else
+        {
+            ExecuteMove(move);
+        }
+    }
+
+    private IEnumerator ExecuteSubMoves(List<LevelLoader.Move> subMoves)
+    {
+        foreach (var subMove in subMoves)
+        {
+            yield return new WaitForSeconds(subMove.Tick);
+            ExecuteMove(subMove);
         }
     }
 

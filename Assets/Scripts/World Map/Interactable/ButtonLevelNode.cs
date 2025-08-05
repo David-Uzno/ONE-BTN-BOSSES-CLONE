@@ -1,51 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ButtonLevelNode : MonoBehaviour
 {
-    [Header("Interactable")]
+    [Header("Interactable Settings")]
     [SerializeField] private bool _isInteractable = true;
+    [SerializeField] private float _inactiveAlphaOpacity = 0.5f;
     private SpriteRenderer _spriteRenderer;
-    [SerializeField] private float _alphaInactiveOpacity = 0.5f;
 
-    [Header("Information")]
-    [SerializeField] private ushort _buttonIndex;
-    
+    [Header("Level Information")]
+    [SerializeField] private ushort _levelIndex;
+
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        UpdateAlpha();
+        UpdateSpriteAlpha();
     }
 
     private void OnMouseDown()
     {
         if (_isInteractable)
         {
-            OverworldUI.Instance.GetPlayerGameObject().transform.position = this.transform.position;
-            LoadLevelIndex.Instance._currentLevelIndex = _buttonIndex;
+            MovePlayerToNode();
+            SetCurrentLevelIndex();
         }
     }
 
-    public void SetInteractable(bool interactable)
+    public void SetInteractable(bool isInteractable)
     {
-        _isInteractable = interactable;
-        UpdateAlpha();
+        _isInteractable = isInteractable;
+        UpdateSpriteAlpha();
     }
 
-    private void UpdateAlpha()
+    private void MovePlayerToNode()
+    {
+        OverworldUI.Instance.GetPlayerGameObject().transform.position = transform.position;
+    }
+
+    private void SetCurrentLevelIndex()
+    {
+        LoadLevelIndex.Instance._currentLevelIndex = _levelIndex;
+    }
+
+    private void UpdateSpriteAlpha()
     {
         if (_spriteRenderer != null)
         {
             Color color = _spriteRenderer.color;
-            if (_isInteractable)
-            {
-                color.a = 1f;
-            }
-            else
-            {
-                color.a = _alphaInactiveOpacity;
-            }
+            color.a = _isInteractable ? 1f : _inactiveAlphaOpacity;
             _spriteRenderer.color = color;
         }
     }

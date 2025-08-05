@@ -3,12 +3,18 @@ using UnityEngine;
 
 public class ProjectilePool : MonoBehaviour
 {
+    [Header("Bullet Settings")]
     [SerializeField] private Transform _bulletPrefab;
     [SerializeField] private int _poolSize = 5;
 
     private Queue<Transform> _pool = new Queue<Transform>();
 
     private void Awake()
+    {
+        InitializePool();
+    }
+
+    private void InitializePool()
     {
         for (int i = 0; i < _poolSize; i++)
         {
@@ -19,7 +25,7 @@ public class ProjectilePool : MonoBehaviour
         }
     }
 
-    public Transform GetBullet()
+    public Transform GetBulletFromPool()
     {
         if (_pool.Count > 0)
         {
@@ -33,7 +39,7 @@ public class ProjectilePool : MonoBehaviour
         return newBullet;
     }
 
-    public void ReturnBullet(Transform bullet)
+    public void ReturnBulletToPool(Transform bullet)
     {
         bullet.gameObject.SetActive(false);
         _pool.Enqueue(bullet);

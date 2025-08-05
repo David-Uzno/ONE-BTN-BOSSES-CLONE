@@ -14,11 +14,11 @@ public class Obstacle : MonoBehaviour
     private void Awake()
     {
         InitializeComponents();
-        SetInitialAlpha();
+        SetInitialTransparency();
         DisableCollider();
 
-        StartCoroutine(ActivateTriangle());
-        Invoke("DisableGameObject", _disableDelay);
+        StartCoroutine(ActivateObstacle());
+        Invoke(nameof(DeactivateGameObject), _disableDelay);
     }
 
     private void InitializeComponents()
@@ -28,7 +28,7 @@ public class Obstacle : MonoBehaviour
         _healthManager = Object.FindFirstObjectByType<HealthManager>();
     }
 
-    private void SetInitialAlpha()
+    private void SetInitialTransparency()
     {
         if (_spriteRenderer != null)
         {
@@ -46,7 +46,7 @@ public class Obstacle : MonoBehaviour
         }
     }
 
-    private IEnumerator ActivateTriangle()
+    private IEnumerator ActivateObstacle()
     {
         yield return new WaitForSeconds(_activationDelay);
 
@@ -63,7 +63,7 @@ public class Obstacle : MonoBehaviour
         }
     }
 
-    private void DisableGameObject()
+    private void DeactivateGameObject()
     {
         gameObject.SetActive(false);
     }

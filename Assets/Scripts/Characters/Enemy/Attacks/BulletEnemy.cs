@@ -2,40 +2,48 @@ using UnityEngine;
 
 public class BulletEnemy : Projectile
 {
-    [Header("StraightProjectile")]
+    [Header("Projectile")]
     [SerializeField] private float _speedIncreaseFactor = 3f;
-    private bool _hasIncreasedSpeed = false;
 
+    [Header("Movement")]
     private Vector2 _movementDirection;
     private CircularPath _circularPath;
+
+    [Header("Health Management")]
     private HealthManager _healthManager;
 
-    public void SetDirection(Vector2 direction)
+    private bool _hasIncreasedSpeed = false;
+
+    public void SetMovementDirection(Vector2 direction)
     {
         _movementDirection = direction;
     }
 
-    public void SetCircularPath(CircularPath circularPath)
+    public void AssignCircularPath(CircularPath circularPath)
     {
         _circularPath = circularPath;
     }
 
     private void Update()
     {
-        transform.Translate(_movementDirection * _speed * Time.deltaTime);
-        CheckAndIncreaseSpeed();
+        MoveProjectile();
+        TryIncreaseSpeed();
     }
 
-    private void CheckAndIncreaseSpeed()
+    private void MoveProjectile()
     {
-        if (_circularPath != null && !_hasIncreasedSpeed)
+        transform.Translate(_movementDirection * _speed * Time.deltaTime);
+    }
+
+    private void TryIncreaseSpeed()
+    {
+        if (_circularPath == null || _hasIncreasedSpeed) return;
+
+        float distanceFromCenter = Vector2.Distance(transform.position, _circularPath.GetCenter());
+        if (distanceFromCenter > _circularPath.GetRadius())
         {
-            float distanceFromCenter = Vector2.Distance(transform.position, _circularPath.GetCenter());
-            if (distanceFromCenter > _circularPath.GetRadius())
-            {
-                _speed *= _speedIncreaseFactor;
-                _hasIncreasedSpeed = true;
-            }
+            _speed *= _speedIncreaseFactor;
+            _hasIncreasedSpeed = true;
         }
     }
 

@@ -27,15 +27,27 @@ public class EnemyCharacter : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        HandleEnemyDestruction();
+        NotifyEnemyDeath();
+        CheckLevelCompletion();
+    }
+
+    private void HandleEnemyDestruction()
+    {
         Destroy(gameObject);
-
         TotalEnemiesAlive--;
+    }
 
+    private void NotifyEnemyDeath()
+    {
         if (OnAnyEnemyDeath != null)
         {
             OnAnyEnemyDeath.Invoke(this);
         }
+    }
 
+    private void CheckLevelCompletion()
+    {
         if (TotalEnemiesAlive <= 0)
         {
             GameManager.Instance.HandleLevelWin();
@@ -44,7 +56,8 @@ public class EnemyCharacter : MonoBehaviour, IDamageable
 
     private void OnDestroy()
     {
-        if (TotalEnemiesAlive > 0)
+        // Asegurarse de que TotalEnemiesAlive no se reduzca dos veces si Die() ya fue llamado.
+        if (gameObject.activeSelf && TotalEnemiesAlive > 0)
         {
             TotalEnemiesAlive--;
         }

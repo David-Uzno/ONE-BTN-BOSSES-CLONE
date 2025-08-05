@@ -11,20 +11,26 @@ public class BulletPlayer : Projectile
 
     protected override void HandleCollision(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (IsEnemy(other))
         {
-            EnemyCharacter enemy = other.GetComponent<EnemyCharacter>();
-
-            if (enemy != null)
-            {
-                enemy.TakeDamage(1);
-            }
-
-            _projectilePool.ReturnBullet(transform);
+            DamageEnemy(other);
         }
-        else
+
+        _projectilePool.ReturnBulletToPool(transform);
+    }
+
+    private bool IsEnemy(Collider2D collider)
+    {
+        return collider.CompareTag("Enemy");
+    }
+
+    private void DamageEnemy(Collider2D collider)
+    {
+        EnemyCharacter enemy = collider.GetComponent<EnemyCharacter>();
+
+        if (enemy != null)
         {
-            _projectilePool.ReturnBullet(transform);
+            enemy.TakeDamage(1);
         }
     }
 }
