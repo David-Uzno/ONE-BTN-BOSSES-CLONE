@@ -4,7 +4,7 @@ public class StartPlayer : MonoBehaviour
 {
     [SerializeField] private MovementData _characterData;
 
-    void Start()
+    private void Start()
     {
         GameObject existingPlayer = GameObject.FindGameObjectWithTag("Player");
 

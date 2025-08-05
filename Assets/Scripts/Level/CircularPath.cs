@@ -25,4 +25,9 @@ public class CircularPath
     {
         return Mathf.Atan2(position.y - _center.y, position.x - _center.x);
     }
+
+    public Vector2 GetCenter()
+    {
+        return _center;
+    }
 }

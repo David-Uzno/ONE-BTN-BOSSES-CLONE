@@ -24,7 +24,7 @@ public class SelectMovement : MonoBehaviour
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private TransitionMaganer _transitionManager;
     
-    void Start()
+    private void Start()
     {
         if (PlayerPrefs.HasKey("PlayerIndex"))
         {
@@ -38,7 +38,7 @@ public class SelectMovement : MonoBehaviour
         UpdateInformation(_movementData.Characters[_currentIndex]);
     }
 
-    void SaveCurrentIndex()
+    private void SaveCurrentIndex()
     {
         PlayerPrefs.SetInt("PlayerIndex", _currentIndex);
     }

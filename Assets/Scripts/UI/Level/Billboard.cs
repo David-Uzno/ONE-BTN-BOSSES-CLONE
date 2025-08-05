@@ -4,12 +4,12 @@ public class Billboard : MonoBehaviour
 {
     private Camera _mainCamera;
 
-    void Start()
+    private void Start()
     {
         _mainCamera = Camera.main;
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         if (_mainCamera != null)
         {

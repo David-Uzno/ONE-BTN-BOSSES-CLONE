@@ -10,7 +10,7 @@ public class Obstacle : MonoBehaviour
     private PolygonCollider2D _polygonCollider;
     private HealthManager _healthManager;
 
-    void Awake()
+    private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _polygonCollider = GetComponent<PolygonCollider2D>();

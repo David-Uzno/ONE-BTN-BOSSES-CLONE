@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class Projectile : MonoBehaviour
 {
     [SerializeField] protected float _speed;
-    [SerializeField ]private Vector2 _direction;
+    [SerializeField] private Vector2 _direction;
 
     private void Update()
     {

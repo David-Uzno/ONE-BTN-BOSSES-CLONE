@@ -54,7 +54,7 @@ public class SquareAction : IMoveAction
             _lastSquareInstance = Object.Instantiate(_squarePrefab, position, Quaternion.Euler(0, 0, startAngle), _spawnParent);
             ConfigureSquare(_lastSquareInstance);
 
-            Debug.Log($"Cuadrado {i + 1} instanciado en posición {position} con rotación {startAngle}");
+            //Debug.Log($"Cuadrado {i + 1} instanciado en posición {position} con rotación {startAngle}");
         }
     }
 
@@ -103,7 +103,14 @@ public class StraightProjectile : IMoveAction
         }
 
         Vector3 startPosition = new Vector3(0, 0, 0);
-        float angle = move.StartAngle != null ? move.StartAngle.GetRandomValue() : 0.0f;
+        
+        float angle = 0.0f;
+        if (move.StartAngle != null)
+        {
+            angle = move.StartAngle.GetRandomValue();
+        }
+
+        CircularPath circularPath = new CircularPath(Vector2.zero);
 
         for (int i = 0; i < move.Count; i++)
         {
@@ -114,9 +121,10 @@ public class StraightProjectile : IMoveAction
             {
                 Vector2 direction = new Vector2(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
                 bullet.SetDirection(direction);
+                bullet.SetCircularPath(circularPath);
             }
 
-            Debug.Log($"Proyectil {i + 1} instanciado en posición {startPosition} con ángulo {angle}");
+            //Debug.Log($"Proyectil {i + 1} instanciado en posición {startPosition} con ángulo {angle}");
         }
     }
 }

@@ -19,7 +19,7 @@ public class DashPlayer : PlayerMovement
     private Coroutine _increaseDashCoroutine;
     private Coroutine _decreaseDashCoroutine;
 
-    void Start()
+    private void Start()
     {
         _initialSpeed = _movementController._initialSpeed;
     }

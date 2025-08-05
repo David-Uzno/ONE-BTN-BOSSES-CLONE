@@ -11,7 +11,7 @@ public class LevelExecutor : MonoBehaviour
     [SerializeField] private GameObject _trianglePrefab;
     [SerializeField] private GameObject _projectile;
 
-    void Start()
+    private void Start()
     {
         MoveFactory.SetMovement();
         MoveFactory.SetTriangle(_squarePrefab);
@@ -50,7 +50,7 @@ public class LevelExecutor : MonoBehaviour
         }
     }
 
-    void ExecuteMove(LevelLoader.Move move)
+    private void ExecuteMove(LevelLoader.Move move)
     {
         var action = MoveFactory.GetAction(move.Type);
         if (action != null)
