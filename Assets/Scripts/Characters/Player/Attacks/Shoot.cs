@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public abstract class Shooter : MonoBehaviour
+public class Shoot : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] protected Transform _bullet;
     [SerializeField] protected Transform _shootingPosition;
+    [SerializeField] private ProjectilePool _projectilePool;
 
     [Header("Time of Shoot")]
     [SerializeField] protected float _shotCooldown;
@@ -19,7 +19,9 @@ public abstract class Shooter : MonoBehaviour
     {
         if (CanShoot())
         {
-            Instantiate(_bullet, _shootingPosition.position, _shootingPosition.rotation);
+            Transform bullet = _projectilePool.GetBullet();
+            bullet.position = _shootingPosition.position;
+            bullet.rotation = _shootingPosition.rotation;
             _shotTime = Time.time + _shotCooldown;
         }
     }

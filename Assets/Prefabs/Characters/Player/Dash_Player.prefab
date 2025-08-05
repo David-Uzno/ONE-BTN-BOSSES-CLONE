@@ -468,7 +468,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5db2d3e08b76ac843adb4960bf1c9472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 10
   _playerInput: {fileID: 7803069833881242545}
   _movementController: {fileID: 7193874668574919277}
   _collider: {fileID: 5765290096288743961}
@@ -486,7 +485,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5332861031014308970}
-  - component: {fileID: 7956600770616302}
+  - component: {fileID: 5228998884454508360}
+  - component: {fileID: 177908293134390346}
   m_Layer: 0
   m_Name: FirePoint
   m_TagString: Untagged
@@ -509,7 +509,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7756761806419574786}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7956600770616302
+--- !u!114 &5228998884454508360
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -518,9 +518,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 9215526895159659765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94aff3029c5970841be5e259b42d4a69, type: 3}
+  m_Script: {fileID: 11500000, guid: 44245a951a2099144bc81671cad759fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bullet: {fileID: 5809045304181728483, guid: 4226a01bb9355714b9dfadba6556cf05, type: 3}
   _shootingPosition: {fileID: 5332861031014308970}
+  _projectilePool: {fileID: 177908293134390346}
   _shotCooldown: 0.25
+--- !u!114 &177908293134390346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9215526895159659765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bd50ba95d5c8b7439c69ee6636c4c0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: 5809045304181728483, guid: 4226a01bb9355714b9dfadba6556cf05, type: 3}
+  _poolSize: 4
