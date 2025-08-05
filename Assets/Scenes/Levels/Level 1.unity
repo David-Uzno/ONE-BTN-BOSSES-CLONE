@@ -1122,6 +1122,7 @@ MonoBehaviour:
   _levelJson: {fileID: 4900000, guid: 98346083c65b10441adec2a3d7162ed4, type: 3}
   _squarePrefab: {fileID: 4606860640228417726, guid: 9c4bcd636cac26d4ea00bbfcb6f19d1b, type: 3}
   _trianglePrefab: {fileID: 1722080280111837541, guid: 8bbb503610b0f1345ab5fbe4d4d5428a, type: 3}
+  _projectile: {fileID: 9095242110189830134, guid: 6bf31f62546a11642b0fdefb8749be6e, type: 3}
 --- !u!114 &1237059095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3195,7 +3196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9447bc875c61667429fa1fc9e706a316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 10
+  _health: 500
 --- !u!1 &1110439409476002322
 GameObject:
   m_ObjectHideFlags: 0

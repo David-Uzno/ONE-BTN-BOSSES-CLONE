@@ -6,6 +6,7 @@ public static class MoveFactory
     private static readonly Dictionary<string, IMoveAction> actions = new Dictionary<string, IMoveAction>();
 
     private static GameObject _squarePrefab;
+    private static GameObject _projectilePrefab;
 
     public static IMoveAction GetAction(string moveType)
     {
@@ -29,5 +30,11 @@ public static class MoveFactory
         _squarePrefab = squarePrefab;
 
         actions["Square"] = new SquareAction(_squarePrefab);
+    }
+
+    public static void SetStraightProjectile(GameObject projectilePrefab)
+    {
+        _projectilePrefab = projectilePrefab;
+        actions["StraightProjectile"] = new StraightProjectile(_projectilePrefab);
     }
 }

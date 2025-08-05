@@ -21,7 +21,7 @@ public class SquareAction : IMoveAction
 {
     private GameObject _squarePrefab;
     private Transform _spawnParent;
-    private GameObject _lastSquareInstance;  
+    private GameObject _lastSquareInstance;
 
     public SquareAction(GameObject prefab, Transform parent = null)
     {
@@ -74,6 +74,53 @@ public class SquareAction : IMoveAction
         }
     }
 }
+
+public class Triangle : IMoveAction
+{
+    public void Execute(LevelLoader.Move move)
+    {
+
+    }
+}
+
+public class StraightProjectile : IMoveAction
+{
+    private GameObject _projectilePrefab;
+    private Transform _spawnParent;
+
+    public StraightProjectile(GameObject prefab, Transform parent = null)
+    {
+        _projectilePrefab = prefab;
+        _spawnParent = parent;
+    }
+
+    public void Execute(LevelLoader.Move move)
+    {
+        if (_projectilePrefab == null)
+        {
+            Debug.LogError("El Prefab del Proyectil no está asignado.");
+            return;
+        }
+
+        Vector3 startPosition = new Vector3(0, 0, 0);
+        float angle = move.StartAngle != null ? move.StartAngle.GetRandomValue() : 0.0f;
+
+        for (int i = 0; i < move.Count; i++)
+        {
+            GameObject projectileInstance = Object.Instantiate(_projectilePrefab, startPosition, Quaternion.Euler(0, 0, angle), _spawnParent);
+
+            BulletEnemy bullet = projectileInstance.GetComponent<BulletEnemy>();
+            if (bullet != null)
+            {
+                Vector2 direction = new Vector2(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
+                bullet.SetDirection(direction);
+            }
+
+            Debug.Log($"Proyectil {i + 1} instanciado en posición {startPosition} con ángulo {angle}");
+        }
+    }
+}
+
 #endregion
 
 #region Compound Attacks

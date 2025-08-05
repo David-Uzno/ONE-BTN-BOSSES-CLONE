@@ -9,11 +9,13 @@ public class LevelExecutor : MonoBehaviour
     [Header("Attacks")]
     [SerializeField] private GameObject _squarePrefab;
     [SerializeField] private GameObject _trianglePrefab;
+    [SerializeField] private GameObject _projectile;
 
     void Start()
     {
         MoveFactory.SetMovement();
         MoveFactory.SetTriangle(_squarePrefab);
+        MoveFactory.SetStraightProjectile(_projectile);
 
         _levelLoader.LoadLevel(_levelJson);
 

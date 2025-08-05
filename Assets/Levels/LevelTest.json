@@ -2,19 +2,19 @@
   "Moves": [
     {
       "Type": "TutorialMove",
-      "Tick": 2.0
+      "Tick": 1.0
     },
     {
       "Type": "BossInitializer",
       "EnemyScale": 1.0,
       "TimeToScale": 0.5,
-      "Tick": 2.25
+      "Tick": 1.125
     },
     {
       "Type": "TutorialDodge",
       "Moves": [
         {
-          "Type": "Square",
+          "Type": "StraightProjectile",
           "Count": 1,
           "StartAngle": {
             "Min": 0.0,
