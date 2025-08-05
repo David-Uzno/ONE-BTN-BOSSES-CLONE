@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class Triangle : MonoBehaviour
+public class Obstacle : MonoBehaviour
 {
     [SerializeField] private float _initialAlpha = 0.5f;
-    [SerializeField] private float _activationDelay = 2f;
+    [SerializeField] private float _activationDelay = 1f;
 
     private SpriteRenderer _spriteRenderer;
     private PolygonCollider2D _polygonCollider;

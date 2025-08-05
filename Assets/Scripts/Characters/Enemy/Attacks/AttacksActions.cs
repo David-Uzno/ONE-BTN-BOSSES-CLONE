@@ -17,23 +17,23 @@ public class BossInitializerAction : IMoveAction
     }
 }
 
-public class TriangleAction : IMoveAction
+public class SquareAction : IMoveAction
 {
-    private GameObject _trianglePrefab;
+    private GameObject _squarePrefab;
     private Transform _spawnParent;
-    private GameObject _lastTriangleInstance;  
+    private GameObject _lastSquareInstance;  
 
-    public TriangleAction(GameObject prefab, Transform parent = null)
+    public SquareAction(GameObject prefab, Transform parent = null)
     {
-        _trianglePrefab = prefab;
+        _squarePrefab = prefab;
         _spawnParent = parent;
     }
 
     public void Execute(LevelLoader.Move move)
     {
-        if (_trianglePrefab == null)
+        if (_squarePrefab == null)
         {
-            Debug.LogError("El Prefab del Triángulo no está asignado.");
+            Debug.LogError("El Prefab del Cuadrado no está asignado.");
             return;
         }
 
@@ -50,27 +50,27 @@ public class TriangleAction : IMoveAction
             float angleRadians = Mathf.Deg2Rad * (startAngle + i * 360.0f / move.Count);
             Vector2 position = circularPath.GetPosition(angleRadians);
 
-            HandleLastTriangleInstance();
-            _lastTriangleInstance = Object.Instantiate(_trianglePrefab, position, Quaternion.Euler(0, 0, startAngle), _spawnParent);
-            ConfigureTriangle(_lastTriangleInstance);
+            HandleLastSquareInstance();
+            _lastSquareInstance = Object.Instantiate(_squarePrefab, position, Quaternion.Euler(0, 0, startAngle), _spawnParent);
+            ConfigureSquare(_lastSquareInstance);
 
-            Debug.Log($"Triángulo {i + 1} instanciado en posición {position} con rotación {startAngle}");
+            Debug.Log($"Cuadrado {i + 1} instanciado en posición {position} con rotación {startAngle}");
         }
     }
 
-    private void HandleLastTriangleInstance()
+    private void HandleLastSquareInstance()
     {
-        if (_lastTriangleInstance != null)
+        if (_lastSquareInstance != null)
         {
-            Object.Destroy(_lastTriangleInstance);
+            Object.Destroy(_lastSquareInstance);
         }
     }
 
-    private void ConfigureTriangle(GameObject triangle)
+    private void ConfigureSquare(GameObject square)
     {
-        if (triangle == null)
+        if (square == null)
         {
-            Debug.LogError("El objeto triángulo es nulo.");
+            Debug.LogError("El objeto cuadrado es nulo.");
         }
     }
 }

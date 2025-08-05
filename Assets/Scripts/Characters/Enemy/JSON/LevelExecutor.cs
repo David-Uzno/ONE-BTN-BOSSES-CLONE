@@ -7,12 +7,13 @@ public class LevelExecutor : MonoBehaviour
     [SerializeField] private TextAsset _levelJson;
 
     [Header("Attacks")]
+    [SerializeField] private GameObject _squarePrefab;
     [SerializeField] private GameObject _trianglePrefab;
 
     void Start()
     {
         MoveFactory.SetMovement();
-        MoveFactory.SetTriangle(_trianglePrefab);
+        MoveFactory.SetTriangle(_squarePrefab);
 
         _levelLoader.LoadLevel(_levelJson);
 
