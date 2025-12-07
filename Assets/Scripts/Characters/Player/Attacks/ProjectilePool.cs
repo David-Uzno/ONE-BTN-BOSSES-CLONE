@@ -7,7 +7,7 @@ public class ProjectilePool : MonoBehaviour
     [SerializeField] private Transform _bulletPrefab;
     [SerializeField] private int _poolSize = 5;
 
-    private Queue<Transform> _pool = new Queue<Transform>();
+    private readonly Queue<Transform> _pool = new();
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class ProjectilePool : MonoBehaviour
     {
         for (int i = 0; i < _poolSize; i++)
         {
-            Transform bullet = Instantiate(_bulletPrefab);
+            Transform bullet = Instantiate(_bulletPrefab, transform);
             bullet.name = $"Bullet_{i}";
             bullet.gameObject.SetActive(false);
             _pool.Enqueue(bullet);
@@ -27,21 +27,39 @@ public class ProjectilePool : MonoBehaviour
 
     public Transform GetBulletFromPool()
     {
+        Transform bullet;
         if (_pool.Count > 0)
         {
-            Transform bullet = _pool.Dequeue();
-            bullet.gameObject.SetActive(true);
-            return bullet;
+            bullet = _pool.Dequeue();
+            bullet.SetParent(null);
         }
+        else
+        {
+            bullet = Instantiate(_bulletPrefab, transform);
+            bullet.name = $"Bullet_{_poolSize + _pool.Count}";
+            bullet.gameObject.SetActive(false);
+            bullet.SetParent(null);
+        }
+        ResetBullet(bullet);
 
-        Transform newBullet = Instantiate(_bulletPrefab);
-        newBullet.gameObject.SetActive(true);
-        return newBullet;
+        return bullet;
+    }
+
+    private void ResetBullet(Transform bullet)
+    {
+        bullet.localRotation = Quaternion.identity;
+        if (bullet.TryGetComponent(out Rigidbody2D rigidbody2D))
+        {
+            rigidbody2D.linearVelocity = Vector2.zero;
+            rigidbody2D.angularVelocity = 0f;
+        }
     }
 
     public void ReturnBulletToPool(Transform bullet)
     {
         bullet.gameObject.SetActive(false);
+        bullet.SetParent(transform);
+        bullet.localRotation = Quaternion.identity;
         _pool.Enqueue(bullet);
     }
 }

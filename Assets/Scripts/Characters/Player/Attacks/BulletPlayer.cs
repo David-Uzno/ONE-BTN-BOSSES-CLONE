@@ -26,9 +26,7 @@ public class BulletPlayer : Projectile
 
     private void DamageEnemy(Collider2D collider)
     {
-        EnemyCharacter enemy = collider.GetComponent<EnemyCharacter>();
-
-        if (enemy != null)
+        if (collider.TryGetComponent(out EnemyCharacter enemy))
         {
             enemy.TakeDamage(1);
         }
