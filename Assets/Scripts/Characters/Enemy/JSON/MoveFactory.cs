@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class MoveFactory
 {
-    private static readonly Dictionary<string, IMoveAction> actions = new Dictionary<string, IMoveAction>();
+    private static readonly Dictionary<string, IMoveAction> actions = new();
 
     private static GameObject _squarePrefab;
     private static GameObject _trianglePrefab;

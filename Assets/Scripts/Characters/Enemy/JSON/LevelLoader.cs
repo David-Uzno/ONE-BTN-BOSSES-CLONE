@@ -6,15 +6,14 @@ public class LevelLoader : MonoBehaviour
     [System.Serializable]
     public class Move
     {
-        public string Type;
-        public float Tick;
-        public float EnemyScale;
-        public float TimeToScale;
-        public List<Move> Moves;    // Sub-acciones
-        public int Count;
-        public RandomRange StartAngle;
-        public bool Cw;
-        public bool ShouldDelay;
+        public string Type;            // Tipo de movimiento o acción a ejecutar
+        public float Tick;             // Tiempo de espera antes de ejecutar el movimiento
+        public float EnemyScale;       // Escalado del enemigo
+        public float TimeToScale;      // Tiempo para aplicar el escalado
+        public int Count;              // Cantidad de elementos a generar
+        public RandomRange StartAngle; // Rango de ángulo inicial para el movimiento
+        public bool Cw;                // Dirección del movimiento (sentido horario)
+        public bool ShouldDelay;       // Indica si debe haber un retraso antes de ejecutar
     }
 
     [System.Serializable]
@@ -30,9 +29,15 @@ public class LevelLoader : MonoBehaviour
     }
 
     [System.Serializable]
-    public class Level
+    public class MoveGroup : Move
     {
         public List<Move> Moves;
+    }
+
+    [System.Serializable]
+    public class Level
+    {
+        public List<MoveGroup> Moves;
     }
 
     public Level CurrentLevel;

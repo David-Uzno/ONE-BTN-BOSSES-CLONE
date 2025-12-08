@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class LevelExecutor : MonoBehaviour
 {
+    [Header("Files for Loading")]
     [SerializeField] private LevelLoader _levelLoader;
     [SerializeField] private TextAsset _levelJSON;
 
     [Header("Attack Prefabs")]
+    [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private GameObject _squarePrefab;
     [SerializeField] private GameObject _trianglePrefab;
-    [SerializeField] private GameObject _projectilePrefab;
 
     private void Start()
     {
@@ -42,28 +43,28 @@ public class LevelExecutor : MonoBehaviour
 
     private IEnumerator ExecuteLevel(LevelLoader.Level level)
     {
-        foreach (var move in level.Moves)
+        foreach (LevelLoader.MoveGroup moveGroup in level.Moves)
         {
-            yield return new WaitForSeconds(move.Tick);
-            ExecuteMoveOrSubMoves(move);
+            yield return new WaitForSeconds(moveGroup.Tick);
+            ExecuteMoveOrSubMoves(moveGroup);
         }
     }
 
-    private void ExecuteMoveOrSubMoves(LevelLoader.Move move)
+    private void ExecuteMoveOrSubMoves(LevelLoader.MoveGroup moveGroup)
     {
-        if (move.Moves != null && move.Moves.Count > 0)
+        if (moveGroup.Moves != null && moveGroup.Moves.Count > 0)
         {
-            StartCoroutine(ExecuteSubMoves(move.Moves));
+            StartCoroutine(ExecuteSubMoves(moveGroup.Moves));
         }
         else
         {
-            ExecuteMove(move);
+            ExecuteMove(moveGroup);
         }
     }
 
     private IEnumerator ExecuteSubMoves(List<LevelLoader.Move> subMoves)
     {
-        foreach (var subMove in subMoves)
+        foreach (LevelLoader.Move subMove in subMoves)
         {
             yield return new WaitForSeconds(subMove.Tick);
             ExecuteMove(subMove);
@@ -72,7 +73,7 @@ public class LevelExecutor : MonoBehaviour
 
     private void ExecuteMove(LevelLoader.Move move)
     {
-        var action = MoveFactory.GetAction(move.Type);
+        IMoveAction action = MoveFactory.GetAction(move.Type);
         if (action != null)
         {
             action.Execute(move);

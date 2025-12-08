@@ -1,14 +1,6 @@
 using UnityEngine;
 
 #region Simple Attacks
-public class TutorialMoveAction : IMoveAction
-{
-    public void Execute(LevelLoader.Move move)
-    {
-        Debug.Log("Ejecutando TutorialMove");
-    }
-}
-
 public abstract class BaseAction : IMoveAction
 {
     protected GameObject _prefab;
@@ -52,7 +44,7 @@ public class SquareAction : BaseAction
             return;
         }
 
-        CircularPath circularPath = new CircularPath(Vector2.zero);
+        CircularPath circularPath = new(Vector2.zero);
 
         for (int i = 0; i < move.Count; i++)
         {
@@ -86,7 +78,7 @@ public class TriangleAction : BaseAction
 
         HandleLastInstance();
 
-        CircularPath circularPath = new CircularPath(Vector2.zero);
+        CircularPath circularPath = new(Vector2.zero);
         float startAngle = 0.0f;
         if (move.StartAngle != null)
         {
@@ -127,7 +119,7 @@ public class StraightProjectile : IMoveAction
             return;
         }
 
-        Vector3 startPosition = new Vector3(0, 0, 0);
+        Vector3 startPosition = new(0, 0, 0);
         
         float angle = 0.0f;
         if (move.StartAngle != null)
@@ -135,16 +127,15 @@ public class StraightProjectile : IMoveAction
             angle = move.StartAngle.GetRandomValue();
         }
 
-        CircularPath circularPath = new CircularPath(Vector2.zero);
+        CircularPath circularPath = new(Vector2.zero);
 
         for (int i = 0; i < move.Count; i++)
         {
             GameObject projectileInstance = Object.Instantiate(_projectilePrefab, startPosition, Quaternion.Euler(0, 0, angle), _spawnParent);
 
-            BulletEnemy bullet = projectileInstance.GetComponent<BulletEnemy>();
-            if (bullet != null)
+            if (projectileInstance.TryGetComponent(out BulletEnemy bullet))
             {
-                Vector2 direction = new Vector2(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
+                Vector2 direction = new(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
                 bullet.SetMovementDirection(direction);
                 bullet.AssignCircularPath(circularPath);
             }
@@ -157,20 +148,19 @@ public class StraightProjectile : IMoveAction
 #endregion
 
 #region Compound Attacks
+public class TutorialMoveAction : IMoveAction
+{
+    public void Execute(LevelLoader.Move move)
+    {
+        //Debug.Log("Ejecutando TutorialMove");
+    }
+}
+
 public class TutorialDodgeAction : IMoveAction
 {
     public void Execute(LevelLoader.Move move)
     {
-        Debug.Log("Ejecutando TutorialDodge");
-        foreach (var subMove in move.Moves)
-        {
-            var action = MoveFactory.GetAction(subMove.Type);
-
-            if (action != null)
-            {
-                action.Execute(subMove);
-            }
-        }
+        //Debug.Log("Ejecutando TutorialDodge");
     }
 }
 #endregion

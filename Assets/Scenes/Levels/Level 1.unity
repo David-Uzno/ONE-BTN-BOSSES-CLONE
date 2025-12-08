@@ -1119,9 +1119,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelLoader: {fileID: 1237059095}
   _levelJSON: {fileID: 4900000, guid: 98346083c65b10441adec2a3d7162ed4, type: 3}
+  _projectilePrefab: {fileID: 9095242110189830134, guid: 6bf31f62546a11642b0fdefb8749be6e, type: 3}
   _squarePrefab: {fileID: 4606860640228417726, guid: 9c4bcd636cac26d4ea00bbfcb6f19d1b, type: 3}
   _trianglePrefab: {fileID: 7956121692010200868, guid: 035825a2ce56e4f41afa461394082265, type: 3}
-  _projectilePrefab: {fileID: 6251852793453850835, guid: 4226a01bb9355714b9dfadba6556cf05, type: 3}
 --- !u!114 &1237059095
 MonoBehaviour:
   m_ObjectHideFlags: 0

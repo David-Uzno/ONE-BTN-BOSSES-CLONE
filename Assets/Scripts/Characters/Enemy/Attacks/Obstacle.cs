@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(PolygonCollider2D))]
 public class Obstacle : MonoBehaviour
 {
     [SerializeField] private float _initialAlpha = 0.5f;
