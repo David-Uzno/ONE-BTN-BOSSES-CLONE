@@ -12,7 +12,10 @@ public class PlayerMovement : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         CheckShootingInput();
-        _movementController.UpdateMovement();
+        if (_movementController != null && _movementController.IsInitialized)
+        {
+            _movementController.UpdateMovement();
+        }
     }
 
     protected void CheckShootingInput()
