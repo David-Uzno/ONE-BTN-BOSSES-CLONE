@@ -3,12 +3,12 @@ using UnityEngine;
 #region Simple Attacks
 public abstract class BaseAction : IMoveAction
 {
-    protected GameObject _prefab;
+    protected Transform _prefab;
     protected Transform _spawnParent;
-    protected GameObject _lastInstance;
+    protected Transform _lastInstance;
     protected ObjectPool _pool;
 
-    public BaseAction(GameObject prefab, ObjectPool pool = null, Transform parent = null)
+    public BaseAction(Transform prefab, ObjectPool pool = null, Transform parent = null)
     {
         _prefab = prefab;
         _pool = pool;
@@ -21,7 +21,7 @@ public abstract class BaseAction : IMoveAction
     {
         if (_pool == null && _lastInstance != null)
         {
-            Object.Destroy(_lastInstance);
+            Object.Destroy(_lastInstance.gameObject);
         }
     }
 
@@ -36,7 +36,7 @@ public abstract class BaseAction : IMoveAction
 
 public class SquareAction : BaseAction
 {
-    public SquareAction(GameObject prefab, ObjectPool pool = null, Transform parent = null) : base(prefab, pool, parent) { }
+    public SquareAction(Transform prefab, ObjectPool pool = null, Transform parent = null) : base(prefab, pool, parent) { }
 
     public override void Execute(LevelLoader.Move move)
     {
@@ -64,15 +64,14 @@ public class SquareAction : BaseAction
             if (_pool != null)
             {
                 Transform pooled = _pool.GetPooledObject(_spawnParent);
-                pooled.position = position;
-                pooled.rotation = Quaternion.Euler(0, 0, startAngle);
+                pooled.SetPositionAndRotation(position, Quaternion.Euler(0, 0, startAngle));
                 pooled.gameObject.SetActive(true);
                 ConfigureInstance(pooled.gameObject);
             }
             else
             {
                 _lastInstance = Object.Instantiate(_prefab, position, Quaternion.Euler(0, 0, startAngle), _spawnParent);
-                ConfigureInstance(_lastInstance);
+                ConfigureInstance(_lastInstance.gameObject);
             }
         }
     }
@@ -80,7 +79,7 @@ public class SquareAction : BaseAction
 
 public class TriangleAction : BaseAction
 {
-    public TriangleAction(GameObject prefab, ObjectPool pool = null, Transform parent = null) : base(prefab, pool, parent) { }
+    public TriangleAction(Transform prefab, ObjectPool pool = null, Transform parent = null) : base(prefab, pool, parent) { }
 
     public override void Execute(LevelLoader.Move move)
     {
@@ -110,15 +109,14 @@ public class TriangleAction : BaseAction
             if (_pool != null)
             {
                 Transform pooled = _pool.GetPooledObject(_spawnParent);
-                pooled.position = position;
-                pooled.rotation = rotation;
+                pooled.SetPositionAndRotation(position, rotation);
                 pooled.gameObject.SetActive(true);
                 ConfigureInstance(pooled.gameObject);
             }
             else
             {
-                GameObject newInstance = Object.Instantiate(_prefab, position, rotation, _spawnParent);
-                ConfigureInstance(newInstance);
+                Transform newInstance = Object.Instantiate(_prefab, position, rotation, _spawnParent);
+                ConfigureInstance(newInstance.gameObject);
             }
         }
     }
@@ -126,11 +124,11 @@ public class TriangleAction : BaseAction
 
 public class StraightProjectile : IMoveAction
 {
-    private GameObject _projectilePrefab;
+    private Transform _projectilePrefab;
     private Transform _spawnParent;
     private ObjectPool _pool;
 
-    public StraightProjectile(GameObject prefab, ObjectPool pool = null, Transform parent = null)
+    public StraightProjectile(Transform prefab, ObjectPool pool = null, Transform parent = null)
     {
         _projectilePrefab = prefab;
         _pool = pool;
@@ -160,8 +158,7 @@ public class StraightProjectile : IMoveAction
             if (_pool != null)
             {
                 Transform pooled = _pool.GetPooledObject(_spawnParent);
-                pooled.position = startPosition;
-                pooled.rotation = Quaternion.Euler(0, 0, angle);
+                pooled.SetPositionAndRotation(startPosition, Quaternion.Euler(0, 0, angle));
                 pooled.gameObject.SetActive(true);
 
                 if (pooled.TryGetComponent(out BulletEnemy bullet))
@@ -173,7 +170,7 @@ public class StraightProjectile : IMoveAction
             }
             else
             {
-                GameObject projectileInstance = Object.Instantiate(_projectilePrefab, startPosition, Quaternion.Euler(0, 0, angle), _spawnParent);
+                Transform projectileInstance = Object.Instantiate(_projectilePrefab, startPosition, Quaternion.Euler(0, 0, angle), _spawnParent);
 
                 if (projectileInstance.TryGetComponent(out BulletEnemy bullet))
                 {

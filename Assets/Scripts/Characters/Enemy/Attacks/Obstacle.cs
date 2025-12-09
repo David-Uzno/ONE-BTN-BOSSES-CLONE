@@ -16,10 +16,14 @@ public class Obstacle : MonoBehaviour
     private void Awake()
     {
         InitializeComponents();
+    }
+
+    private void OnEnable()
+    {
         SetInitialTransparency();
         DisableCollider();
-
         StartCoroutine(ActivateObstacle());
+        CancelInvoke(nameof(DeactivateGameObject));
         Invoke(nameof(DeactivateGameObject), _disableDelay);
     }
 
@@ -27,7 +31,7 @@ public class Obstacle : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _polygonCollider = GetComponent<PolygonCollider2D>();
-        _healthManager = Object.FindFirstObjectByType<HealthManager>();
+        _healthManager = FindFirstObjectByType<HealthManager>();
     }
 
     private void SetInitialTransparency()
@@ -72,7 +76,7 @@ public class Obstacle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && _healthManager != null)
+        if (_polygonCollider != null && _polygonCollider.enabled && other.CompareTag("Player") && _healthManager != null)
         {
             _healthManager.TakeDamage(1);
         }

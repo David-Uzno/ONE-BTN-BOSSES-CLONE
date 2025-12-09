@@ -8,23 +8,62 @@ public class LevelExecutor : MonoBehaviour
     [SerializeField] private LevelLoader _levelLoader;
     [SerializeField] private TextAsset _levelJSON;
 
-    [Header("Attack Prefabs")]
-    [SerializeField] private GameObject _projectilePrefab;
-    [SerializeField] private GameObject _squarePrefab;
-    [SerializeField] private GameObject _trianglePrefab;
+    [System.Serializable]
+    public struct PoolConfig
+    {
+        public string key;
+        public GameObject prefab;
+        public int poolSize;
+        [HideInInspector] public ObjectPool pool;
+    }
+
+    [Header("Attack Pools")]
+    [SerializeField] private List<PoolConfig> _attackPools = new();
 
     private void Start()
     {
+        CreatePools();
         InitializeMoveFactory();
         LoadAndExecuteLevel();
+    }
+
+    private void CreatePools()
+    {
+        for (int poolIndex = 0; poolIndex < _attackPools.Count; poolIndex++)
+        {
+            PoolConfig poolConfig = _attackPools[poolIndex];
+
+            // Crear GameObject contenedor para el pool
+            GameObject poolContainer = new(poolConfig.key + "PoolContainer");
+            poolContainer.transform.SetParent(transform);
+
+            // Crear ObjectPool como hijo del contenedor
+            ObjectPool createdPool = poolContainer.AddComponent<ObjectPool>();
+            createdPool.Initialize(poolConfig.prefab.transform, poolConfig.poolSize, poolContainer.transform);
+
+            poolConfig.pool = createdPool;
+            _attackPools[poolIndex] = poolConfig;
+        }
     }
 
     private void InitializeMoveFactory()
     {
         MoveFactory.SetMovement();
-        MoveFactory.SetSquare(_squarePrefab);
-        MoveFactory.SetTriangle(_trianglePrefab);
-        MoveFactory.SetStraightProjectile(_projectilePrefab);
+        foreach (PoolConfig poolConfig in _attackPools)
+        {
+            switch (poolConfig.key)
+            {
+                case "Square":
+                    MoveFactory.SetSquare(poolConfig.prefab, poolConfig.pool);
+                    break;
+                case "Triangle":
+                    MoveFactory.SetTriangle(poolConfig.prefab, poolConfig.pool);
+                    break;
+                case "StraightProjectile":
+                    MoveFactory.SetStraightProjectile(poolConfig.prefab, poolConfig.pool);
+                    break;
+            }
+        }
     }
 
     private void LoadAndExecuteLevel()
@@ -73,10 +112,10 @@ public class LevelExecutor : MonoBehaviour
 
     private void ExecuteMove(LevelLoader.Move move)
     {
-        IMoveAction action = MoveFactory.GetAction(move.Type);
-        if (action != null)
+        IMoveAction moveAction = MoveFactory.GetAction(move.Type);
+        if (moveAction != null)
         {
-            action.Execute(move);
+            moveAction.Execute(move);
         }
         else
         {

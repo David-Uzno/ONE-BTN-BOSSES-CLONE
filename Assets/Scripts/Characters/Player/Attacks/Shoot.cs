@@ -5,10 +5,11 @@ public class Shoot : MonoBehaviour
     [Header("Components")]
     protected Transform _bullet;
     [SerializeField] protected Transform _shootingPosition;
+    [SerializeField] private ObjectPool _objectPool;
 
     [Header("Pool Settings")]
     [SerializeField] private Transform _bulletPrefab;
-    [SerializeField] private int _poolSize = 5;
+    [SerializeField] private int _poolSize = 4;
 
     [Header("Time of Shoot")]
     [SerializeField] protected float _shotCooldown;
@@ -16,12 +17,16 @@ public class Shoot : MonoBehaviour
 
     private void Awake()
     {
-        if (ObjectPool.Instance == null)
+        if (_objectPool == null)
         {
-            Debug.LogError("No se encontró una instancia de ObjectPool en la escena.");
-            return;
+            _objectPool = GetComponent<ObjectPool>() ?? FindFirstObjectByType<ObjectPool>();
+            if (_objectPool == null)
+            {
+                Debug.LogError("No se encontró un ObjectPool en la escena.");
+                return;
+            }
         }
-        ObjectPool.Instance.Initialize(_bulletPrefab, _poolSize, transform);
+        _objectPool.Initialize(_bulletPrefab, _poolSize, transform);
     }
 
     private void Update()
@@ -33,7 +38,9 @@ public class Shoot : MonoBehaviour
     {
         if (CanShoot())
         {
-            Transform bullet = ObjectPool.Instance.GetPooledObject(_shootingPosition);
+            Transform bullet = _objectPool.GetPooledObject(_shootingPosition);
+            if (bullet == null) return;
+
             bullet.SetPositionAndRotation(_shootingPosition.position, _shootingPosition.rotation);
             bullet.gameObject.SetActive(true);
 
