@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class DashPlayer : PlayerMovement
 {
-    [Header("Dash")]
+    [Header("Dash Collider")]
     [SerializeField] private Collider2D _collider;
+
+    [Header("Dash Counter")]
     [SerializeField] private byte _counter = 100;
     [SerializeField] private TextMeshProUGUI _counterText;
-    
-    [Header("Dash Settings")]
+    [SerializeField] private float _counterDelay = 0.025f;
+
+    [Header("Dash Speed")]
     [SerializeField] private float _counterIncreasedSpeed = 2.0f;
     [SerializeField] private float _counterDecreaseSpeed = 1.0f;
-    [SerializeField] private float _counterDelay = 0.025f;
+    [SerializeField] private float _invulnerabilityTime = 0.5f;
 
     private float _initialSpeed;
 
     private Coroutine _increaseDashCoroutine;
     private Coroutine _decreaseDashCoroutine;
+    private Coroutine _invulnerabilityCoroutine;
 
     private void Start()
     {
@@ -67,7 +71,6 @@ public class DashPlayer : PlayerMovement
 
     protected override void StopMovement()
     {
-        _collider.enabled = true;
         _movementController._currentSpeed = _initialSpeed;
 
         if (_decreaseDashCoroutine != null)
@@ -80,6 +83,20 @@ public class DashPlayer : PlayerMovement
         {
             _increaseDashCoroutine = StartCoroutine(IncreaseDashCounter());
         }
+
+        if (_invulnerabilityCoroutine != null)
+        {
+            StopCoroutine(_invulnerabilityCoroutine);
+        }
+        _invulnerabilityCoroutine = StartCoroutine(InvulnerabilityCoroutine());
+    }
+
+    private IEnumerator InvulnerabilityCoroutine()
+    {
+        _collider.enabled = false;
+        yield return new WaitForSeconds(_invulnerabilityTime);
+        _collider.enabled = true;
+        _invulnerabilityCoroutine = null;
     }
 
     private IEnumerator IncreaseDashCounter()
