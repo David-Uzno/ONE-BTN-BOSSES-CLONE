@@ -25,7 +25,14 @@ public class DashPlayer : PlayerMovement
 
     private void Start()
     {
-        _initialSpeed = _movementController._initialSpeed;
+        if (_movementController != null)
+        {
+            _initialSpeed = _movementController._initialSpeed;
+        }
+        else
+        {
+            _initialSpeed = 1.0f; // Valor por defecto para pruebas
+        }
     }
 
     protected override void Movement()

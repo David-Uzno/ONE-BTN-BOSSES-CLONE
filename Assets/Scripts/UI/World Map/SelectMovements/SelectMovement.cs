@@ -17,7 +17,7 @@ public class SelectMovement : MonoBehaviour
 
     [Header("Selection")]
     private int _currentIndex;
-    public static UnityEvent<int> OnMovementSelected = new UnityEvent<int>();
+    public static UnityEvent<int> OnMovementSelected = new();
     public static int SelectedIndex {get; private set;} = 0;
 
     [Header("Dependencies")]
@@ -26,6 +26,12 @@ public class SelectMovement : MonoBehaviour
     
     private void Start()
     {
+        if (_movementData == null || _movementData.Characters == null || _movementData.Characters.Count == 0)
+        {
+            Debug.LogError("SelectMovement requiere MovementData con al menos un Character.");
+            return;
+        }
+
         if (PlayerPrefs.HasKey("PlayerIndex"))
         {
             _currentIndex = PlayerPrefs.GetInt("PlayerIndex");
@@ -35,7 +41,16 @@ public class SelectMovement : MonoBehaviour
             _currentIndex = 0;
         }
 
-        UpdateInformation(_movementData.Characters[_currentIndex]);
+        int characterCount = _movementData.Characters.Count;
+        _currentIndex = Mathf.Clamp(_currentIndex, 0, characterCount - 1);
+        var character = _movementData.Characters[_currentIndex];
+        if (character == null)
+        {
+            Debug.LogError("SelectMovement requiere un Character válido en MovementData.");
+            return;
+        }
+
+        UpdateInformation(character);
     }
 
     private void SaveCurrentIndex()
@@ -45,13 +60,38 @@ public class SelectMovement : MonoBehaviour
 
     private void UpdateInformation(MovementData.Character character)
     {
-        _titleTextUI.text = character.Title;
-        _descriptionTextUI.text = character.Description;
+        if (character == null)
+        {
+            Debug.LogError("SelectMovement recibió un Character nulo.");
+            return;
+        }
 
-        if (character.VideoPlayer != null)
+        if (_titleTextUI != null)
+        {
+            _titleTextUI.text = character.Title;
+        }
+        else
+        {
+            Debug.LogWarning("SelectMovement: falta asignar _titleTextUI.");
+        }
+
+        if (_descriptionTextUI != null)
+        {
+            _descriptionTextUI.text = character.Description;
+        }
+        else
+        {
+            Debug.LogWarning("SelectMovement: falta asignar _descriptionTextUI.");
+        }
+
+        if (character.VideoPlayer != null && _videoPlayer != null)
         {
             _videoPlayer.clip = character.VideoPlayer;
             _videoPlayer.Play();
+        }
+        else if (character.VideoPlayer != null)
+        {
+            Debug.LogWarning("SelectMovement: se intentó reproducir un VideoPlayer pero falta el componente asignado.");
         }
 
         if (_currentIcon != null)

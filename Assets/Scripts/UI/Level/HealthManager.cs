@@ -17,7 +17,10 @@ public class HealthManager : MonoBehaviour, IDamageable
 
         if (_health <= 0)
         {
-            GameManager.Instance.GameOver();
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.GameOver();
+            }
         }
     }
 

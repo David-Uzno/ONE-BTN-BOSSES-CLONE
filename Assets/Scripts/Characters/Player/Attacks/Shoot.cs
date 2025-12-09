@@ -19,7 +19,10 @@ public class Shoot : MonoBehaviour
     {
         if (_objectPool == null)
         {
-            _objectPool = GetComponent<ObjectPool>() ?? FindFirstObjectByType<ObjectPool>();
+            if (_objectPool == null)
+            {
+                _objectPool = FindFirstObjectByType<ObjectPool>();
+            }
             if (_objectPool == null)
             {
                 Debug.LogError("No se encontró un ObjectPool en la escena.");

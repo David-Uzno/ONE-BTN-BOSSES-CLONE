@@ -26,7 +26,7 @@ public class Timer : MonoBehaviour
     private void Awake()
     {
         _gameManager = GameManager.Instance;
-        _saveManager = Object.FindFirstObjectByType<SaveManager>();
+        _saveManager = FindFirstObjectByType<SaveManager>();
     }
 
     private void Start()
