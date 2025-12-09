@@ -486,7 +486,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5332861031014308970}
   - component: {fileID: 5228998884454508360}
-  - component: {fileID: 177908293134390346}
   m_Layer: 0
   m_Name: FirePoint
   m_TagString: Untagged
@@ -522,19 +521,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootingPosition: {fileID: 5332861031014308970}
-  _projectilePool: {fileID: 177908293134390346}
-  _shotCooldown: 0.25
---- !u!114 &177908293134390346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9215526895159659765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bd50ba95d5c8b7439c69ee6636c4c0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 5809045304181728483, guid: 4226a01bb9355714b9dfadba6556cf05, type: 3}
-  _poolSize: 4
+  _poolSize: 5
+  _shotCooldown: 0.25

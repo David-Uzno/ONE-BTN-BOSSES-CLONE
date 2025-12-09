@@ -6,10 +6,12 @@ public abstract class BaseAction : IMoveAction
     protected GameObject _prefab;
     protected Transform _spawnParent;
     protected GameObject _lastInstance;
+    protected ObjectPool _pool;
 
-    public BaseAction(GameObject prefab, Transform parent = null)
+    public BaseAction(GameObject prefab, ObjectPool pool = null, Transform parent = null)
     {
         _prefab = prefab;
+        _pool = pool;
         _spawnParent = parent;
     }
 
@@ -17,7 +19,7 @@ public abstract class BaseAction : IMoveAction
 
     protected void HandleLastInstance()
     {
-        if (_lastInstance != null)
+        if (_pool == null && _lastInstance != null)
         {
             Object.Destroy(_lastInstance);
         }
@@ -34,7 +36,7 @@ public abstract class BaseAction : IMoveAction
 
 public class SquareAction : BaseAction
 {
-    public SquareAction(GameObject prefab, Transform parent = null) : base(prefab, parent) { }
+    public SquareAction(GameObject prefab, ObjectPool pool = null, Transform parent = null) : base(prefab, pool, parent) { }
 
     public override void Execute(LevelLoader.Move move)
     {
@@ -58,15 +60,27 @@ public class SquareAction : BaseAction
             Vector2 position = circularPath.GetPosition(angleRadians);
 
             HandleLastInstance();
-            _lastInstance = Object.Instantiate(_prefab, position, Quaternion.Euler(0, 0, startAngle), _spawnParent);
-            ConfigureInstance(_lastInstance);
+
+            if (_pool != null)
+            {
+                Transform pooled = _pool.GetPooledObject(_spawnParent);
+                pooled.position = position;
+                pooled.rotation = Quaternion.Euler(0, 0, startAngle);
+                pooled.gameObject.SetActive(true);
+                ConfigureInstance(pooled.gameObject);
+            }
+            else
+            {
+                _lastInstance = Object.Instantiate(_prefab, position, Quaternion.Euler(0, 0, startAngle), _spawnParent);
+                ConfigureInstance(_lastInstance);
+            }
         }
     }
 }
 
 public class TriangleAction : BaseAction
 {
-    public TriangleAction(GameObject prefab, Transform parent = null) : base(prefab, parent) { }
+    public TriangleAction(GameObject prefab, ObjectPool pool = null, Transform parent = null) : base(prefab, pool, parent) { }
 
     public override void Execute(LevelLoader.Move move)
     {
@@ -91,11 +105,21 @@ public class TriangleAction : BaseAction
             float angleRadians = Mathf.Deg2Rad * angle;
 
             Vector2 position = circularPath.GetPosition(angleRadians);
-
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
-            GameObject newInstance = Object.Instantiate(_prefab, position, rotation, _spawnParent);
-            ConfigureInstance(newInstance);
+            if (_pool != null)
+            {
+                Transform pooled = _pool.GetPooledObject(_spawnParent);
+                pooled.position = position;
+                pooled.rotation = rotation;
+                pooled.gameObject.SetActive(true);
+                ConfigureInstance(pooled.gameObject);
+            }
+            else
+            {
+                GameObject newInstance = Object.Instantiate(_prefab, position, rotation, _spawnParent);
+                ConfigureInstance(newInstance);
+            }
         }
     }
 }
@@ -104,10 +128,12 @@ public class StraightProjectile : IMoveAction
 {
     private GameObject _projectilePrefab;
     private Transform _spawnParent;
+    private ObjectPool _pool;
 
-    public StraightProjectile(GameObject prefab, Transform parent = null)
+    public StraightProjectile(GameObject prefab, ObjectPool pool = null, Transform parent = null)
     {
         _projectilePrefab = prefab;
+        _pool = pool;
         _spawnParent = parent;
     }
 
@@ -120,7 +146,7 @@ public class StraightProjectile : IMoveAction
         }
 
         Vector3 startPosition = new(0, 0, 0);
-        
+
         float angle = 0.0f;
         if (move.StartAngle != null)
         {
@@ -131,20 +157,34 @@ public class StraightProjectile : IMoveAction
 
         for (int i = 0; i < move.Count; i++)
         {
-            GameObject projectileInstance = Object.Instantiate(_projectilePrefab, startPosition, Quaternion.Euler(0, 0, angle), _spawnParent);
-
-            if (projectileInstance.TryGetComponent(out BulletEnemy bullet))
+            if (_pool != null)
             {
-                Vector2 direction = new(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
-                bullet.SetMovementDirection(direction);
-                bullet.AssignCircularPath(circularPath);
-            }
+                Transform pooled = _pool.GetPooledObject(_spawnParent);
+                pooled.position = startPosition;
+                pooled.rotation = Quaternion.Euler(0, 0, angle);
+                pooled.gameObject.SetActive(true);
 
-            //Debug.Log($"Proyectil {i + 1} instanciado en posición {startPosition} con ángulo {angle}");
+                if (pooled.TryGetComponent(out BulletEnemy bullet))
+                {
+                    Vector2 direction = new(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
+                    bullet.SetMovementDirection(direction);
+                    bullet.AssignCircularPath(circularPath);
+                }
+            }
+            else
+            {
+                GameObject projectileInstance = Object.Instantiate(_projectilePrefab, startPosition, Quaternion.Euler(0, 0, angle), _spawnParent);
+
+                if (projectileInstance.TryGetComponent(out BulletEnemy bullet))
+                {
+                    Vector2 direction = new(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
+                    bullet.SetMovementDirection(direction);
+                    bullet.AssignCircularPath(circularPath);
+                }
+            }
         }
     }
 }
-
 #endregion
 
 #region Compound Attacks

@@ -25,23 +25,23 @@ public static class MoveFactory
         actions["TutorialDodge"] = new TutorialDodgeAction();
     }
 
-    public static void SetSquare(GameObject squarePrefab)
+    public static void SetSquare(GameObject squarePrefab, ObjectPool pool = null)
     {
         _squarePrefab = squarePrefab;
 
-        actions["Square"] = new SquareAction(_squarePrefab);
+        actions["Square"] = new SquareAction(_squarePrefab, pool);
     }
 
-    public static void SetTriangle(GameObject trianglePrefab)
+    public static void SetTriangle(GameObject trianglePrefab, ObjectPool pool = null)
     {
         _trianglePrefab = trianglePrefab;
 
-        actions["Triangle"] = new TriangleAction(_trianglePrefab);
+        actions["Triangle"] = new TriangleAction(_trianglePrefab, pool);
     }
 
-    public static void SetStraightProjectile(GameObject projectilePrefab)
+    public static void SetStraightProjectile(GameObject projectilePrefab, ObjectPool pool = null)
     {
         _projectilePrefab = projectilePrefab;
-        actions["StraightProjectile"] = new StraightProjectile(_projectilePrefab);
+        actions["StraightProjectile"] = new StraightProjectile(_projectilePrefab, pool);
     }
 }

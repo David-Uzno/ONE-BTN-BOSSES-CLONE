@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class BulletPlayer : Projectile
 {
-    private ProjectilePool _projectilePool;
+    private ObjectPool _projectilePool;
 
     private void Awake()
     {
-        _projectilePool = Object.FindAnyObjectByType<ProjectilePool>();
+        _projectilePool = FindAnyObjectByType<ObjectPool>();
     }
 
     protected override void HandleCollision(Collider2D other)
@@ -16,7 +16,7 @@ public class BulletPlayer : Projectile
             DamageEnemy(other);
         }
 
-        _projectilePool.ReturnBulletToPool(transform);
+        _projectilePool.ReturnObjectToPool(transform);
     }
 
     private bool IsEnemy(Collider2D collider)
