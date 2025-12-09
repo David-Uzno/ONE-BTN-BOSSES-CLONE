@@ -5,7 +5,7 @@ public class Shoot : MonoBehaviour
     [Header("Components")]
     protected Transform _bullet;
     [SerializeField] protected Transform _shootingPosition;
-    [SerializeField] private ObjectPool _objectPool;
+    private ObjectPool _objectPool;
 
     [Header("Pool Settings")]
     [SerializeField] private Transform _bulletPrefab;
@@ -26,7 +26,7 @@ public class Shoot : MonoBehaviour
                 return;
             }
         }
-        _objectPool.Initialize(_bulletPrefab, _poolSize, transform);
+        _objectPool.Initialize(_bulletPrefab, _poolSize, _objectPool.transform);
     }
 
     private void Update()
