@@ -7,7 +7,8 @@ public class BulletEnemy : Projectile
 
     [Header("Movement")]
     private Vector2 _movementDirection;
-    private CircularPath _circularPath;
+    private ILevelLayout _layout;
+    private IRadialLayout _radialLayout;
 
     [Header("Health Management")]
     private HealthManager _healthManager;
@@ -19,9 +20,10 @@ public class BulletEnemy : Projectile
         _movementDirection = direction;
     }
 
-    public void AssignCircularPath(CircularPath circularPath)
+    public void AssignLayout(ILevelLayout layout)
     {
-        _circularPath = circularPath;
+        _layout = layout;
+        _radialLayout = layout as IRadialLayout;
     }
 
     private void Update()
@@ -37,10 +39,10 @@ public class BulletEnemy : Projectile
 
     private void TryIncreaseSpeed()
     {
-        if (_circularPath == null || _hasIncreasedSpeed) return;
+        if (_layout == null || _hasIncreasedSpeed || _radialLayout == null) return;
 
-        float distanceFromCenter = Vector2.Distance(transform.position, _circularPath.GetCenter());
-        if (distanceFromCenter > _circularPath.GetRadius())
+        float distanceFromCenter = Vector2.Distance(transform.position, _layout.GetCenter());
+        if (distanceFromCenter > _radialLayout.Radius)
         {
             _speed *= _speedIncreaseFactor;
             _hasIncreasedSpeed = true;

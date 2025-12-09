@@ -15,6 +15,11 @@ public abstract class BaseAction : IMoveAction
         _spawnParent = parent;
     }
 
+    protected ILevelLayout GetLayout(Vector2 fallbackCenter)
+    {
+        return LevelLayoutResolver.Resolve(fallbackCenter);
+    }
+
     public abstract void Execute(LevelLoader.Move move);
 
     protected void HandleLastInstance()
@@ -46,7 +51,7 @@ public class SquareAction : BaseAction
             return;
         }
 
-        CircularPath circularPath = new(Vector2.zero);
+        ILevelLayout layout = GetLayout(Vector2.zero);
 
         for (int i = 0; i < move.Count; i++)
         {
@@ -57,7 +62,7 @@ public class SquareAction : BaseAction
             }
 
             float angleRadians = Mathf.Deg2Rad * (startAngle + i * 360.0f / move.Count);
-            Vector2 position = circularPath.GetPosition(angleRadians);
+            Vector2 position = layout.GetPoint(angleRadians);
 
             HandleLastInstance();
 
@@ -91,7 +96,7 @@ public class TriangleAction : BaseAction
 
         HandleLastInstance();
 
-        CircularPath circularPath = new(Vector2.zero);
+        ILevelLayout layout = GetLayout(Vector2.zero);
         float startAngle = 0.0f;
         if (move.StartAngle != null)
         {
@@ -103,7 +108,7 @@ public class TriangleAction : BaseAction
             float angle = startAngle + i * (360.0f / move.Count);
             float angleRadians = Mathf.Deg2Rad * angle;
 
-            Vector2 position = circularPath.GetPosition(angleRadians);
+            Vector2 position = layout.GetPoint(angleRadians);
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
             if (_pool != null)
@@ -151,7 +156,7 @@ public class StraightProjectile : IMoveAction
             angle = move.StartAngle.GetRandomValue();
         }
 
-        CircularPath circularPath = new(Vector2.zero);
+        ILevelLayout layout = LevelLayoutResolver.Resolve(Vector2.zero);
 
         for (int i = 0; i < move.Count; i++)
         {
@@ -165,7 +170,7 @@ public class StraightProjectile : IMoveAction
                 {
                     Vector2 direction = new(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
                     bullet.SetMovementDirection(direction);
-                    bullet.AssignCircularPath(circularPath);
+                    bullet.AssignLayout(layout);
                 }
             }
             else
@@ -176,7 +181,7 @@ public class StraightProjectile : IMoveAction
                 {
                     Vector2 direction = new(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
                     bullet.SetMovementDirection(direction);
-                    bullet.AssignCircularPath(circularPath);
+                    bullet.AssignLayout(layout);
                 }
             }
         }

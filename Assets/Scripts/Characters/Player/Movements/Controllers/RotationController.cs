@@ -11,20 +11,17 @@ public class RotationController : MonoBehaviour
 
     [Header("Internal Calculations")]
     public float _currentSpeed;
-    private float _angleRadians;
-    private CircularPath _circularPath;
+    private float _pathParameter;
+    private ILevelLayout _layout;
     private bool _isInitialized = false;
 
     private void Start()
     {
-        // Inicializar CircularPath con el radio fijo
-        _circularPath = new CircularPath(_rotationPoint);
+        _layout = LevelLayoutResolver.Resolve(_rotationPoint);
 
-        // Calcular el ángulo inicial
-        _angleRadians = _circularPath.GetAngle(transform.position);
+        _pathParameter = _layout.GetParameter(transform.position);
 
-        // Ajustar la posición inicial
-        transform.position = _circularPath.GetPosition(_angleRadians);
+        transform.position = _layout.GetPoint(_pathParameter);
 
         _currentSpeed = _initialSpeed;
 
@@ -39,14 +36,11 @@ public class RotationController : MonoBehaviour
             return;
         }
 
-        // Incrementar ángulo
-        _angleRadians += _currentSpeed * _rotationDirection * Time.fixedDeltaTime;
+        _pathParameter += _currentSpeed * _rotationDirection * Time.fixedDeltaTime;
 
-        // Calcular nueva posición
-        transform.position = _circularPath.GetPosition(_angleRadians);
+        transform.position = _layout.GetPoint(_pathParameter);
 
-        // Calcular rotación
-        Vector2 directionToCenter = (_rotationPoint - (Vector2)transform.position).normalized;
+        Vector2 directionToCenter = (_layout.GetCenter() - (Vector2)transform.position).normalized;
         float rotationAngle = Mathf.Atan2(directionToCenter.y, directionToCenter.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotationAngle - 90f);
     }
