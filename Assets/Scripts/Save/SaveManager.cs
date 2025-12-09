@@ -1,22 +1,23 @@
-using Firebase;
-using Firebase.Database;
-using Firebase.Extensions;
 using System.IO;
 using TMPro;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
+    #region Fields
     public static SaveManager Instance;
 
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI _timer;
+    private readonly int _decimalsToTruncate = 3;
 
     [Header("Game Data")]
     [SerializeField] private string _saveFilePath;
     private DataGame _gameData;
-    private DatabaseReference _databaseReference;
+    [SerializeField] private FirebaseService _firebaseService;
+    #endregion
 
+    #region Unity Events
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -28,32 +29,38 @@ public class SaveManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        FirebaseInitializer();
-        _saveFilePath = Application.dataPath + "/save.json";       
+        EnsureFirebaseService();
+        _firebaseService.Initialize();
+        _saveFilePath = Application.dataPath + "/save.json";
     }
 
-    private void FirebaseInitializer()
+    private void EnsureFirebaseService()
     {
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+        if (_firebaseService != null)
         {
-            if (task.Result == DependencyStatus.Available)
-            {
-                _databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
-                Debug.Log("Firebase está inicializado correctamente.");
-            }
-            else
-            {
-                Debug.LogError($"No se pudo inicializar Firebase: {task.Result}");
-            }
-        });
-    }
+            return;
+        }
 
+        FirebaseService found = FindFirstObjectByType<FirebaseService>();
+        if (found != null)
+        {
+            _firebaseService = found;
+            return;
+        }
+
+        GameObject go = new GameObject(nameof(FirebaseService));
+        _firebaseService = go.AddComponent<FirebaseService>();
+    }
+    #endregion
+
+    #region Public API
     public DataGame LoadData()
     {
         if (File.Exists(_saveFilePath))
         {
             string content = File.ReadAllText(_saveFilePath);
             _gameData = JsonUtility.FromJson<DataGame>(content);
+            DataTruncateHelper.TruncatePointsPerLevel(_gameData, _decimalsToTruncate);
         }
         else
         {
@@ -66,50 +73,59 @@ public class SaveManager : MonoBehaviour
     public void SaveScore(float bestTime, ushort level)
     {
         if (_gameData == null)
-        {
             _gameData = new DataGame();
-        }
 
-        if (_gameData._pointsPerLevel.Count > level)
-        {
-            _gameData._pointsPerLevel[level] = bestTime;
-        }
-        else
-        {
-            while (_gameData._pointsPerLevel.Count < level)
-            {
-                _gameData._pointsPerLevel.Add(float.MaxValue);
-            }
-            _gameData._pointsPerLevel.Add(bestTime);
-        }
-
-        string JSON = JsonUtility.ToJson(_gameData);
-        File.WriteAllText(_saveFilePath, JSON);
-
-        SaveScoreToFirebase(bestTime, "userId_placeholder");
-
-        Debug.Log($"Archivo guardado en la ruta: {_saveFilePath}");      
+        DataGameHelper.UpdatePointsPerLevel(_gameData, bestTime, level, _decimalsToTruncate);
+        DataTruncateHelper.TruncatePointsPerLevel(_gameData, _decimalsToTruncate);
+        WriteDataToJsonFile();
+        _firebaseService.SaveData(_gameData, "userId_placeholder", _decimalsToTruncate);
+        Debug.Log($"Archivo guardado en la ruta: {_saveFilePath}");
     }
 
     public void SaveScoreToFirebase(float score, string userId)
     {
-        if (_databaseReference == null)
-        {
-            Debug.LogError("Firebase no está inicializado. Intentando inicializar...");
-            FirebaseInitializer();
-            return;
-        }
-
-        _databaseReference.Child("scores").Child(userId).SetValueAsync(score).ContinueWith(task =>
-        {
-            if (task.IsCompleted)
-            {
-                Debug.Log("Score guardado exitosamente en Firebase.");
-            }
-            else
-            {
-                Debug.LogError("Error al guardar el score en Firebase: " + task.Exception);
-            }
-        });
+        _firebaseService.SaveScore(
+            score,
+            userId,
+            _decimalsToTruncate,
+            OnSaveSuccess,
+            OnFail
+        );
     }
+
+    public void SaveDataToFirebase(DataGame gameData, string userId)
+    {
+        _firebaseService.SaveData(
+            gameData,
+            userId,
+            _decimalsToTruncate,
+            OnSaveDataSuccess,
+            OnFail
+        );
+    }
+
+    private void OnSaveSuccess()
+    {
+        Debug.Log("Score guardado exitosamente en Firebase.");
+    }
+
+    private void OnSaveDataSuccess()
+    {
+        Debug.Log("Nuevo DataGame guardado exitosamente en Firebase.");
+    }
+
+    private void OnFail(string error)
+    {
+        Debug.LogError(error);
+    }
+    #endregion
+
+    #region File IO
+    private void WriteDataToJsonFile()
+    {
+        DataTruncateHelper.TruncatePointsPerLevel(_gameData, _decimalsToTruncate);
+        string json = DataTruncateHelper.BuildTruncatedJson(_gameData, _decimalsToTruncate);
+        File.WriteAllText(_saveFilePath, json);
+    }
+    #endregion
 }
