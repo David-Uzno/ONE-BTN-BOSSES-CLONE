@@ -75,3 +75,6 @@ crashlytics-build.properties
 # Firebase
 !Assets/Firebase/Plugins/
 !Assets/Firebase/Plugins/**
+
+# Ignore save.json
+Assets/save.json
