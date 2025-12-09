@@ -43,7 +43,7 @@ public class SelectMovement : MonoBehaviour
 
         int characterCount = _movementData.Characters.Count;
         _currentIndex = Mathf.Clamp(_currentIndex, 0, characterCount - 1);
-        var character = _movementData.Characters[_currentIndex];
+        MovementData.Character character = _movementData.Characters[_currentIndex];
         if (character == null)
         {
             Debug.LogError("SelectMovement requiere un Character válido en MovementData.");

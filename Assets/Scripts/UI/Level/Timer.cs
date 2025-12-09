@@ -52,6 +52,12 @@ public class Timer : MonoBehaviour
 
     private void UpdateTimeUI()
     {
+        if (_currentTimeText == null)
+        {
+            Debug.LogWarning("_currentTimeText no está asignado.");
+            return;
+        }
+
         int minutes = Mathf.FloorToInt(_elapsedTime / 60);
         int seconds = Mathf.FloorToInt(_elapsedTime % 60);
         int milliseconds = Mathf.FloorToInt((_elapsedTime - Mathf.Floor(_elapsedTime)) * 1000);

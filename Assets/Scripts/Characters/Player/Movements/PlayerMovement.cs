@@ -20,6 +20,13 @@ public class PlayerMovement : MonoBehaviour
 
     protected void CheckShootingInput()
     {
+        if (_playerInput == null || _playerInput.actions == null)
+        {
+            Debug.LogWarning("PlayerInput o sus acciones no están asignadas.");
+            _isShootingPressed = false;
+            return;
+        }
+
         bool isCurrentShootingPressed = _playerInput.actions["Shoot"].ReadValue<float>() > 0;
 
         if (isCurrentShootingPressed && !_isShootingPressed)
