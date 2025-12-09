@@ -126,8 +126,8 @@ public class FirebaseSavesService
         // Caso: límite alcanzado o superado, eliminar solo el mayor y luego guardar
         if (saveEntries.Count > 0)
         {
-            var largestEntry = saveEntries[0]; // mayor valor comparable
-            RemoveSequential(savesReference, new List<string> { largestEntry.saveKey }, 0, onFail, SaveNewEntry);
+            (string saveKey, float saveValue) = saveEntries[0]; // mayor valor comparable
+            RemoveSequential(savesReference, new List<string> { saveKey }, 0, onFail, SaveNewEntry);
             return;
         }
 
@@ -211,40 +211,40 @@ public class FirebaseSavesService
 
         if (numericValue is float)
         {
-            float floatVal = (float)numericValue;
-            if (floatVal > maxValue)
+            float floatValue = (float)numericValue;
+            if (floatValue > maxValue)
             {
-                maxValue = floatVal;
+                maxValue = floatValue;
             }
             return;
         }
 
         if (numericValue is int)
         {
-            float floatVal = (int)numericValue;
-            if (floatVal > maxValue)
+            float floatValue = (int)numericValue;
+            if (floatValue > maxValue)
             {
-                maxValue = floatVal;
+                maxValue = floatValue;
             }
             return;
         }
 
         if (numericValue is double firebaseSaveTimestamp)
         {
-            float floatVal = (float)firebaseSaveTimestamp;
-            if (floatVal > maxValue)
+            float floatValue = (float)firebaseSaveTimestamp;
+            if (floatValue > maxValue)
             {
-                maxValue = floatVal;
+                maxValue = floatValue;
             }
             return;
         }
 
         if (numericValue is long)
         {
-            float floatVal = (long)numericValue;
-            if (floatVal > maxValue)
+            float floatValue = (long)numericValue;
+            if (floatValue > maxValue)
             {
-                maxValue = floatVal;
+                maxValue = floatValue;
             }
             return;
         }

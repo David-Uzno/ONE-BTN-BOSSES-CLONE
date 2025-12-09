@@ -71,7 +71,7 @@ public class OverworldUI : MonoBehaviour
     {
         if (_selectCharacter == null)
         {
-            _selectCharacter = Object.FindFirstObjectByType<SelectMovement>();
+            _selectCharacter = FindFirstObjectByType<SelectMovement>();
             if (_selectCharacter == null)
             {
                 Debug.LogError("SelectCharacter no encontrado en la escena.");
@@ -83,7 +83,7 @@ public class OverworldUI : MonoBehaviour
     {
         if (_transitionManager == null)
         {
-            _transitionManager = Object.FindFirstObjectByType<TransitionMaganer>();
+            _transitionManager = FindFirstObjectByType<TransitionMaganer>();
             if (_transitionManager == null)
             {
                 Debug.LogError("TransitionMaganer no encontrado en la escena.");

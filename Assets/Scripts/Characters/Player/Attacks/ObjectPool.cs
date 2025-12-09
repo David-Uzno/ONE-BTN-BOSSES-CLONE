@@ -49,11 +49,11 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    private void EnsurePooledItemComponent(Transform obj)
+    private void EnsurePooledItemComponent(Transform pooledObject)
     {
-        if (!obj.TryGetComponent(out PooledItem pooledItem))
+        if (!pooledObject.TryGetComponent(out PooledItem pooledItem))
         {
-            pooledItem = obj.gameObject.AddComponent<PooledItem>();
+            pooledItem = pooledObject.gameObject.AddComponent<PooledItem>();
         }
         pooledItem.SetPool(this);
     }

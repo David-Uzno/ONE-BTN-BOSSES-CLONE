@@ -6,7 +6,7 @@ public abstract class EnemyAttackBase : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _healthManager = Object.FindFirstObjectByType<HealthManager>();
+        _healthManager = FindFirstObjectByType<HealthManager>();
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other)

@@ -29,7 +29,7 @@ public class ObstacleActivator
     {
         if (_spriteRenderer != null)
         {
-            var color = _spriteRenderer.color;
+            Color color = _spriteRenderer.color;
             color.a = alpha;
             _spriteRenderer.color = color;
         }

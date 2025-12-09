@@ -48,8 +48,8 @@ public class SaveManager : MonoBehaviour
             return;
         }
 
-        GameObject go = new GameObject(nameof(FirebaseService));
-        _firebaseService = go.AddComponent<FirebaseService>();
+        GameObject firebaseServiceInstance = new(nameof(FirebaseService));
+        _firebaseService = firebaseServiceInstance.AddComponent<FirebaseService>();
     }
     #endregion
 

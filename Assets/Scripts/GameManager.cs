@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _timer = Object.FindFirstObjectByType<Timer>();
+        _timer = FindFirstObjectByType<Timer>();
 
         EnemyCharacter.OnAnyEnemyDeath += HandleEnemyDeath;
     }

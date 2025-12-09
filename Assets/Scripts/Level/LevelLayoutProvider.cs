@@ -33,11 +33,10 @@ public class LevelLayoutProvider : MonoBehaviour
 
     private ILevelLayout CreateLayout()
     {
-        switch (_layoutType)
+        return _layoutType
+        switch
         {
-            case LevelLayoutType.Circular:
-            default:
-                return new CircularPath(_center, _radius);
-        }
+            _ => new CircularPath(_center, _radius),
+        };
     }
 }

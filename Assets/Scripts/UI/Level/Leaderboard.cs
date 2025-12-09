@@ -43,13 +43,13 @@ public class Leaderboard : MonoBehaviour
     private List<float> CollectAllPoints(DataSnapshot snapshot)
     {
         List<float> allPoints = new();
-        foreach (var saveSnapshot in snapshot.Children)
+        foreach (DataSnapshot saveSnapshot in snapshot.Children)
         {
             string json = saveSnapshot.GetRawJsonValue();
-            DataGame data = JsonUtility.FromJson<DataGame>(json);
-            if (data != null && data._pointsPerLevel != null)
+            DataGame dataGame = JsonUtility.FromJson<DataGame>(json);
+            if (dataGame != null && dataGame._pointsPerLevel != null)
             {
-                allPoints.AddRange(data._pointsPerLevel);
+                allPoints.AddRange(dataGame._pointsPerLevel);
             }
         }
         allPoints.RemoveAll(pointValue => pointValue == float.MaxValue);

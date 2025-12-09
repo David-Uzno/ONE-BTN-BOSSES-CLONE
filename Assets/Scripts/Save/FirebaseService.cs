@@ -146,23 +146,23 @@ public class FirebaseService : MonoBehaviour
                         }
                         else
                         {
-                            string errorMsg = "Error al guardar score.";
+                            string scoreSavingError = "Error al guardar score.";
                             if (saveTask.Exception != null)
                             {
-                                errorMsg = saveTask.Exception.ToString();
+                                scoreSavingError = saveTask.Exception.ToString();
                             }
-                            InvokeFail(onFail, errorMsg);
+                            InvokeFail(onFail, scoreSavingError);
                         }
                     });
                 }
                 else
                 {
-                    string errorMsg = "Error al eliminar score.";
+                    string scoreSavingError = "Error al eliminar score.";
                     if (removeTask.Exception != null)
                     {
-                        errorMsg = removeTask.Exception.ToString();
+                        scoreSavingError = removeTask.Exception.ToString();
                     }
-                    InvokeFail(onFail, errorMsg);
+                    InvokeFail(onFail, scoreSavingError);
                 }
             });
             return;

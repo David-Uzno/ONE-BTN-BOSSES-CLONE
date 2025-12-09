@@ -12,7 +12,7 @@ public class ScoreManager : MonoBehaviour
 
     public void SaveScore(int score)
     {
-        string userId = "user123"; // Cambia esto por un identificador único para el usuario
+        string userId = "user123";
         databaseReference.Child("scores").Child(userId).SetValueAsync(score).ContinueWith(task =>
         {
             if (task.IsCompleted)
