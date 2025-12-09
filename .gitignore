@@ -73,6 +73,10 @@ crashlytics-build.properties
 
 # --- CUSTOM EXCLUSIONS ---
 # Firebase
+!Assets/ExternalDependencyManager/Editor/
+!Assets/ExternalDependencyManager/Editor/**
+!Assets/Firebase/Editor/
+!Assets/Firebase/Editor/**
 !Assets/Firebase/Plugins/
 !Assets/Firebase/Plugins/**
 
