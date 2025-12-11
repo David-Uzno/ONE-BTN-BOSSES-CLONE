@@ -58,7 +58,15 @@ public abstract class BaseAction : IMoveAction
                 float delta = Mathf.Abs(Mathf.DeltaAngle(angle, lastAngle));
                 if (delta < minSeparationDeg)
                 {
-                    float offsetSign = Random.value < 0.5f ? -1f : 1f;
+                    float offsetSign;
+                    if (Random.value < 0.5f)
+                    {
+                        offsetSign = -1f;
+                    }
+                    else
+                    {
+                        offsetSign = 1f;
+                    }
                     angle = Mathf.Repeat(angle + offsetSign * minSeparationDeg, 360f);
                 }
             }
@@ -75,6 +83,7 @@ public abstract class BaseAction : IMoveAction
 public class SquareAction : BaseAction
 {
     public SquareAction(Transform prefab, ObjectPool pool = null, Transform parent = null) : base(prefab, pool, parent) { }
+    private const float MinSeparationDeg = 75.0f;
 
     public override void Execute(LevelLoader.Move move)
     {
@@ -85,7 +94,7 @@ public class SquareAction : BaseAction
         }
 
         ILevelLayout layout = GetLayout(Vector2.zero);
-        List<float> angles = GenerateAngles(move, move.Count);
+        List<float> angles = GenerateAngles(move, move.Count, MinSeparationDeg);
 
         for (int i = 0; i < move.Count; i++)
         {
@@ -113,6 +122,7 @@ public class SquareAction : BaseAction
 public class TriangleAction : BaseAction
 {
     public TriangleAction(Transform prefab, ObjectPool pool = null, Transform parent = null) : base(prefab, pool, parent) { }
+    private const float MinSeparationDeg = 75.0f;
 
     public override void Execute(LevelLoader.Move move)
     {
@@ -125,7 +135,7 @@ public class TriangleAction : BaseAction
         HandleLastInstance();
 
         ILevelLayout layout = GetLayout(Vector2.zero);
-        List<float> angles = GenerateAngles(move, move.Count);
+        List<float> angles = GenerateAngles(move, move.Count, MinSeparationDeg);
 
         for (int i = 0; i < move.Count; i++)
         {
@@ -156,6 +166,7 @@ public class StraightProjectile : IMoveAction
     private Transform _projectilePrefab;
     private Transform _spawnParent;
     private ObjectPool _pool;
+    private const float MinSeparationDeg = 2.0f;
 
     public StraightProjectile(Transform prefab, ObjectPool pool = null, Transform parent = null)
     {
@@ -175,7 +186,7 @@ public class StraightProjectile : IMoveAction
         Vector3 startPosition = new(0, 0, 0);
 
         ILevelLayout layout = LevelLayoutResolver.Resolve(Vector2.zero);
-        List<float> angles = BaseAction.GenerateAngles(move, move.Count);
+        List<float> angles = BaseAction.GenerateAngles(move, move.Count, MinSeparationDeg);
 
         for (int i = 0; i < move.Count; i++)
         {

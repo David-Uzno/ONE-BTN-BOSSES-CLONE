@@ -135,10 +135,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.5, y: 0.5}
-      - {x: -0.5, y: -0.5}
-      - {x: 0.5, y: -0.5}
-      - {x: 0.5, y: 0.5}
+    - - {x: -0.45, y: 0.45}
+      - {x: -0.45, y: -0.45}
+      - {x: 0.45, y: -0.45}
+      - {x: 0.45, y: 0.45}
   m_UseDelaunayMesh: 0
 --- !u!114 &8810382997738728874
 MonoBehaviour:
@@ -154,3 +154,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialAlpha: 0.5
   _activationDelay: 1
+  _disableDelay: 3

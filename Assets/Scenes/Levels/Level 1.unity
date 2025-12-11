@@ -1152,15 +1152,15 @@ MonoBehaviour:
   _attackPools:
   - key: StraightProjectile
     prefab: {fileID: 9095242110189830134, guid: 6bf31f62546a11642b0fdefb8749be6e, type: 3}
-    poolSize: 6
+    poolSize: 10
     pool: {fileID: 0}
   - key: Square
     prefab: {fileID: 4606860640228417726, guid: 9c4bcd636cac26d4ea00bbfcb6f19d1b, type: 3}
-    poolSize: 6
+    poolSize: 10
     pool: {fileID: 0}
   - key: Triangle
     prefab: {fileID: 7956121692010200868, guid: 035825a2ce56e4f41afa461394082265, type: 3}
-    poolSize: 6
+    poolSize: 10
     pool: {fileID: 0}
 --- !u!114 &1237059095
 MonoBehaviour:
@@ -3236,7 +3236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9447bc875c61667429fa1fc9e706a316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  _health: 125
 --- !u!1 &1110439409476002322
 GameObject:
   m_ObjectHideFlags: 0
