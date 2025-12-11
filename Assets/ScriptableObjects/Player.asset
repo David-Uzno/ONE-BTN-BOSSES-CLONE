@@ -14,17 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Characters:
   - Player: {fileID: 1871520718089569364, guid: 764994ff70ba82f45b67009faeaf4e8d, type: 3}
-    Title: '>TURNS'
-    Description: Keep flying in the same direction to ACCELERATE. Press SPACE to
-      TURN, changing your direction. When you TURN and your SPEED will be reduced.
-      Balance when you TURN to maintain a high speed!
+    Title: '>GIRO'
+    Description: "Girar te permite cambiar de direcci\xF3n. Sigue volando en la misma
+      direcci\xF3n para ACELERAR. Presiona SPACE para hacer un GIRO. Cuando realices
+      un GIRO, tu VELOCIDAD se reducir\xE1. \xA1Ten cuidado cuando hagas un GIRO
+      para no perder velocidad!"
     VideoPlayer: {fileID: 32900000, guid: 16df3d1bce7bb5a4d86df0c40666951f, type: 3}
     Icon: {fileID: 8421919844343690454, guid: a2570c5ad6cbfd248872ffe355e5db5f, type: 3}
   - Player: {fileID: 7201232138829511188, guid: 653b4c508b929fa47b5b3cf8291eb2df, type: 3}
     Title: '>DASH'
-    Description: 'Your ship always travels in a counter-clockwise direction. When
-      you HOLD SPACE you will be in DASH, ignoring all enemy attacks and traveling
-      at an increased speed. But beware, DASH drains your ENERGY and if you deplete
-      it your DASH will end. When not in DASH your ENERGY will regenerate. '
+    Description: "Tu nave siempre se desplaza en sentido contrario a las agujas del
+      reloj. Cuando MANTIENES SPACE entrar\xE1s en un DASH, ignorando todos los ataques
+      enemigos y volando a mayor velocidad. Pero ten cuidado, HACER UN DASH consume
+      tu ENERG\xCDA, y si la agot\xE1s, tu DASH se acabar\xE1. Mientras no est\xE9s
+      en un DASH, tu energ\xEDa se regenerar\xE1."
     VideoPlayer: {fileID: 32900000, guid: 45e6132e849b43445ac8678aa2fa10dd, type: 3}
     Icon: {fileID: 3946776350683909951, guid: 663ae1d5cc533a849a633a775f597787, type: 3}

@@ -9,10 +9,10 @@
       "Moves": [
         {
           "Type": "StraightProjectile",
-          "Count": 1,
+          "Count": 3,
           "StartAngle": {
             "Min": 0.0,
-            "Max": 360.0
+            "Max": 120.0
           },
           "Cw": false,
           "ShouldDelay": true,
@@ -20,10 +20,10 @@
         },
         {
           "Type": "Triangle",
-          "Count": 1,
+          "Count": 2,
           "StartAngle": {
-            "Min": 0.0,
-            "Max": 360.0
+            "Min": 120.0,
+            "Max": 240.0
           },
           "Cw": false,
           "ShouldDelay": true,
@@ -31,9 +31,9 @@
         },
         {
           "Type": "Square",
-          "Count": 1,
+          "Count": 2,
           "StartAngle": {
-            "Min": 0.0,
+            "Min": 240.0,
             "Max": 360.0
           },
           "Cw": false,
@@ -42,10 +42,10 @@
         },
         {
           "Type": "Square",
-          "Count": 1,
+          "Count": 2,
           "StartAngle": {
-            "Min": 0.0,
-            "Max": 360.0
+            "Min": 60.0,
+            "Max": 180.0
           },
           "Cw": false,
           "ShouldDelay": true,
@@ -53,10 +53,10 @@
         },
         {
           "Type": "Square",
-          "Count": 1,
+          "Count": 2,
           "StartAngle": {
-            "Min": 0.0,
-            "Max": 360.0
+            "Min": 180.0,
+            "Max": 300.0
           },
           "Cw": false,
           "ShouldDelay": true,
@@ -64,10 +64,10 @@
         },
         {
           "Type": "StraightProjectile",
-          "Count": 1,
+          "Count": 3,
           "StartAngle": {
-            "Min": 0.0,
-            "Max": 360.0
+            "Min": 90.0,
+            "Max": 210.0
           },
           "Cw": false,
           "ShouldDelay": true,
@@ -75,10 +75,10 @@
         },
         {
           "Type": "Triangle",
-          "Count": 1,
+          "Count": 2,
           "StartAngle": {
-            "Min": 0.0,
-            "Max": 360.0
+            "Min": 210.0,
+            "Max": 330.0
           },
           "Cw": false,
           "ShouldDelay": true,
@@ -86,10 +86,10 @@
         },
         {
           "Type": "Square",
-          "Count": 1,
+          "Count": 2,
           "StartAngle": {
             "Min": 0.0,
-            "Max": 360.0
+            "Max": 90.0
           },
           "Cw": false,
           "ShouldDelay": true,
@@ -97,10 +97,10 @@
         },
         {
           "Type": "Square",
-          "Count": 1,
+          "Count": 2,
           "StartAngle": {
-            "Min": 0.0,
-            "Max": 360.0
+            "Min": 120.0,
+            "Max": 240.0
           },
           "Cw": false,
           "ShouldDelay": true,
@@ -108,9 +108,64 @@
         },
         {
           "Type": "Square",
-          "Count": 1,
+          "Count": 2,
+          "StartAngle": {
+            "Min": 270.0,
+            "Max": 360.0
+          },
+          "Cw": false,
+          "ShouldDelay": true,
+          "Tick": 2.75
+        },
+                {
+          "Type": "StraightProjectile",
+          "Count": 3,
+          "StartAngle": {
+            "Min": 90.0,
+            "Max": 210.0
+          },
+          "Cw": false,
+          "ShouldDelay": true,
+          "Tick": 0.75
+        },
+        {
+          "Type": "Triangle",
+          "Count": 2,
+          "StartAngle": {
+            "Min": 210.0,
+            "Max": 330.0
+          },
+          "Cw": false,
+          "ShouldDelay": true,
+          "Tick": 1.75
+        },
+        {
+          "Type": "Square",
+          "Count": 2,
           "StartAngle": {
             "Min": 0.0,
+            "Max": 90.0
+          },
+          "Cw": false,
+          "ShouldDelay": true,
+          "Tick": 2.75
+        },
+        {
+          "Type": "Square",
+          "Count": 2,
+          "StartAngle": {
+            "Min": 120.0,
+            "Max": 240.0
+          },
+          "Cw": false,
+          "ShouldDelay": true,
+          "Tick": 2.75
+        },
+        {
+          "Type": "Square",
+          "Count": 2,
+          "StartAngle": {
+            "Min": 270.0,
             "Max": 360.0
           },
           "Cw": false,

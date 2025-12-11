@@ -264,3 +264,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerInput: {fileID: 8770595585772241783}
   _movementController: {fileID: 4603856691599726644}
+  _slowdownDuration: 0.5
+  _slowdownFactor: 0.5

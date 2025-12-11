@@ -20999,8 +20999,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 51
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!212 &3217259933656695425
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -25541,8 +25541,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 24
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &3885090641170667552
 GameObject:
   m_ObjectHideFlags: 0
@@ -27756,7 +27756,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '>TURNS'
+  m_text: '>GIRO'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe9d7ec03a1fff5448324e4d86047704, type: 2}
   m_sharedMaterial: {fileID: 120269874700060487, guid: fe9d7ec03a1fff5448324e4d86047704, type: 2}
@@ -31506,8 +31506,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 4
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &4798068235339216606
 Transform:
   m_ObjectHideFlags: 0
@@ -36802,8 +36802,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 44
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &5677875144188451953
 Transform:
   m_ObjectHideFlags: 0
@@ -38569,8 +38569,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 38
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!225 &5926823432262114044
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -39254,8 +39254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 8
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!114 &6046113306762774147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40877,8 +40877,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 45
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &6265833142412004646
 GameObject:
   m_ObjectHideFlags: 0
@@ -41035,8 +41035,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 47
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &6282150210286666497
 Transform:
   m_ObjectHideFlags: 0
@@ -43163,8 +43163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 10
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &6668087819475787644
 Transform:
   m_ObjectHideFlags: 0
@@ -44181,8 +44181,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 35
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &6818131755104600392
 GameObject:
   m_ObjectHideFlags: 0
@@ -45067,8 +45067,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 29
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!212 &6950272571737994791
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -46283,8 +46283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 6
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &7135109757142859606
 GameObject:
   m_ObjectHideFlags: 0
@@ -46411,8 +46411,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 3
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &7149203124159601408
 GameObject:
   m_ObjectHideFlags: 0
@@ -46695,8 +46695,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 16
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &7162830198690562959
 GameObject:
   m_ObjectHideFlags: 0
@@ -47533,8 +47533,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 27
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!212 &7240193233526457854
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -47658,8 +47658,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 7
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!212 &7257477844807165924
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -48018,8 +48018,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 33
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &7305055958483455332
 Transform:
   m_ObjectHideFlags: 0
@@ -48123,8 +48123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 5
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!212 &7324491375548168007
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -49014,8 +49014,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 50
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &7441508476470020652
 Transform:
   m_ObjectHideFlags: 0
@@ -49201,8 +49201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 11
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!224 &7481417483590558040
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49454,8 +49454,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 22
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!212 &7522479123213059629
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -49625,8 +49625,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 12
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &7535088586424740575
 Transform:
   m_ObjectHideFlags: 0
@@ -49966,8 +49966,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 13
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &7595842727943937530
 Transform:
   m_ObjectHideFlags: 0
@@ -50359,8 +50359,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 40
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &7711465447945010696
 GameObject:
   m_ObjectHideFlags: 0
@@ -50749,8 +50749,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 32
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!212 &7759218940954589016
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -51089,8 +51089,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 1
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 1
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &7801405902140891240
 Transform:
   m_ObjectHideFlags: 0
@@ -52641,8 +52641,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 19
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &7937075793176040117
 Transform:
   m_ObjectHideFlags: 0
@@ -53262,8 +53262,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 15
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &8025242301757490734
 GameObject:
   m_ObjectHideFlags: 0
@@ -53547,8 +53547,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 49
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &8063628269985732593
 GameObject:
   m_ObjectHideFlags: 0
@@ -54532,8 +54532,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 41
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!212 &8170304579082372078
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -55000,8 +55000,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 37
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &8254923979733409182
 Transform:
   m_ObjectHideFlags: 0
@@ -55265,8 +55265,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 26
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &8298177983292803906
 GameObject:
   m_ObjectHideFlags: 0
@@ -55363,8 +55363,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 36
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &8312958813903814885
 GameObject:
   m_ObjectHideFlags: 0
@@ -55749,8 +55749,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 43
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &8397074258209454605
 Transform:
   m_ObjectHideFlags: 0
@@ -56354,8 +56354,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 48
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &8502604393065503792
 Transform:
   m_ObjectHideFlags: 0
@@ -56885,8 +56885,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 23
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!224 &8567129527489439269
 RectTransform:
   m_ObjectHideFlags: 0
@@ -57235,8 +57235,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 20
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!212 &8642676153581507980
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -57305,8 +57305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 1
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 0
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &8643700262237796888
 GameObject:
   m_ObjectHideFlags: 0
@@ -58165,8 +58165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 42
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &8780150613278925723
 Transform:
   m_ObjectHideFlags: 0
@@ -58286,9 +58286,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Keep flying in the same direction to ACCELERATE. Press SPACE to TURN, changing
-    your direction. When you TURN and your SPEED will be reduced. Balance when you
-    TURN to maintain a high speed!
+  m_text: "Girar te permite cambiar de direcci\xF3n.\nSigue volando en la misma direcci\xF3n
+    para ACELERAR. Presiona SPACE para hacer un GIRO. Cuando realices un GIRO, tu
+    VELOCIDAD se reducir\xE1.\n\xA1Ten cuidado cuando hagas un GIRO para no perder
+    velocidad!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8cbb722bc2a63ba40948dc94d384fbe8, type: 2}
   m_sharedMaterial: {fileID: -7456593892144789117, guid: 8cbb722bc2a63ba40948dc94d384fbe8, type: 2}
@@ -59107,8 +59108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 39
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &8882119801407047765
 Transform:
   m_ObjectHideFlags: 0
@@ -59549,8 +59550,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 31
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &8942665735712502059
 Transform:
   m_ObjectHideFlags: 0
@@ -59672,8 +59673,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 14
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &8950777793807672724
 GameObject:
   m_ObjectHideFlags: 0
@@ -59813,8 +59814,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 17
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &8999595870493886783
 GameObject:
   m_ObjectHideFlags: 0
@@ -59848,8 +59849,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 21
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &8999871843910277708
 GameObject:
   m_ObjectHideFlags: 0
@@ -60198,8 +60199,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 25
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &9041423959195224696
 GameObject:
   m_ObjectHideFlags: 0
@@ -60302,8 +60303,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 34
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &9066040163029257929
 Transform:
   m_ObjectHideFlags: 0
@@ -60335,8 +60336,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 9
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!4 &9074945031258782339
 Transform:
   m_ObjectHideFlags: 0
@@ -60437,8 +60438,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 18
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!95 &9081437089233825210
 Animator:
   serializedVersion: 7
@@ -60593,8 +60594,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 46
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!1 &9090981977614771003
 GameObject:
   m_ObjectHideFlags: 0
@@ -60785,8 +60786,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 30
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!114 &9101933445759889732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61480,8 +61481,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isInteractable: 0
-  _alphaInactiveOpacity: 0.5
-  _buttonIndex: 28
+  _inactiveAlphaOpacity: 0.5
+  _levelIndex: 0
 --- !u!114 &9179385666273557292
 MonoBehaviour:
   m_ObjectHideFlags: 0
