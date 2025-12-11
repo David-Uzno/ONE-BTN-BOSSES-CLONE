@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 #region Simple Attacks
@@ -37,6 +38,38 @@ public abstract class BaseAction : IMoveAction
             Debug.LogError("El objeto instanciado es nulo.");
         }
     }
+
+    public static List<float> GenerateAngles(LevelLoader.Move move, int count, float minSeparationDeg = 1.0f)
+    {
+        List<float> angles = new(count);
+        bool hasLastAngle = false;
+        float lastAngle = 0f;
+
+        for (int i = 0; i < count; i++)
+        {
+            float angle = 0.0f;
+            if (move.StartAngle != null)
+            {
+                angle = move.StartAngle.GetRandomValue();
+            }
+
+            if (hasLastAngle)
+            {
+                float delta = Mathf.Abs(Mathf.DeltaAngle(angle, lastAngle));
+                if (delta < minSeparationDeg)
+                {
+                    float offsetSign = Random.value < 0.5f ? -1f : 1f;
+                    angle = Mathf.Repeat(angle + offsetSign * minSeparationDeg, 360f);
+                }
+            }
+
+            hasLastAngle = true;
+            lastAngle = angle;
+            angles.Add(angle);
+        }
+
+        return angles;
+    }
 }
 
 public class SquareAction : BaseAction
@@ -52,16 +85,11 @@ public class SquareAction : BaseAction
         }
 
         ILevelLayout layout = GetLayout(Vector2.zero);
+        List<float> angles = GenerateAngles(move, move.Count);
 
         for (int i = 0; i < move.Count; i++)
         {
-            float startAngle = 0.0f;
-            if (move.StartAngle != null)
-            {
-                startAngle = move.StartAngle.GetRandomValue();
-            }
-
-            float angleRadians = Mathf.Deg2Rad * (startAngle + i * 360.0f / move.Count);
+            float angleRadians = Mathf.Deg2Rad * angles[i];
             Vector2 position = layout.GetPoint(angleRadians);
 
             HandleLastInstance();
@@ -69,13 +97,13 @@ public class SquareAction : BaseAction
             if (_pool != null)
             {
                 Transform pooled = _pool.GetPooledObject(_spawnParent);
-                pooled.SetPositionAndRotation(position, Quaternion.Euler(0, 0, startAngle));
+                pooled.SetPositionAndRotation(position, Quaternion.Euler(0, 0, angles[i]));
                 pooled.gameObject.SetActive(true);
                 ConfigureInstance(pooled.gameObject);
             }
             else
             {
-                _lastInstance = Object.Instantiate(_prefab, position, Quaternion.Euler(0, 0, startAngle), _spawnParent);
+                _lastInstance = Object.Instantiate(_prefab, position, Quaternion.Euler(0, 0, angles[i]), _spawnParent);
                 ConfigureInstance(_lastInstance.gameObject);
             }
         }
@@ -97,15 +125,11 @@ public class TriangleAction : BaseAction
         HandleLastInstance();
 
         ILevelLayout layout = GetLayout(Vector2.zero);
-        float startAngle = 0.0f;
-        if (move.StartAngle != null)
-        {
-            startAngle = move.StartAngle.GetRandomValue();
-        }
+        List<float> angles = GenerateAngles(move, move.Count);
 
         for (int i = 0; i < move.Count; i++)
         {
-            float angle = startAngle + i * (360.0f / move.Count);
+            float angle = angles[i];
             float angleRadians = Mathf.Deg2Rad * angle;
 
             Vector2 position = layout.GetPoint(angleRadians);
@@ -150,22 +174,18 @@ public class StraightProjectile : IMoveAction
 
         Vector3 startPosition = new(0, 0, 0);
 
-        float angle = 0.0f;
-        if (move.StartAngle != null)
-        {
-            angle = move.StartAngle.GetRandomValue();
-        }
-
         ILevelLayout layout = LevelLayoutResolver.Resolve(Vector2.zero);
+        List<float> angles = BaseAction.GenerateAngles(move, move.Count);
 
         for (int i = 0; i < move.Count; i++)
         {
+            float angle = angles[i];
+
             if (_pool != null)
             {
                 Transform pooled = _pool.GetPooledObject(_spawnParent);
                 pooled.SetPositionAndRotation(startPosition, Quaternion.Euler(0, 0, angle));
                 pooled.gameObject.SetActive(true);
-
                 if (pooled.TryGetComponent(out BulletEnemy bullet))
                 {
                     Vector2 direction = new(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
@@ -176,7 +196,6 @@ public class StraightProjectile : IMoveAction
             else
             {
                 Transform projectileInstance = Object.Instantiate(_projectilePrefab, startPosition, Quaternion.Euler(0, 0, angle), _spawnParent);
-
                 if (projectileInstance.TryGetComponent(out BulletEnemy bullet))
                 {
                     Vector2 direction = new(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
